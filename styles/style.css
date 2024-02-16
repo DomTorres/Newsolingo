@@ -27,3 +27,13 @@ img[src="./images/bird.png"] {
     height: auto;
     margin-bottom: 0 !important;
 }
+#page-content {
+    position: botom;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+
+}
+#sticky-footer{
+    background-color: #064479;
+}
