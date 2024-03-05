@@ -61,13 +61,15 @@ img[src="./images/bird.png"] {
     width: auto;
 }
 
-@media only screen and (min-width: 701px) {
+#profile-photo {
+    border-radius: 50%;
+}
+
+@media only screen and (min-width: 701px) and (max-width: 1600px){
     #cardContainer, #cardContainer2 {
         flex-direction: row;
 
     }
 }
 
-@media only screen and (max-width: 1281px) and (min-width: 1600px) {
-    
-}
+
