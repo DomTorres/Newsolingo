@@ -22,18 +22,22 @@
     --bs-btn-hover-border-color: #0aa5e9;
 }
 
-img[src="./images/bird.png"] {
-    width: 250px;
-    height: auto;
-    margin-bottom: 0 !important;
-}
-#page-content {
-    position: botom;
-    height: 100px;
-    bottom: 0;
-    width: 100%;
 
+.title h1{
+    font-size: 30px;
+    
 }
-#sticky-footer{
-    background-color: #064479;
+.notification h2 {
+    font-size: 30px;
+    
+}
+.rounded {
+    width: 100px;
+}
+.main {
+    align-content: center
+}
+
+#profile-photo {
+    border-radius: 50%;
 }
