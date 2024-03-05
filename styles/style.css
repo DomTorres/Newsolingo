@@ -37,3 +37,7 @@ img[src="./images/bird.png"] {
 #sticky-footer{
     background-color: #064479;
 }
+
+#profile-photo {
+    border-radius: 50%;
+}
