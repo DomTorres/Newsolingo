@@ -38,6 +38,38 @@ img[src="./images/bird.png"] {
     background-color: #064479;
 }
 
+#cardContainer, #cardContainer2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1%;
+}
+
+.card {
+    margin: 1%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding: 0.5%;
+}
+
+.card:hover {
+    box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: auto;
+}
+
 #profile-photo {
     border-radius: 50%;
 }
+
+@media only screen and (min-width: 701px) and (max-width: 1600px){
+    #cardContainer, #cardContainer2 {
+        flex-direction: row;
+
+    }
+}
+
+
