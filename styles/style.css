@@ -38,6 +38,12 @@ img[src="./images/bird.png"] {
     background-color: #064479;
 }
 
+#pageTitle {
+    padding-left: 2em;
+    padding-top: 2em;
+    font-size: 20pt;
+    text-align: center;
+}
 #cardContainer, #cardContainer2 {
     display: flex;
     flex-direction: column;
@@ -82,5 +88,13 @@ img[src="./images/bird.png"] {
 }
 
 @media only screen and (min-width: 1601px){
+    .navbar {
+        flex-direction: column;
+        flex-shrink: 0;
+    }
+
+    #cardContainer, #cardContainer2 {
+        flex-direction: row;
+    }
 
 }
