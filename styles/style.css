@@ -22,22 +22,79 @@
     --bs-btn-hover-border-color: #0aa5e9;
 }
 
+img[src="./images/bird.png"] {
+    width: 250px;
+    height: auto;
+    margin-bottom: 0 !important;
+}
+#page-content {
+    position: botom;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
 
-.title h1{
-    font-size: 30px;
-    
 }
-.notification h2 {
-    font-size: 30px;
-    
+#sticky-footer{
+    background-color: #064479;
 }
-.rounded {
-    width: 100px;
+
+#pageTitle {
+    padding-left: 2em;
+    padding-top: 2em;
+    font-size: 20pt;
+    text-align: center;
 }
-.main {
-    align-content: center
+#cardContainer, #cardContainer2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1%;
+}
+
+.card {
+    margin: 1%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding: 0.5%;
+    width: 18rem;
+}
+
+.card:hover {
+    box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: auto;
 }
 
 #profile-photo {
     border-radius: 50%;
+}
+
+.card-mb-3 {
+    width: 90%;
+    height: 100px;
+}
+.col-md-4 img {
+    float: left;
+}
+
+@media only screen and (min-width: 701px) and (max-width: 1600px){
+    #cardContainer, #cardContainer2 {
+        flex-direction: row;
+
+    }
+}
+
+@media only screen and (min-width: 1601px){
+    .navbar {
+        flex-direction: column;
+        flex-shrink: 0;
+    }
+
+    #cardContainer, #cardContainer2 {
+        flex-direction: row;
+    }
+
 }
