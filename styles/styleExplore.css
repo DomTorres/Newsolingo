@@ -13,9 +13,9 @@ main {
 
 main img {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1000px;
     display: flex;
-    justify-content: center;
+    align-items: center;
 }
 
 #news {
@@ -50,6 +50,7 @@ main img {
 
 
 @media only screen and (min-width: 701px) and (max-width: 1280px) {
+    
     #news {
         flex-direction: row;
         overflow-x: auto;
@@ -80,14 +81,22 @@ main img {
     }
 
     #search {
-        grid-area: "search";
+        grid-area: search;
+
     }
 
     main {
-        grid-area: "map";
+        grid-area: map;
+    }
+
+    main img {
+        height: 100%;
+        max-width: 1280px;
     }
 
     #news {
-        grid-area: "news";
+        grid-area: news;
+        margin-top: 4em;
+        height: 90%;
     }
 }
