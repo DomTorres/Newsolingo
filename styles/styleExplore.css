@@ -37,6 +37,10 @@ main img {
     padding: 5px;
 }
 
+#newsCard:hover {
+    box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
 #newsCard img {
     height: 150px;
     width: 100px;
