@@ -17,6 +17,13 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <!-- Other libraries go here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
@@ -37,48 +44,7 @@
     <!-- Stuff for body goes here -->
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-primary-subtle">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="#">Newsolingo</a>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">For You</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Explore</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" aria-disabled="true">Saved</a>
-              </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Profile
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Personal Information</a></li>
-                <li><a class="dropdown-item" href="#">Preferences</a></li>
-                <li><a class="dropdown-item" href="#">Progress</a></li>
-                <li><a class="dropdown-item" href="#">Setting</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Contact
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">About Us</a></li>
-                <li><a class="dropdown-item" href="#">Contact Us</a></li>
-              </ul>
-            </li>
-            </ul>
-            
-          </div>
-        </div>
-      </nav>
+    <nav id="navbarPlaceholder"></nav>
       
       <br>
       <br>
@@ -89,16 +55,17 @@
       <div class="text-center">
         <img src="images/Profile.png" id="profile-photo" height="200px" width="200px">
     </div>
-    <div class="btn-1">
-    <button type="save" class="btn btn-primary">Save Changes</button>
-  </div>
     <br>
+    
   
-      <form class="column gy-2 gx-3 align-items-center">
+  <form class="column gy-2 gx-3 align-items-center shrink-form">
+     
+  </form>
   <div class="col-auto">
     <label class="visually-hidden" for="autoSizingInput">Name</label>
     <input type="text" class="form-control" id="autoSizingInput" placeholder="Name">
   </div>
+  <br>
   <div class="col-auto">
     <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
     <div class="input-group">
@@ -107,6 +74,7 @@
     </div>
   </div>
   
+  <br>
   
   <div class="col-auto">
     <label class="visually-hidden" for="autoSizingSelect">Preference</label>
@@ -119,9 +87,20 @@
   </div>
   
   <br>
-  <div class="col-auto">
+  <div class="col-auto text-center">
     <button type="save" class="btn btn-primary">Save Changes</button>
   </div>
          
 </form>
+
+<nav id="footerPlaceholder"></nav>
+
+<script src="./scripts/authentication.js"></script>
+<script src="./scripts/firebaseAPI_BBY22.js"></script>
+    <script src="./scripts/skeleton.js"></script>
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/script.js"></script>
+
+</body>
+</html>
      

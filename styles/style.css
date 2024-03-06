@@ -80,6 +80,11 @@ img[src="./images/bird.png"] {
     float: left;
 }
 
+.shrink-form {
+    width: 50%; /* Adjust this value to your liking */
+    margin: 0 auto; /* This centers the form horizontally */
+}
+
 @media only screen and (min-width: 701px) and (max-width: 1600px){
     #cardContainer, #cardContainer2 {
         flex-direction: row;
@@ -98,3 +103,4 @@ img[src="./images/bird.png"] {
     }
 
 }
+
