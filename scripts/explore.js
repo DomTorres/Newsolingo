@@ -13,7 +13,7 @@ searchJS.onload = function () {
   const searchBox = new MapboxSearchBox();
   searchBox.accessToken = ACCESS_TOKEN;
   searchBox.options = {
-    types: 'address,poi',
+    types: 'country',
     proximity: [-73.99209, 40.68933]
   };
   searchBox.marker = true;
