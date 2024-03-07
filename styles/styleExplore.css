@@ -77,18 +77,11 @@ main img {
 @media only screen and (min-width: 1281px) {
     #container {
         display: grid;
-        grid-template-rows: 5vh 80vh;
         grid-template-columns: 65vw 35vw;
         grid-template-areas:
-            "search news"
             "map news";
     }
-
-    #search {
-        grid-area: search;
-
-    }
-
+    
     main {
         grid-area: map;
     }
