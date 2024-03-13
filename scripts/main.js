@@ -32,7 +32,7 @@ function displayCardsDynamically(collection) {
     var max = "10";
     var from = "2024-03-11T00:00:00Z";
 
-    apikey = 'b2455571715527d9eca18e89650be00d';
+    apikey = '';
     url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${max}&from=${from}&apikey=${apikey}`;
 
     fetch(url)
