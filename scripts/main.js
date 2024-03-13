@@ -27,22 +27,55 @@ getNameFromAuth(); //run the function
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("newsCardTemplate");
 
-    db.collection(collection).get()
-        .then(allNews => {
-            allNews.forEach(article => {
-                var headline = article.data().Headline;
-                var preview = article.data().Preview;
-                // var time_to_read = article.data().Time-To-Read;
-                var country = article.data().Country;
+    var category = "entertainment";
+    var country = "ph";
+    var max = "10";
+    var from = "2024-03-11T00:00:00Z";
 
+    apikey = 'b2455571715527d9eca18e89650be00d';
+    url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${max}&from=${from}&apikey=${apikey}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var articles = data.articles;
+            console.log(articles);
+            console.log("length:" + articles.length);
+
+            length = articles.length;
+            for(let i = 0; i < length; i++) {
+                var headline = articles[i].title;
+                var preview = articles[i].description;
+                var image_source = articles[i].image;
+                
                 let newcard = cardTemplate.content.cloneNode(true);
 
+                newcard.querySelector('.card-img').setAttribute("src", image_source);
                 newcard.querySelector('.headline').innerHTML = headline;
                 newcard.querySelector('.preview').innerHTML = preview;
-                // newcard.querySelector('.time-to-read').innerHTML = time_to_read;
                 newcard.querySelector('.country').innerHTML = country;
 
                 document.getElementById("for-you-cards-go-here").appendChild(newcard);
-            })
+            }
         })
+
+
+    // db.collection(collection).get()
+    //     .then(allNews => {
+    //         allNews.forEach(article => {
+    //             var headline = article.data().Headline;
+    //             var preview = article.data().Preview;
+    //             var time_to_read = article.data().Time_To_Read;
+    //             var country = article.data().Country;
+
+    //             let newcard = cardTemplate.content.cloneNode(true);
+
+    //             newcard.querySelector('.headline').innerHTML = headline;
+    //             newcard.querySelector('.preview').innerHTML = preview;
+    //             newcard.querySelector('.time-to-read').innerHTML = time_to_read + " minute read";
+    //             newcard.querySelector('.country').innerHTML = country;
+
+    //             document.getElementById("for-you-cards-go-here").appendChild(newcard);
+    //         })
+    //     })
 }
