@@ -2,4 +2,4 @@
 *.logs
 node_modules/
 .vscode/
-firebaseAPI_BBY22.js
+scripts/firebaseAPI_BBY22.js
