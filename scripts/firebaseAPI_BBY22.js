@@ -9,5 +9,7 @@ const firebaseConfig = {
 };
 
 const app = firebase.initializeApp(firebaseConfig);
-
 const db = firebase.firestore();
+
+// API Key for GNews API
+const news_api_key = "b2455571715527d9eca18e89650be00d";

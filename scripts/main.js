@@ -28,12 +28,11 @@ function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("newsCardTemplate");
 
     var category = "entertainment";
-    var country = "ph";
+    var country = "us";
     var max = "10";
     var from = "2024-03-11T00:00:00Z";
 
-    apikey = '';
-    url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${max}&from=${from}&apikey=${apikey}`;
+    url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${max}&from=${from}&apikey=${news_api_key}`;
 
     fetch(url)
         .then(response => response.json())
