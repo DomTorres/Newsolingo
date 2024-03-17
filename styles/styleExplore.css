@@ -1,24 +1,24 @@
-#search {
-    width: 90%;
-    display: flex;
-    margin: 0 auto;
-    padding-top: 1em;
+#container {
+    display: grid;
+    grid-template-rows: 35vh 45vh;
+    grid-template-areas: 
+        "map"
+        "news";
 }
 
 main {
-    width: 90%;
-    margin: 0 auto;
-    padding: 1em;
+    grid-area: map;
+    height: 90%;
+    margin: 1em;
 }
 
 main img {
-    width: 100%;
-    max-width: 1000px;
-    display: flex;
-    align-items: center;
+    height: 90%;
+    padding: 1em;
 }
 
 #news {
+    grid-area: news;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,15 +54,31 @@ main img {
 
 
 @media only screen and (min-width: 701px) and (max-width: 1280px) {
+
+    #container {
+        display: grid;
+        grid-template-rows: 60vh 20vh;
+        grid-template-areas: 
+            "map"
+            "news";
+    }
+
+    main {
+        grid-area: map;
+    }
     
+    main img {
+        height: 90%;
+        padding: 1em;
+    }
+
     #news {
+        grid: news;
         flex-direction: row;
         overflow-x: auto;
         overflow-y: hidden;
         height: 30vh;
         flex-wrap: nowrap;
-
-
     }
 
     #newsCard {
@@ -72,18 +88,23 @@ main img {
         width: 200px;
         flex: 0 0 auto;
     }
+
 }
 
 @media only screen and (min-width: 1281px) {
     #container {
         display: grid;
         grid-template-columns: 65vw 35vw;
+        grid-template-rows: none;
         grid-template-areas:
             "map news";
     }
     
     main {
         grid-area: map;
+        height: 90%;
+        margin-left: 2em;
+        margin-top: 2em;
     }
 
     main img {
