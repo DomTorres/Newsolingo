@@ -24,10 +24,10 @@ function getNameFromAuth() {
 }
 getNameFromAuth(); //run the function
 
-function displayCardsDynamically(collection) {
+function displayCardsDynamically() {
     let cardTemplate = document.getElementById("newsCardTemplate");
 
-    var category = "entertainment";
+    var category = "general";
     var country = "us";
     var max = "10";
     var from = "2024-03-11T00:00:00Z";
