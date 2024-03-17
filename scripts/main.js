@@ -24,11 +24,10 @@ function getNameFromAuth() {
 }
 getNameFromAuth(); //run the function
 
-function displayCardsDynamically() {
-    let cardTemplate = document.getElementById("newsCardTemplate");
-
+// Use API to query news, then add to database
+function fetchNewsFromAPI() {
     var category = "general";
-    var country = "us";
+    var country = "gb";
     var max = "10";
     var from = "2024-03-11T00:00:00Z";
 
@@ -41,40 +40,43 @@ function displayCardsDynamically() {
             console.log(articles);
             console.log("length:" + articles.length);
 
-            length = articles.length;
-            for(let i = 0; i < length; i++) {
-                var headline = articles[i].title;
-                var preview = articles[i].description;
-                var image_source = articles[i].image;
+            numberOfArticles = articles.length;
+
+            for(let i = 0; i < numberOfArticles; i++) {
+                // Write each article into database, with ID = title
+                var title = articles[i].title;
                 
+                db.collection("news").doc(title).set({
+                    description: articles[i].description,
+                    content: articles[i].content,
+                    url: articles[i].url,
+                    image: articles[i].image,
+                    publishedAt: articles[i].publishedAt,
+                    category: category,
+                    country: country
+                })
+            }            
+        })
+}
+fetchNewsFromAPI();
+
+// Display news from database
+function displayCards() {
+    let cardTemplate = document.getElementById("newsCardTemplate");
+
+    db.collection("news").get()
+        .then(articles => {
+            articles.forEach(article => {
                 let newcard = cardTemplate.content.cloneNode(true);
 
-                newcard.querySelector('.card-img').setAttribute("src", image_source);
-                newcard.querySelector('.headline').innerHTML = headline;
-                newcard.querySelector('.preview').innerHTML = preview;
-                newcard.querySelector('.country').innerHTML = country;
+                newcard.querySelector('.card-img').setAttribute("src", article.data().image);
+                newcard.querySelector('.headline').innerHTML = article.id;
+                newcard.querySelector('.preview').innerHTML = article.data().description;
+                // newcard.querySelector('.time-to-read').innerHTML = time_to_read + " minute read";
+                newcard.querySelector('.country').innerHTML = article.data().country;
 
                 document.getElementById("for-you-cards-go-here").appendChild(newcard);
-            }
+            })
         })
-
-
-    // db.collection(collection).get()
-    //     .then(allNews => {
-    //         allNews.forEach(article => {
-    //             var headline = article.data().Headline;
-    //             var preview = article.data().Preview;
-    //             var time_to_read = article.data().Time_To_Read;
-    //             var country = article.data().Country;
-
-    //             let newcard = cardTemplate.content.cloneNode(true);
-
-    //             newcard.querySelector('.headline').innerHTML = headline;
-    //             newcard.querySelector('.preview').innerHTML = preview;
-    //             newcard.querySelector('.time-to-read').innerHTML = time_to_read + " minute read";
-    //             newcard.querySelector('.country').innerHTML = country;
-
-    //             document.getElementById("for-you-cards-go-here").appendChild(newcard);
-    //         })
-    //     })
 }
+displayCards();
