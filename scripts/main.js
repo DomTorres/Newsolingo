@@ -86,3 +86,34 @@ function displayCards() {
         })
 }
 displayCards();
+
+function writeNews() {
+    //define a variable for the collection you want to create in Firestore to populate data
+    var newsRef = db.collection("news");
+
+    newsRef.add({
+        code: "NEWS01",
+        name: "Test 1",
+        country: "gb",
+        level: "easy",
+		details: "A lovely place for lunch walk",
+        readTime: 3,
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+    });
+    newsRef.add({
+        code: "NEWS02",
+        name: "Test 2",
+        country: "uk",
+        details: "Placeholder for news article",
+        readTime: 4,
+        last_updated: firebase.firestore.Timestamp.fromDate(new Date("March 10, 2022"))
+    });
+    newsRef.add({
+        code: "NEWS03",
+        name: "Test 3",
+        country: "canada",
+        details:  "Amazing ski slope views",
+        readTime: 5,
+        last_updated: firebase.firestore.Timestamp.fromDate(new Date("January 1, 2023"))
+    });
+}
