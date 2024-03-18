@@ -26,8 +26,24 @@
 
 // Use API to query news, then add to database
 function fetchNewsFromAPI() {
+    /**
+    const user = firebase.auth().currentUser;
+    const userID = user.uid;
+    console.log(userID);
+
+    var docRef = db.collection("users").doc(userID);
+    docRef.get().then(function(doc) {
+        console.log(doc.data().country);
+    });
+    */
     var category = "general";
+    /**docRef.get().then(function(doc) {
+        doc.data().category;
+    });*/
     var country = "gb";
+    /**docRef.get().then(function(doc) {
+        doc.data().country;
+    });*/
     var max = "10";
     var from = "2024-03-17T00:00:00Z";
 
