@@ -26,53 +26,50 @@
 
 // Use API to query news, then add to database
 function fetchNewsFromAPI() {
-    /**
-    const user = firebase.auth().currentUser;
-    const userID = user.uid;
-    console.log(userID);
 
-    var docRef = db.collection("users").doc(userID);
-    docRef.get().then(function(doc) {
-        console.log(doc.data().country);
-    });
-    */
-    var category = "general";
-    /**docRef.get().then(function(doc) {
-        doc.data().category;
-    });*/
-    var country = "gb";
-    /**docRef.get().then(function(doc) {
-        doc.data().country;
-    });*/
-    var max = "10";
-    var from = "2024-03-17T00:00:00Z";
+    firebase.auth().onAuthStateChanged(user => {
+        console.log("The user's ID is: " + user.uid);
+        const userID = user.uid;
 
-    url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${max}&from=${from}&apikey=${news_api_key}`;
+        db.collection("users").doc(userID).get()
+            .then(user => {
+                var country = user.data().country_preference;
+                var category = user.data().category_preference;
+                var articlesPerDay = user.data().articlesPerDay_preference;
+                var from = "2024-03-17T00:00:00Z"; // This needs to be dynamically based based on the current date.
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            var articles = data.articles;
-            console.log(articles);
-            console.log("length:" + articles.length);
+                console.log(country);
+                console.log(category);
+                console.log(articlesPerDay);
 
-            numberOfArticles = articles.length;
+                var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${articlesPerDay}&from=${from}&apikey=${news_api_key}`;
 
-            for(let i = 0; i < numberOfArticles; i++) {
-                // Write each article into database, with ID = title
-                var title = articles[i].title;
-                
-                db.collection("news").doc(title).set({
-                    description: articles[i].description,
-                    content: articles[i].content,
-                    url: articles[i].url,
-                    image: articles[i].image,
-                    publishedAt: articles[i].publishedAt,
-                    category: category,
-                    country: country
-                })
-            }            
-        })
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        var articles = data.articles;
+                        console.log(articles);
+                        console.log("length:" + articles.length);
+
+                        numberOfArticles = articles.length;
+
+                        for(let i = 0; i < numberOfArticles; i++) {
+                            // Write each article into database, with ID = title
+                            var title = articles[i].title;
+                            
+                            db.collection("news").doc(title).set({
+                                description: articles[i].description,
+                                content: articles[i].content,
+                                url: articles[i].url,
+                                image: articles[i].image,
+                                publishedAt: articles[i].publishedAt,
+                                category: category,
+                                country: country
+                            })
+                        }                   
+                    })
+            })
+    })
 }
 fetchNewsFromAPI();
 
@@ -101,7 +98,7 @@ function displayCards() {
             })
         })
 }
-displayCards();
+// displayCards();
 
 function writeNews() {
     //define a variable for the collection you want to create in Firestore to populate data
