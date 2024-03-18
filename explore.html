@@ -41,70 +41,32 @@
     <nav id="navbarPlaceholder"></nav>
 
     <div id="container">
-
         <main>
             <div id='map'></div>
         </main>
 
         <div id="news">
-            <div id="newsCard">
-                <img src="images/placeholder_vertical.jpeg" alt="Movie Poster">
-                <div id="layout">
-                    <h3>Headline</h3>
-                    <p>Some quick example text to build on the card title and make up the
-                        bulk of the card's content.</p>
-
-                </div>
-            </div>
-            <div id="newsCard">
-                <img src="images/placeholder_vertical.jpeg" alt="Movie Poster">
-                <div id="layout">
-                    <h3>Headline</h3>
-                    <p>Some quick example text to build on the card title and make up the
-                        bulk of the card's content.</p>
-
-                </div>
-            </div>
-            <div id="newsCard">
-                <img src="images/placeholder_vertical.jpeg" alt="Movie Poster">
-                <div id="layout">
-                    <h3>Headline</h3>
-                    <p>Some quick example text to build on the card title and make up the
-                        bulk of the card's content.</p>
-
-                </div>
-            </div>
-            <div id="newsCard">
-                <img src="images/placeholder_vertical.jpeg" alt="Movie Poster">
-                <div id="layout">
-                    <h3>Headline</h3>
-                    <p>Some quick example text to build on the card title and make up the
-                        bulk of the card's content.</p>
-
-                </div>
-            </div>
-            <div id="newsCard">
-                <img src="images/placeholder_vertical.jpeg" alt="Movie Poster">
-                <div id="layout">
-                    <h3>Headline</h3>
-                    <p>Some quick example text to build on the card title and make up the
-                        bulk of the card's content.</p>
-
-                </div>
-            </div>
-            <div id="newsCard">
-                <img src="images/placeholder_vertical.jpeg" alt="Movie Poster">
-                <div id="layout">
-                    <h3>Headline</h3>
-                    <p>Some quick example text to build on the card title and make up the
-                        bulk of the card's content.</p>
-
-                </div>
-            </div>
+            <div id="for-you-cards-go-here"></div>
         </div>
     </div>
+
     <nav id="footerPlaceholder"></nav>
 
+     <!-- Templates for general use, not displayed -->
+     <template id="newsCardTemplate">
+        <a href="">
+            <div id="card">
+                <img src="#" class="card-img-top card-img" alt="article" />
+                <div class="card-body">
+                    <h5 class="headline"></h5>
+                    <p class="preview"></p>
+                    <hr>
+                    <p class="time-to-read"></p>
+                    <p class="country"></p>
+                </div> 
+            </div>   
+        </a>
+    </template>
 
     <script src="./scripts/firebaseAPI_BBY22.js"></script>
     <script src="./scripts/skeleton.js"></script>
