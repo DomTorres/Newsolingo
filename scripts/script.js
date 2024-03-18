@@ -12,3 +12,15 @@ function logout() {
 }
 
 // document.getElementById("logout-button").addEventListener("click", logout);
+
+// Set global variable containing logged-in user's ID
+var userID;
+
+function getUserID() {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      userID = user.uid;
+    }
+  })
+}
+getUserID()

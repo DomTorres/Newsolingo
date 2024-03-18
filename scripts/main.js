@@ -29,7 +29,7 @@ function fetchNewsFromAPI() {
     var category = "general";
     var country = "gb";
     var max = "10";
-    var from = "2024-03-11T00:00:00Z";
+    var from = "2024-03-17T00:00:00Z";
 
     url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${max}&from=${from}&apikey=${news_api_key}`;
 
