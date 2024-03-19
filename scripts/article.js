@@ -17,27 +17,30 @@ loadArticle();
 document.querySelector("#done-reading").addEventListener("click", () => {
 
     console.log("clicked!");
-
-    const user = firebase.auth().currentUser;
-    const userID = user.uid;
     console.log(userID);
+ 
+    firebase.auth().onAuthStateChanged(user => {
+        const userID = user.uid;
+        console.log(userID);
+        var points;
 
-    var points;
-
-    db.collection("users").doc(userID).get()
-        .then(user => {
-            points = user.data().points;
-            console.log(points);
-            points++;
-            console.log(points);
-        }, () => {
-            db.collection("users").doc(userID).update({
-                points: points
+        db.collection("users").doc(userID).get()
+            .then(user => {
+                points = user.data().points;
+                console.log(points);
+                points++;
+                console.log(points);
             })
-            console.log("made it up to here!");
-        })
-        // .then(
-        //     window.location.replace("main.html")
-        // )
+            .then(() => {
+                db.collection("users").doc(userID).update({
+                    points: points
+                });
+                console.log("made it up to here woohoo");
+            })
+            .then(() => {
+                console.log("this is the last thing");
+                // window.location.replace("main.html");
+            })
+    })
 });
 
