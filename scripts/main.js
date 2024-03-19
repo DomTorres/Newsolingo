@@ -98,7 +98,7 @@ function displayCards() {
             })
         })
 }
-// displayCards();
+displayCards();
 
 function writeNews() {
     //define a variable for the collection you want to create in Firestore to populate data
