@@ -1,8 +1,12 @@
+var newsID;
+
 function loadArticle() {
     let params = new URL(window.location.href);
-    let articleID = params.searchParams.get("articleID"); 
 
-    db.collection("news").doc(articleID).get().then(article => {
+    newsID = params.searchParams.get("articleID"); 
+    const docRef = db.collection("news").doc(newsID)
+
+    docRef.get().then(article => {
         var title = article.id;
         var image = article.data().image;
         var content = article.data().content;
@@ -16,31 +20,35 @@ loadArticle();
 
 document.querySelector("#done-reading").addEventListener("click", () => {
 
+    const userID = localStorage.getItem("userID");
+    const userRef = db.collection("users").doc(userID);
+    const docRef = db.collection("news").doc(newsID)
+
     console.log("clicked!");
     console.log(userID);
  
-    firebase.auth().onAuthStateChanged(user => {
-        const userID = user.uid;
-        console.log(userID);
-        var points;
+    const pointsForReading = 100;
 
-        db.collection("users").doc(userID).get()
-            .then(user => {
-                points = user.data().points;
-                console.log(points);
-                points++;
-                console.log(points);
+    userRef.get()
+        .then(user => {
+            // Read user's current points
+            points = user.data().points;
+            console.log("Old points: " + points);
+
+            // Add pointsForReading 
+            points += pointsForReading;
+
+            // Write updated points
+            userRef.update({
+                points: points
             })
-            .then(() => {
-                db.collection("users").doc(userID).update({
-                    points: points
-                });
-                console.log("made it up to here woohoo");
+            console.log("added points");
+
+            console.log(newsID);
+            userRef.update({
+                for_you: firebase.firestore.FieldValue.arrayRemove(newsID)
             })
-            .then(() => {
-                console.log("this is the last thing");
-                // window.location.replace("main.html");
-            })
-    })
+            console.log("deleted from for you array");
+        })
 });
 

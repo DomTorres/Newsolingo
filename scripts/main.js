@@ -34,8 +34,9 @@ saveUserIDToLocalStorage();
 
 // Use API to query news, then add to database
 function fetchNewsFromAPI() {
+    const userID = localStorage.getItem("userID");
 
-    db.collection("users").doc(localStorage.getItem("userID")).get()
+    db.collection("users").doc(userID).get()
         .then(user => {
             var country = user.data().country_preference;
             var category = user.data().category_preference;
@@ -69,7 +70,12 @@ function fetchNewsFromAPI() {
                             publishedAt: articles[i].publishedAt,
                             category: category,
                             country: country
-                        })
+                        });
+
+                        // Save the newsID in the user's for_you array
+                        db.collection("users").doc(userID).update({
+                            for_you: firebase.firestore.FieldValue.arrayUnion(title)
+                        });
                     }                   
                 })
         })
@@ -78,58 +84,67 @@ fetchNewsFromAPI();
 
 // Display news from database
 function displayCards() {
+    const userID = localStorage.getItem("userID");
+
     let cardTemplate = document.getElementById("newsCardTemplate");
 
-    db.collection("news").get()
-        .then(articles => {
-            articles.forEach(article => {
-                // Clone template card
-                let newcard = cardTemplate.content.cloneNode(true);
+    db.collection("users").doc(userID).get()
+        .then(user => {
+            var articlesPerDay = user.data().articlesPerDay_preference;
 
-                // Set card details
-                newcard.querySelector('.card-img').setAttribute("src", article.data().image);
-                newcard.querySelector('.headline').innerHTML = article.id;
-                newcard.querySelector('.preview').innerHTML = article.data().description;
-                // newcard.querySelector('.time-to-read').innerHTML = time_to_read + " minute read";
-                newcard.querySelector('.country').innerHTML = article.data().country;
+            for(let i = 0; i < articlesPerDay; i++) {
+                let forYouNewsID = user.data().for_you[i];
 
-                // Set card hyperlink
-                newcard.querySelector("a").href = "article.html?articleID=" + article.id;
+                db.collection("news").doc(forYouNewsID).get()
+                    .then(article => {
+                        // Clone template card
+                        let newcard = cardTemplate.content.cloneNode(true);
 
-                // Add card to DOM
-                document.getElementById("for-you-cards-go-here").appendChild(newcard);
-            })
+                        // Set card details
+                        newcard.querySelector('.card-img').setAttribute("src", article.data().image);
+                        newcard.querySelector('.headline').innerHTML = article.id;
+                        newcard.querySelector('.preview').innerHTML = article.data().description;
+                        // newcard.querySelector('.time-to-read').innerHTML = time_to_read + " minute read";
+                        newcard.querySelector('.country').innerHTML = article.data().country;
+
+                        // Set card hyperlink
+                        newcard.querySelector("a").href = "article.html?articleID=" + article.id;
+
+                        // Add card to DOM
+                        document.getElementById("for-you-cards-go-here").appendChild(newcard);
+                    })
+            }
         })
 }
 displayCards();
 
-function writeNews() {
-    //define a variable for the collection you want to create in Firestore to populate data
-    var newsRef = db.collection("news");
+// function writeNews() {
+//     //define a variable for the collection you want to create in Firestore to populate data
+//     var newsRef = db.collection("news");
 
-    newsRef.add({
-        code: "NEWS01",
-        name: "Test 1",
-        country: "gb",
-        level: "easy",
-		details: "A lovely place for lunch walk",
-        readTime: 3,
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
-    });
-    newsRef.add({
-        code: "NEWS02",
-        name: "Test 2",
-        country: "uk",
-        details: "Placeholder for news article",
-        readTime: 4,
-        last_updated: firebase.firestore.Timestamp.fromDate(new Date("March 10, 2022"))
-    });
-    newsRef.add({
-        code: "NEWS03",
-        name: "Test 3",
-        country: "canada",
-        details:  "Amazing ski slope views",
-        readTime: 5,
-        last_updated: firebase.firestore.Timestamp.fromDate(new Date("January 1, 2023"))
-    });
-}
+//     newsRef.add({
+//         code: "NEWS01",
+//         name: "Test 1",
+//         country: "gb",
+//         level: "easy",
+// 		details: "A lovely place for lunch walk",
+//         readTime: 3,
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+//     });
+//     newsRef.add({
+//         code: "NEWS02",
+//         name: "Test 2",
+//         country: "uk",
+//         details: "Placeholder for news article",
+//         readTime: 4,
+//         last_updated: firebase.firestore.Timestamp.fromDate(new Date("March 10, 2022"))
+//     });
+//     newsRef.add({
+//         code: "NEWS03",
+//         name: "Test 3",
+//         country: "canada",
+//         details:  "Amazing ski slope views",
+//         readTime: 5,
+//         last_updated: firebase.firestore.Timestamp.fromDate(new Date("January 1, 2023"))
+//     });
+// }
