@@ -1,8 +1,12 @@
+var newsID;
+
 function loadArticle() {
     let params = new URL(window.location.href);
-    let articleID = params.searchParams.get("articleID"); 
 
-    db.collection("news").doc(articleID).get().then(article => {
+    newsID = params.searchParams.get("articleID"); 
+    const docRef = db.collection("news").doc(newsID)
+
+    docRef.get().then(article => {
         var title = article.id;
         var image = article.data().image;
         var content = article.data().content;
@@ -16,28 +20,35 @@ loadArticle();
 
 document.querySelector("#done-reading").addEventListener("click", () => {
 
+    const userID = localStorage.getItem("userID");
+    const userRef = db.collection("users").doc(userID);
+    const docRef = db.collection("news").doc(newsID)
+
     console.log("clicked!");
-
-    const user = firebase.auth().currentUser;
-    const userID = user.uid;
     console.log(userID);
+ 
+    const pointsForReading = 100;
 
-    var points;
-
-    db.collection("users").doc(userID).get()
+    userRef.get()
         .then(user => {
+            // Read user's current points
             points = user.data().points;
-            console.log(points);
-            points++;
-            console.log(points);
-        }, () => {
-            db.collection("users").doc(userID).update({
+            console.log("Old points: " + points);
+
+            // Add pointsForReading 
+            points += pointsForReading;
+
+            // Write updated points
+            userRef.update({
                 points: points
             })
-            console.log("made it up to here!");
+            console.log("added points");
+
+            console.log(newsID);
+            userRef.update({
+                for_you: firebase.firestore.FieldValue.arrayRemove(newsID)
+            })
+            console.log("deleted from for you array");
         })
-        // .then(
-        //     window.location.replace("main.html")
-        // )
 });
 
