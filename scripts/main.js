@@ -24,6 +24,9 @@
 // }
 // getNameFromAuth(); //run the function
 
+console.log("Hello!");
+// console.log(userID);
+
 // Use API to query news, then add to database
 function fetchNewsFromAPI() {
 

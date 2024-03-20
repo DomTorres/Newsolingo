@@ -1,3 +1,9 @@
+body {
+    margin: 0%;
+    padding: 0%;
+    width: 100vw;
+    height: 100vh;
+}
 #container {
     display: grid;
     grid-template-rows: 35vh 45vh;
@@ -82,7 +88,7 @@ a {
         overflow-x: auto;
         overflow-y: hidden;
         height: 30vh;
-        /**flex-wrap: nowrap;*/
+        flex-wrap: nowrap;
     }
 
     #card {
