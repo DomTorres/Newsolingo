@@ -1,21 +1,32 @@
-#container2 {
+:root {
+  --primary-color: #07afd9;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.container-radio {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 25vh;
+  margin-top: 20px; /*controls the Y position of the buttons*/
 }
 
-.radio-group {
+.radio-tile-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .input-container {
   position: relative;
-  height: 4rem;
-  width: 14rem;
-  margin: 1rem;
+  height: 3rem; /*controls the height of the buttons*/
+  width: 15rem; /*controls the width of the buttons*/
+  margin: 0.5rem; /*controls the separation among the buttons*/
 }
+
 .input-container input {
   position: absolute;
   height: 100%;
@@ -26,37 +37,51 @@
   opacity: 0;
 }
 
-.input-container .radio-title {
+.input-container .radio-tile {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
-  border: 2px solid #07afd9;
-  border-radius: 8px;
+  border: 2px solid var(--primary-color);
+  border-radius: 15px;
   transition: all 300ms ease;
 }
 
 .input-container label {
-  color: #07afd9;
-  font-size: 16px;
+  color: var(--primary-color);
+  font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-.input-container .icon {
-  color: #07afd9;
-  font-size: 16px;
+input:checked + .radio-tile {
+  background-color: var(--primary-color);
+  box-shadow: 0 0 12px var(--primary-color);
+  transform: scale(1.1);
 }
-input:checked + .radio-title {
-  background-color: #07afd9;
-  box-shadow: 0 0 12px #07afd9;
+
+input:hover + .radio-tile {
+  box-shadow: 0 0 12px var(--primary-color);
 }
-input:hover + .radio-title {
-  box-shadow: 0 0 12px #07afd9;
-}
-input:checked + .radio-title ion-icon,
-input:checked + .radio-title label {
+
+input:checked + .radio-tile ion-icon,
+input:checked + .radio-tile label {
   color: white;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-item input[type="checkbox"] {
+  margin-right: 5px; 
 }
