@@ -14,6 +14,7 @@ searchJS.onload = function () {
   searchBox.accessToken = ACCESS_TOKEN;
   searchBox.options = {
     types: 'country',
+    country: ['US', 'CA', 'AU', 'BR', 'CN', 'EG', 'FR', 'DE', 'GR', 'HK', 'IN', 'IE', 'IL', 'IT', 'JP', 'NL', 'NO', 'PK', 'PE', 'ph', 'pt', 'ro', 'ru', 'sg', 'es', 'se', 'ch', 'tw', 'ua', 'gb'],
     proximity: [-73.99209, 40.68933]
   };
   searchBox.marker = true;
