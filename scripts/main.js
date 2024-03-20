@@ -24,55 +24,55 @@
 // }
 // getNameFromAuth(); //run the function
 
-console.log("Hello!");
-// console.log(userID);
+// Get logged in user's ID, save it to local storage for future purposes
+function saveUserIDToLocalStorage() {
+    firebase.auth().onAuthStateChanged(user => {
+        localStorage.setItem("userID", user.uid);
+    })
+}
+saveUserIDToLocalStorage();
 
 // Use API to query news, then add to database
 function fetchNewsFromAPI() {
 
-    firebase.auth().onAuthStateChanged(user => {
-        console.log("The user's ID is: " + user.uid);
-        const userID = user.uid;
+    db.collection("users").doc(localStorage.getItem("userID")).get()
+        .then(user => {
+            var country = user.data().country_preference;
+            var category = user.data().category_preference;
+            var articlesPerDay = user.data().articlesPerDay_preference;
+            var from = "2024-03-17T00:00:00Z"; // This needs to be dynamically based based on the current date.
 
-        db.collection("users").doc(userID).get()
-            .then(user => {
-                var country = user.data().country_preference;
-                var category = user.data().category_preference;
-                var articlesPerDay = user.data().articlesPerDay_preference;
-                var from = "2024-03-17T00:00:00Z"; // This needs to be dynamically based based on the current date.
+            console.log(country);
+            console.log(category);
+            console.log(articlesPerDay);
 
-                console.log(country);
-                console.log(category);
-                console.log(articlesPerDay);
+            var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${articlesPerDay}&from=${from}&apikey=${news_api_key}`;
 
-                var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${articlesPerDay}&from=${from}&apikey=${news_api_key}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var articles = data.articles;
+                    console.log(articles);
+                    console.log("length:" + articles.length);
 
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        var articles = data.articles;
-                        console.log(articles);
-                        console.log("length:" + articles.length);
+                    numberOfArticles = articles.length;
 
-                        numberOfArticles = articles.length;
-
-                        for(let i = 0; i < numberOfArticles; i++) {
-                            // Write each article into database, with ID = title
-                            var title = articles[i].title;
-                            
-                            db.collection("news").doc(title).set({
-                                description: articles[i].description,
-                                content: articles[i].content,
-                                url: articles[i].url,
-                                image: articles[i].image,
-                                publishedAt: articles[i].publishedAt,
-                                category: category,
-                                country: country
-                            })
-                        }                   
-                    })
-            })
-    })
+                    for(let i = 0; i < numberOfArticles; i++) {
+                        // Write each article into database, with ID = title
+                        var title = articles[i].title;
+                        
+                        db.collection("news").doc(title).set({
+                            description: articles[i].description,
+                            content: articles[i].content,
+                            url: articles[i].url,
+                            image: articles[i].image,
+                            publishedAt: articles[i].publishedAt,
+                            category: category,
+                            country: country
+                        })
+                    }                   
+                })
+        })
 }
 fetchNewsFromAPI();
 
