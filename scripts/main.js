@@ -24,21 +24,29 @@
 // }
 // getNameFromAuth(); //run the function
 
+// console.log(today);
+// todayString = String(today);
+// console.log(todayString);
+
+// console.log(Date(todayString));
+
+
 // Get date function
-function printDate() {
-    const currentDate = new Date();
+// function printDate() {
+//     const currentDate = new Date();
+//     console.log(currentDate);
 
-    const currentDayOfMonth = currentDate.getDate();
-    const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
-    const currentYear = currentDate.getFullYear();
+//     const currentDayOfMonth = currentDate.getDate();
+//     const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+//     const currentYear = currentDate.getFullYear();
     
-    const dateString = currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
-    console.log("The date is: " + dateString);
+//     const dateString = currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
+//     console.log("The date is: " + dateString);
 
-    // const timestamp = currentDate.getTime(); 
-    // console.log("The timestramp is: " + timestamp);
-}
-printDate();
+//     // const timestamp = currentDate.getTime(); 
+//     // console.log("The timestramp is: " + timestamp);
+// }
+// printDate();
 
 // Get logged in user's ID, save it to local storage for future purposes
 function saveUserIDToLocalStorage() {
@@ -101,18 +109,46 @@ function fetchNewsFromAPI() {
                     });
                 }  
                 
-                localStorage.setItem("fetchedNewsForToday", "true");
                 displayCards();
+                console.log("Successfully loaded cards for today.");
+
+                userRef.update({
+                    date_last_loaded: String(new Date())
+                })
             })
         })
 }
-console.log("fetched News for today? " + localStorage.getItem("fetchedNewsForToday"));
-console.log(localStorage.getItem("fetchedNewsForToday"));
 
-if (localStorage.getItem("fetchedNewsForToday") == "false") {
-    console.log("ran function");
-    fetchNewsFromAPI();
+function loadNewsForToday() {
+    const userID = localStorage.getItem("userID");
+    const userRef = db.collection("users").doc(userID);
+
+    userRef.get()
+        .then(user => {
+            console.log("Date read from database: " + user.data().date_last_loaded);
+
+            var dateLastLoaded = new Date(user.data().date_last_loaded);
+            console.log(dateLastLoaded);
+
+            var dateToday = new Date("March 22, 2024")
+            console.log("Date today: " + dateToday);
+
+            console.log(dateLastLoaded.getDate() > dateToday.getDate());
+            if (dateToday > dateLastLoaded) {
+                console.log("We need to fetch news for today.");
+                fetchNewsFromAPI();
+            } else {
+                console.log("Today's cards are already loaded.");
+            }
+        }) 
+
 }
+loadNewsForToday();
+
+// if (localStorage.getItem("fetchedNewsForToday") == "false") {
+//     console.log("ran function");
+//     fetchNewsFromAPI();
+// }
 
 // Display news from database
 function displayCards() {
@@ -151,7 +187,7 @@ function displayCards() {
             }
         })
 }
-// displayCards();
+displayCards();
 
 // function writeNews() {
 //     //define a variable for the collection you want to create in Firestore to populate data
