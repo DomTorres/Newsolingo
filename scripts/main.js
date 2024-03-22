@@ -24,6 +24,22 @@
 // }
 // getNameFromAuth(); //run the function
 
+// Get date function
+function printDate() {
+    const currentDate = new Date();
+
+    const currentDayOfMonth = currentDate.getDate();
+    const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
+    const currentYear = currentDate.getFullYear();
+    
+    const dateString = currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
+    console.log("The date is: " + dateString);
+
+    // const timestamp = currentDate.getTime(); 
+    // console.log("The timestramp is: " + timestamp);
+}
+printDate();
+
 // Get logged in user's ID, save it to local storage for future purposes
 function saveUserIDToLocalStorage() {
     firebase.auth().onAuthStateChanged(user => {
@@ -32,67 +48,86 @@ function saveUserIDToLocalStorage() {
 }
 saveUserIDToLocalStorage();
 
+// Is it a new day?
+localStorage.setItem("fetchedNewsForToday", "false");
+
 // Use API to query news, then add to database
 function fetchNewsFromAPI() {
+    console.log("Entered function fetchNewsFromAPI");
+
     const userID = localStorage.getItem("userID");
+    const userRef = db.collection("users").doc(userID);
 
-    db.collection("users").doc(userID).get()
+    userRef.get()
         .then(user => {
-            var country = user.data().country_preference;
-            var category = user.data().category_preference;
-            var articlesPerDay = user.data().articlesPerDay_preference;
-            var from = "2024-03-17T00:00:00Z"; // This needs to be dynamically based based on the current date.
 
-            console.log(country);
-            console.log(category);
-            console.log(articlesPerDay);
+        var country = user.data().country_preference;
+        var category = user.data().category_preference;
+        var articlesPerDay = user.data().articlesPerDay_preference;
+        var from = "2024-03-17T00:00:00Z"; // This needs to be dynamically based based on the current date.
 
-            var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${articlesPerDay}&from=${from}&apikey=${news_api_key}`;
+        console.log(country);
+        console.log(category);
+        console.log(articlesPerDay);
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    var articles = data.articles;
-                    console.log(articles);
-                    console.log("length:" + articles.length);
+        var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${articlesPerDay}&from=${from}&apikey=${news_api_key}`;
 
-                    numberOfArticles = articles.length;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                var articles = data.articles;
+                console.log(articles);
+                console.log("length:" + articles.length);
 
-                    for(let i = 0; i < numberOfArticles; i++) {
-                        // Write each article into database, with ID = title
-                        var title = articles[i].title;
-                        
-                        db.collection("news").doc(title).set({
-                            description: articles[i].description,
-                            content: articles[i].content,
-                            url: articles[i].url,
-                            image: articles[i].image,
-                            publishedAt: articles[i].publishedAt,
-                            category: category,
-                            country: country
-                        });
+                numberOfArticles = articles.length;
 
-                        // Save the newsID in the user's for_you array
-                        db.collection("users").doc(userID).update({
-                            for_you: firebase.firestore.FieldValue.arrayUnion(title)
-                        });
-                    }                   
-                })
+                for(let i = 0; i < numberOfArticles; i++) {
+                    // Write each article into database, with ID = title
+                    var title = articles[i].title;
+                    
+                    db.collection("news").doc(title).set({
+                        description: articles[i].description,
+                        content: articles[i].content,
+                        url: articles[i].url,
+                        image: articles[i].image,
+                        publishedAt: articles[i].publishedAt,
+                        category: category,
+                        country: country
+                    });
+
+                    // Save the newsID in the user's for_you array
+                    userRef.update({
+                        for_you: firebase.firestore.FieldValue.arrayUnion(title)
+                    });
+                }  
+                
+                localStorage.setItem("fetchedNewsForToday", "true");
+                displayCards();
+            })
         })
 }
-fetchNewsFromAPI();
+console.log("fetched News for today? " + localStorage.getItem("fetchedNewsForToday"));
+console.log(localStorage.getItem("fetchedNewsForToday"));
+
+if (localStorage.getItem("fetchedNewsForToday") == "false") {
+    console.log("ran function");
+    fetchNewsFromAPI();
+}
 
 // Display news from database
 function displayCards() {
+    console.log("Entered function displayCards");
+
     const userID = localStorage.getItem("userID");
+    const userRef = db.collection("users").doc(userID);
 
     let cardTemplate = document.getElementById("newsCardTemplate");
 
-    db.collection("users").doc(userID).get()
+    userRef.get()
         .then(user => {
-            var articlesPerDay = user.data().articlesPerDay_preference;
+            var articlesToShow = user.data().for_you.length;
 
-            for(let i = 0; i < articlesPerDay; i++) {
+            for(let i = 0; i < articlesToShow; i++) {
                 let forYouNewsID = user.data().for_you[i];
 
                 db.collection("news").doc(forYouNewsID).get()
@@ -116,7 +151,7 @@ function displayCards() {
             }
         })
 }
-displayCards();
+// displayCards();
 
 // function writeNews() {
 //     //define a variable for the collection you want to create in Firestore to populate data
