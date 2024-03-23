@@ -1,13 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Sono:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 body {
     margin: 0%;
     padding: 0%;
     width: 100vw;
     height: 100vh;
+    font-family: 'Nunito';
+}
+
+* {
+    font-size: 10pt;
 }
 
 #container {
     display: grid;
-    grid-template-rows: 35vh 45vh;
+    grid-template-rows: 30vh 40vh;
     grid-template-areas: 
         "map"
         "news";
@@ -35,8 +43,9 @@ a {
     align-items: center;
     overflow-y: scroll;
     height: 55vh;
-    margin: 0.5% 5% 0.5% 5%;
+    margin: 0.5% 2.5% 0.5% 2.5%;
 }
+
 
 #card {
     display: flex;
@@ -46,6 +55,7 @@ a {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     padding: 5px;
+    font-family: 'Nunito';
 }
 
 .card:hover {
@@ -53,51 +63,18 @@ a {
 }
 
 .card-img {
-    height: 250px;
-    width: 200px;
-    padding: 10px;
+    display: none;
 }
 
 #map {
     height: 100%;
 }
 
-
-
 @media only screen and (min-width: 701px) and (max-width: 1280px) {
-
-    #container {
-        display: grid;
-        grid-template-rows: 60vh 20vh;
-        grid-template-areas: 
-            "map"
-            "news";
-    }
-
-    main {
-        grid-area: map;
-    }
-    
-    main img {
-        height: 90%;
-        padding: 1em;
-    }
-
-    #news {
-        grid: news;
-        flex-direction: row;
-        overflow-x: auto;
-        overflow-y: hidden;
-        height: 30vh;
-        flex-wrap: nowrap;
-    }
-
-    #card {
-        flex-direction: column;
-        padding: 0.5em;
-        margin: 0.5em;
-        width: 200px;
-        flex: 0 0 auto;
+    .card-img {
+        display: unset;
+        padding: 2em 0.5em 0em 0.5em;
+        max-width: 40%;;    
     }
 
 }
@@ -106,28 +83,34 @@ a {
     #container {
         display: grid;
         grid-template-columns: 65vw 35vw;
-        grid-template-rows: 95vh;
+        grid-template-rows: 80vh;
         grid-template-areas:
             "map news";
     }
     
     main {
         grid-area: map;
-        height: 90%;
+        height: 100%;
         margin-left: 2em;
         margin-top: 2em;
     }
 
     main img {
-        height: 90%;
+        width: 100%;
         max-width: 1280px;
         padding: 1em;
     }
 
     #news {
         grid-area: news;
-        margin-top: 4em;
+        margin-top: 2em;
         margin-bottom: 2em;
-        height: 90%;
+        height: 100%;
+    }
+
+    .card-img {
+        display: unset;
+        padding: 2em 0.5em 0em 0.5em;
+        max-width: 40%;;    
     }
 }
