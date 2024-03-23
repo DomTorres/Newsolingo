@@ -44,6 +44,18 @@ document.querySelector("#done-reading").addEventListener("click", () => {
             })
             console.log("added points");
 
+            // Read user's current articles read today
+            articles_read_today = user.data().articles_read_today;
+            
+            // Add articles_read_today by 1
+            articles_read_today++;
+
+            // Write updated articles read today
+            userRef.update({
+                articles_read_today: articles_read_today
+            })
+
+            // Delete article from "for you" array
             console.log(newsID);
             userRef.update({
                 for_you: firebase.firestore.FieldValue.arrayRemove(newsID)
