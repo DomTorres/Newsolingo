@@ -74,9 +74,9 @@ function fetchNewsFromAPI() {
         var articlesPerDay = user.data().articlesPerDay_preference;
         var from = "2024-03-17T00:00:00Z"; // This needs to be dynamically based based on the current date.
 
-        console.log(country);
-        console.log(category);
-        console.log(articlesPerDay);
+        console.log("Country read from database: " + country);
+        console.log("Category read from database: " + category);
+        console.log("articlesPerDay read from database: " + articlesPerDay);
 
         var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${articlesPerDay}&from=${from}&apikey=${news_api_key}`;
 

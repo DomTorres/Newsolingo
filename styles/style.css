@@ -1,18 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Sono:wght@200..800&display=swap');
+
 .bg-primary-subtle {
-  background-color: #064479 !important;
+  background-color: white !important;
+}
+
+* {
+  font-size: 14pt;
 }
 
 .nav-link,
 .navbar-brand {
-  color: white !important;
-  font-family: "Poppins", sans-serif;
+  color: darkgray !important;
+  /* font-family: "Poppins", sans-serif; */
+  font-family: "Nunito";
+}
+
+#navbarPlaceholder {
+  border-bottom: lightgray solid;
+}
+
+#logo {
+  color: #0aa5e9 !important;
+  font-weight: bold;
 }
 
 .btn-primary {
-  --bs-btn-bg: #064479;
+  --bs-btn-bg: white;
   --bs-btn-border-color: #064479;
   --bs-btn-hover-bg: #0aa5e9;
   --bs-btn-hover-border-color: #0aa5e9;
+  border: 2px solid #04AA6D; 
+  border-radius: 20px;
 }
 
 .btn-outline-success {
