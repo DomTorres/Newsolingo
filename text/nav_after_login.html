@@ -1,9 +1,12 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+
 <nav class="navbar navbar-expand-lg bg-primary-subtle">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="../main.html">Newsolingo</a>
+      <a class="navbar-brand" id="logo" href="../main.html">newsolingo</a>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -24,23 +27,21 @@
             <li><a class="dropdown-item" href="../preferences.html">Preferences</a></li>
             <li><a class="dropdown-item" href="#">Progress</a></li>
             <li><a class="dropdown-item" href="../edit_profile.html">Settings</a></li>
+            <li><a class="dropdown-item" href="../index.html" onclick="logout()">Log Out</a></li>
           </ul>
         </li>
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Contact
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">About Us</a></li>
-            <li><a class="dropdown-item" href="#">Contact Us</a></li>
-          </ul>
-        </li> -->
         </ul>
-        <!-- <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search Region" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
-        <a class="btn btn-outline-success" href="../index.html">Log Out</a>
-      </div>
+        <div class="navbar_points">
+          <span class="material-symbols-outlined">
+            kid_star
+          </span>
+          <span>Points</span>
+        </div>
+        <div class="navbar_streak">
+          <span class="material-symbols-outlined">
+            local_fire_department
+            </span>
+          <span>Streak</span>
+        </div>
     </div>
 </nav>
