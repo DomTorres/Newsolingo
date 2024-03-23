@@ -23,3 +23,18 @@ function loadSkeleton() {
     });
 }
 loadSkeleton(); 
+
+function loadUserStats() {
+    const userID = localStorage.getItem("userID");
+    const userRef = db.collection("users").doc(userID);
+
+    userRef.onSnapshot(user => {
+        let points = user.data().points;
+        document.querySelector("#points-go-here").innerHTML = points;
+
+        let streak = user.data().streak;
+        document.querySelector("#streak-goes-here").innerHTML = streak;
+    })
+
+}
+loadUserStats()

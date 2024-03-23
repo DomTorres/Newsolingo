@@ -138,7 +138,7 @@ function loadNewsForToday() {
                 console.log("We need to fetch news for today.");
                 fetchNewsFromAPI();
             } else {
-                console.log("Today's cards are already loaded.");
+                console.log("Today's cards are already fetched.");
             }
         }) 
 

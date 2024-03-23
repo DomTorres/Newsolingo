@@ -40,7 +40,24 @@
         <img id="image" src="">
         <div id="content"></div>
 
-        <a id="done-reading" class="btn btn-primary btn-lg px-4 gap-3">Done Reading</a>
+        <a id="done-reading" class="btn btn-primary btn-lg px-4 gap-3" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Done Reading</a>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title primary-font" id="exampleModalLongTitle">Modal title</h5>
+            </div>
+            <div class="modal-body secondary-font">
+            Good job, John!
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to For You Page</button>
+            </div>
+        </div>
+        </div>
     </div>
 
     <br>
@@ -51,8 +68,6 @@
     <br>
 
     <nav id="footerPlaceholder"></nav>
-
-
 
     <script src="./scripts/firebaseAPI_BBY22.js"></script>
     <script src="./scripts/skeleton.js"></script>

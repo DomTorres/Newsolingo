@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Sono:wght@200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
+.primary-font {
+  font-family: "Nunito", sans-serif;
+}
+
+.secondary-font {
+  font-family: "Open Sans", sans-serif;
+}
+
 .bg-primary-subtle {
   background-color: white !important;
 }
@@ -30,11 +38,12 @@
 }
 
 .navbar_points, .navbar_streak {
-  float: right;
+  /* float: right; */
 }
 
 .material-symbols-outlined {
   color: #0aa5e9;
+  vertical-align: middle;
 }
 
 .btn-primary {
@@ -174,6 +183,19 @@ a {
   font-size: 15pt;
   border: 2px solid #D2D4DA;
   color: #D2D4DA;
+}
+
+/* MODAL STYLES */
+.modal-content {
+  border-radius: 20px;
+}
+
+.modal-header {
+  border-bottom: 0;
+}
+
+.modal-footer {
+  border-top: 0;
 }
 
 @media only screen and (min-width: 701px) and (max-width: 1600px) {
