@@ -3,7 +3,7 @@
   <head>
     <title>My BCIT Project</title>
     <meta name="comp1800 template" content="My 1800 App" />
-    
+
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -37,8 +37,7 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css" />
-    <link rel="stylesheet" href="/styles/stylePreferences.css">
-    
+    <link rel="stylesheet" href="/styles/stylePreferences.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -59,55 +58,102 @@
 
     <div class="text-center 1">
       <div class="title">
-        <h1><br />Set Preferences<br /></h1>
+        <h1>Set Preferences</h1>
       </div>
     </div>
-    <br />
 
     <div class="text-center notification">
-      <h2><br />Set Genres<br /></h2>
+      <h2>Set Genres</h2>
     </div>
 
     <div class="main text-center">
       <input
         class="form-check-input"
-        type="checkbox"
-        value=""
-        id="flexCheckDefault"
+        type="radio"
+        name="category"
+        id="general"
+        value="general"
       />
-      <label class="form-check-label" for="flexCheckDefault"> Politics </label>
+      <label class="form-check-label" for="general">General</label>
     </div>
 
     <div class="main text-center">
       <input
         class="form-check-input"
-        type="checkbox"
-        value=""
-        id="flexCheckChecked"
+        type="radio"
+        name="category"
+        id="world"
+        value="world"
       />
-      <label class="form-check-label" for="flexCheckChecked"> Economics </label>
+      <label class="form-check-label" for="world">World</label>
     </div>
 
     <div class="main text-center">
       <input
         class="form-check-input"
-        type="checkbox"
-        value=""
-        id="flexCheckDefault"
+        type="radio"
+        name="category"
+        id="nation"
+        value="nation"
       />
-      <label class="form-check-label" for="flexCheckDefault">
-        Entertainment
-      </label>
+      <label class="form-check-label" for="nation">Nation</label>
     </div>
 
     <div class="main text-center">
       <input
         class="form-check-input"
-        type="checkbox"
-        value=""
-        id="flexCheckChecked"
+        type="radio"
+        name="category"
+        id="business"
+        value="business"
       />
-      <label class="form-check-label" for="flexCheckChecked"> Sports </label>
+      <label class="form-check-label" for="business">Business</label>
+    </div>
+
+    <div class="main text-center">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="category"
+        id="technology"
+        value="technology"
+      />
+      <label class="form-check-label" for="technology">Technology</label>
+    </div>
+
+    <div class="main text-center">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="category"
+        id="entertainment"
+        value="entertainment"
+      />
+      <label class="form-check-label" for="entertainment">Entertainment</label>
+    </div>
+
+    <div class="main text-center">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="category"
+        id="sports"
+        value="sports"
+      />
+      <label class="form-check-label" for="sports">Sports</label>
+    </div>
+
+    <div class="main text-center">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="category"
+        id="science_health"
+        value="science_health"
+      />
+      <label class="form-check-label" for="science_health"
+        >Science and Health</label
+      >
     </div>
 
     <!--radio buttons-->
@@ -137,7 +183,6 @@
     </div>
 
     <nav id="footerPlaceholder"></nav>
-  
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
