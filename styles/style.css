@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Sono:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 .bg-primary-subtle {
   background-color: white !important;
 }
 
 * {
-  font-size: 14pt;
+  font-size: 15pt;
 }
 
 .nav-link,
@@ -15,13 +16,25 @@
   font-family: "Nunito";
 }
 
+.nav-link:hover {
+  color: #404040 !important;
+}
+
 #navbarPlaceholder {
-  border-bottom: lightgray solid;
+  border-bottom: #D2D4DA solid 1px !important;
 }
 
 #logo {
   color: #0aa5e9 !important;
   font-weight: bold;
+}
+
+.navbar_points, .navbar_streak {
+  float: right;
+}
+
+.material-symbols-outlined {
+  color: #0aa5e9;
 }
 
 .btn-primary {
@@ -45,12 +58,14 @@ img[src="./images/bird.png"] {
   height: auto;
   margin-bottom: 0 !important;
 }
+
 #page-content {
   position: botom;
   height: 100px;
   bottom: 0;
   width: 100%;
 }
+ 
 #sticky-footer {
   background-color: #064479;
 }
@@ -61,6 +76,7 @@ img[src="./images/bird.png"] {
   font-size: 20pt;
   text-align: center;
 }
+
 #cardContainer,
 #cardContainer2 {
   display: flex;
@@ -69,22 +85,46 @@ img[src="./images/bird.png"] {
   align-items: center;
   margin: 1%;
 }
+a {
+  text-decoration: none;
+}
 
 .card {
+  border-radius: 20px;
   margin: 1%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
   transition: 0.3s;
-  padding: 0.5%;
+  padding: 12px;
   width: 18rem;
 }
 
-.card:hover {
-  box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.2);
+.card .headline {
+  font-size: 15pt;
+  font-family: "Nunito";
+  color: #404040;
 }
 
-.card img {
-  width: auto;
+.card .preview, .card .country {
+  font-size: 12pt;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  color: #808080;
 }
+
+.card-img-top {
+  border-radius: 8px;
+  width: 100%;
+  height: 9em; 
+}
+
+.card:hover {
+  /* box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.2); */
+  background-color: #F3F4F8;
+}
+
+/* .card img {
+  width: auto;
+} */
 
 #profile-photo {
   border-radius: 50%;
@@ -101,6 +141,39 @@ img[src="./images/bird.png"] {
 .shrink-form {
   width: 50%;
   margin: 0 auto;
+}
+
+.mapboxgl-map {
+  border: lightgray solid;
+  border-radius: 15px;
+}
+
+.article_container {
+  width: 80%;
+  margin: auto;
+}
+
+#title {
+  font-size: 22pt;
+  font-family: "Nunito";
+  color: #404040;
+}
+
+#image {
+  border-radius: 20px;
+}
+
+#content {
+  font-size: 15pt;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  color: #808080;
+}
+
+.btn {
+  font-size: 15pt;
+  border: 2px solid #D2D4DA;
+  color: #D2D4DA;
 }
 
 @media only screen and (min-width: 701px) and (max-width: 1600px) {
