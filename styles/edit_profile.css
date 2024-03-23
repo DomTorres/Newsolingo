@@ -1,0 +1,83 @@
+.text h2 {
+    text-align: center; /* Center-align heading */
+    font-size: 25px;
+  }
+  
+  .img-container {
+    text-align: center; /* Center-align image and label */
+  }
+  
+  #profile-pic {
+    width: 100px; /* Reduce image size */
+    height: 100px;
+    border-radius: 50%; /* Circular shape */
+    margin-bottom: 10px; /* Add space between image and button */
+  }
+  
+  #profile-load {
+    display: block; /* Ensure button appears on a new line */
+    margin: 0 auto; /* Center-align button */
+  }
+  
+  label {
+    display: block;
+    height: 30px; /* Change input container height to 40 pixels */
+    width: 110px;
+    background: #0aa5e9;
+    color: #fff;
+    padding: 5px;
+    margin: 10px auto;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .main-container {
+    width: calc(50% - 20px);
+    padding: 20px; /* Add internal space to form container */
+    border-radius: 25px;
+    border: 1px solid #ccccccd1;
+    background-color: #ffffff;
+    font-size: 14px;
+    margin: 15px auto;
+  }
+  
+  /* Add space between form elements */
+  .name-form,
+  .user-form,
+  .form-select {
+    margin-bottom: 5px;
+  }
+  
+  .save-editBtn {
+    text-align: center; /* Center buttons */
+    margin-top: 1px; /* Add top space */
+  }
+  
+  /* Additional styles for buttons */
+  .btn-edit,
+  .btn-save {
+    margin-right: 10px; /* Add space between buttons */
+    background: #0aa5e9;
+    color: #fff;
+    padding: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    outline-color: #0aa5e9;
+    height: 30px; /* Change input container height to 40 pixels */
+    width: 130px; /* Adjust the width of the button */
+  }
+  
+  /* Show the "Load Picture" button */
+  input[type="file"] {
+    display: block;
+  }
+  
+  /* Show the associated label */
+  label[for="profile-load"] {
+    display: block;
+  }
+  
+  #profile-load {
+    display: none;
+  }
+  

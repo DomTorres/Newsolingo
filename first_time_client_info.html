@@ -4,6 +4,7 @@
     <title>Personal Information</title>
     <meta name="comp1800 template" content="My 1800 App" />
     <link rel="stylesheet" href="/styles/first_time_client_info.css" />
+    <script src="/scripts/script.js"></script>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,24 +49,20 @@
     <nav id="navbarPlaceholder"></nav>
 
     <div class="profile-photo">
-      <div class="card">
-        <div class="profile-info">
-          <h1>Set your Profile</h1>
-          <p></p>
-        </div>
-        <img src="/images/avatar.png" id="profile-pic" />
-        <label for="profile-load">Load image</label>
-        <input
-          id="profile-load"
-          type="file"
-          accept="image/jpeg, image/png, image/jpg"
-        />
+      <div class="card-container">
+        <h1>Set your Profile</h1>
+        
+        <img id="profile-pic" src="/images/avatar.png"/>
+        <label for="profile-load">Profile Picture</label>
+        <input id="profile-load" type="file" accept="image/*"/>
+    
         <input
           type="text"
           class="form-control"
           id="autoSizingInput"
           placeholder="Name"
         />
+    
         <input
           type="text"
           class="form-control"
@@ -73,18 +70,45 @@
           placeholder="@Username"
         />
         <select class="form-select" id="autoSizingSelect">
-          <option selected>Country</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="" disabled selected hidden>Choose a country</option>
+          
+          <option value="au">Australia</option>
+          <option value="br">Brazil</option>
+          <option value="ca">Canada</option>
+          <option value="cn">China</option>
+          <option value="eg">Egypt</option>
+          <option value="fr">France</option>
+          <option value="de">Germany</option>
+          <option value="gr">Greece</option>
+          <option value="hk">Hong Kong</option>
+          <option value="in">India</option>
+          <option value="ie">Ireland</option>
+          <option value="il">Israel</option>
+          <option value="it">Italy</option>
+          <option value="jp">Japan</option>
+          <option value="nl">Netherlands</option>
+          <option value="no">Norway</option>
+          <option value="pk">Pakistan</option>
+          <option value="pe">Peru</option>
+          <option value="ph">Philippines</option>
+          <option value="pt">Portugal</option>
+          <option value="ro">Romania</option>
+          <option value="ru">Russian Federation</option>
+          <option value="sg">Singapore</option>
+          <option value="es">Spain</option>
+          <option value="se">Sweden</option>
+          <option value="ch">Switzerland</option>
+          <option value="tw">Taiwan</option>
+          <option value="ua">Ukraine</option>
+          <option value="gb">United Kingdom</option>
+          <option value="us">United States</option>
         </select>
-        <button class="save-button">Save</button>
+        <button class="save-button" onclick="saveUserInfo()">Save</button>
       </div>
     </div>
-    <script>
-      let profilePic = document.getElementById("profile-pic");
-      let inputFile = document.getElementById("input-file");
-    </script>
+    <nav id="footerPlaceholder"></nav>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="/scripts/First_time_client_info.js"></script>
     <script src="./scripts/firebaseAPI_BBY22.js"></script>
     <script src="./scripts/main.js"></script>
     <script src="./scripts/firebaseAPI_BBY22.js"></script>
