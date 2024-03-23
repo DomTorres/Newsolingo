@@ -9,7 +9,7 @@
 }
 
 .btn-primary {
-  --bs-btn-bg: #064479;
+  --bs-btn-bg: #0aa5e9;
   --bs-btn-border-color: #064479;
   --bs-btn-hover-bg: #0aa5e9;
   --bs-btn-hover-border-color: #0aa5e9;
@@ -71,7 +71,7 @@ img[src="./images/bird.png"] {
 #profile-photo {
   border-radius: 50%;
 }
-
+*
 .card-mb-3 {
   width: 90%;
   height: 100px;
@@ -84,7 +84,7 @@ img[src="./images/bird.png"] {
   width: 50%;
   margin: 0 auto;
 }
-
+*/
 @media only screen and (min-width: 701px) and (max-width: 1600px) {
   #cardContainer,
   #cardContainer2 {
