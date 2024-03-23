@@ -26,7 +26,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <!-- Link to styles of your own -->
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="/styles/edit_profile.css">
+    <link rel="stylesheet" href="/styles/style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,60 +47,81 @@
     <!-- Navbar -->
     <nav id="navbarPlaceholder"></nav>
       
-      <br>
-      <br>
-      <div class=text-center>
+      
+    <div class="text">
       <h2>Edit Profile</h2>
     </div>
-      
-      <div class="text-center">
-        <img src="images/Profile.png" id="profile-photo" height="200px" width="200px">
-    </div>
-    <br>
     
-  
-  <form class="column gy-2 gx-3 align-items-center shrink-form">
-     
-  </form>
-  <div class="col-auto">
-    <label class="visually-hidden" for="autoSizingInput">Name</label>
-    <input type="text" class="form-control" id="autoSizingInput" placeholder="Name">
-  </div>
-  <br>
-  <div class="col-auto">
-    <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
-    <div class="input-group">
-      <div class="input-group-text">@</div>
-      <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
+    <div class="img-container">
+      <img id="profile-pic" src="/images/avatar.png"/>
+      <label for="profile-load">Load Picture</label>
+      <input id="profile-load" type="file" accept="image/*"/>
     </div>
-  </div>
-  
-  <br>
-  
-  <div class="col-auto">
-    <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-    <select class="form-select" id="autoSizingSelect">
-      <option selected>Country</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-  </div>
-  
-  <br>
-  <div class="col-auto text-center">
-    <button type="save" class="btn btn-primary">Save Changes</button>
-  </div>
-         
-</form>
+    
+    <form class="main-container">
+      <div class="name-form">
+        <label class="visually-hidden" for="autoSizingInput">Name</label>
+        <input type="text" class="form-control" id="autoSizingInput" placeholder="Name">
+      </div>
+    
+      <div class="user-form">
+        <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+        <div class="input-group">
+          <div class="input-group-text">@</div>
+          <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
+        </div>
+      </div>
+    
+      <select class="form-select" id="autoSizingSelect">
+        <option value="" disabled selected hidden>Choose a News Country</option>
+        <option value="au">Australia</option>
+          <option value="br">Brazil</option>
+          <option value="ca">Canada</option>
+          <option value="cn">China</option>
+          <option value="eg">Egypt</option>
+          <option value="fr">France</option>
+          <option value="de">Germany</option>
+          <option value="gr">Greece</option>
+          <option value="hk">Hong Kong</option>
+          <option value="in">India</option>
+          <option value="ie">Ireland</option>
+          <option value="il">Israel</option>
+          <option value="it">Italy</option>
+          <option value="jp">Japan</option>
+          <option value="nl">Netherlands</option>
+          <option value="no">Norway</option>
+          <option value="pk">Pakistan</option>
+          <option value="pe">Peru</option>
+          <option value="ph">Philippines</option>
+          <option value="pt">Portugal</option>
+          <option value="ro">Romania</option>
+          <option value="ru">Russian Federation</option>
+          <option value="sg">Singapore</option>
+          <option value="es">Spain</option>
+          <option value="se">Sweden</option>
+          <option value="ch">Switzerland</option>
+          <option value="tw">Taiwan</option>
+          <option value="ua">Ukraine</option>
+          <option value="gb">United Kingdom</option>
+          <option value="us">United States</option>
+      </select>
+    </form>
+    
+    <div class="save-editBtn">
+      <button type="button" class="btn-edit" onclick="editUserInfo()">Edit</button>
+      <button type="button" class="btn-save" onclick="saveUserInfo()">Save</button>
+    </div>
+    
+    
 
 <nav id="footerPlaceholder"></nav>
 
-<script src="./scripts/authentication.js"></script>
-<script src="./scripts/firebaseAPI_BBY22.js"></script>
+    <script src="./scripts/authentication.js"></script>
+    <script src="./scripts/firebaseAPI_BBY22.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/main.js"></script>
     <script src="./scripts/script.js"></script>
+    <script src="/scripts/edit_profile.js"></script>
 
 </body>
 </html>
