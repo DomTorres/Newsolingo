@@ -49,12 +49,13 @@
 /* BUTTON STYLING */
 .btn {
   color: #0aa5e9 !important;
-  font-size: 12pt;
+  font-size: 15pt;
   font-family: "Nunito", sans-serif !important;
   font-weight: bold;
   border: 2px solid #D2D4DA;
   background-color: white;
   box-shadow: 0 3px #D2D4DA;
+  border-radius: 15px;
 }
 
 .btn:hover {

@@ -60,7 +60,11 @@ document.querySelector("#done-reading").addEventListener("click", () => {
             userRef.update({
                 for_you: firebase.firestore.FieldValue.arrayRemove(newsID)
             })
-            console.log("deleted from for you array");
         })
+
 });
+
+document.querySelector("#back-to-for-you-page").addEventListener("click", () => {
+    window.location.replace("main.html");
+})
 
