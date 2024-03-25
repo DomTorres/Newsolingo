@@ -19,7 +19,6 @@ function loadArticle() {
 loadArticle();
 
 document.querySelector("#done-reading").addEventListener("click", () => {
-
     const userID = localStorage.getItem("userID");
     const userRef = db.collection("users").doc(userID);
     const docRef = db.collection("news").doc(newsID)
@@ -66,5 +65,17 @@ document.querySelector("#done-reading").addEventListener("click", () => {
 
 document.querySelector("#back-to-for-you-page").addEventListener("click", () => {
     window.location.replace("main.html");
+})
+
+document.querySelector("#save").addEventListener("click", () => {
+    const userID = localStorage.getItem("userID");
+    const userRef = db.collection("users").doc(userID);
+
+    userRef.update({
+        saved: firebase.firestore.FieldValue.arrayUnion(newsID)
+    })
+    .then(() => {
+        alert("saved!");
+    })
 })
 

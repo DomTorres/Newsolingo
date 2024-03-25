@@ -35,65 +35,31 @@
 <body>
     <nav id="navbarPlaceholder"></nav>
 
-    <br>
-    <p class="text-center display-6">Jan 15, 2024</p>
-    <div id="cardContainer">
-        <div class="card" style="width: 18rem;">
-            <img src="/images/placeholder.png" class="card-img-top" alt="article">
-            <div class="card-body">
-                <h5 class="card-title">Heading</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">Read More</a>
-            </div>
+    <div class="container">
+        <div id="saved-cards-go-here" class="row row-cols-auto">
         </div>
-        <div class="card" style="width: 18rem;">
-            <img src="/images/placeholder.png" class="card-img-top" alt="article">
-            <div class="card-body">
-                <h5 class="card-title">Heading</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">Read More</a>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="/images/placeholder.png" class="card-img-top" alt="article">
-            <div class="card-body">
-                <h5 class="card-title">Heading</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">Read More</a>
-            </div>
-        </div>
-    </div>
-
-    <p class="text-center display-6">Dec 25, 2023</p>
-    <div id="cardContainer">
-        <div class="card" style="width: 18rem;">
-            <img src="/images/placeholder.png" class="card-img-top" alt="article">
-            <div class="card-body">
-                <h5 class="card-title">Heading</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">Read More</a>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="/images/placeholder.png" class="card-img-top" alt="article">
-            <div class="card-body">
-                <h5 class="card-title">Heading</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a href="#" class="btn btn-primary">Read More</a>
-            </div>
-        </div>
-    </div>
+    </div>   
 
     <nav id="footerPlaceholder"></nav>
 
+    <template id="newsCardTemplate">
+        <a href="">
+            <div class="card">
+                <img src="#" class="card-img-top card-img" alt="article" />
+                <div class="card-body">
+                    <h5 class="headline"></h5>
+                    <p class="preview"></p>
+                    <hr>
+                    <p class="time-to-read"></p>
+                    <p class="country"></p>
+                </div> 
+            </div>   
+        </a>
+    </template>
+
     <script src="./scripts/firebaseAPI_BBY22.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/main.js"></script>
+    <script src="./scripts/saved.js"></script>
     <script src="./scripts/script.js"></script>
 </body>
 
