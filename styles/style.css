@@ -46,20 +46,27 @@
   vertical-align: middle;
 }
 
-.btn-primary {
-  --bs-btn-bg: white;
-  --bs-btn-border-color: #064479;
-  --bs-btn-hover-bg: #0aa5e9;
-  --bs-btn-hover-border-color: #0aa5e9;
-  border: 2px solid #04AA6D; 
-  border-radius: 20px;
+/* BUTTON STYLING */
+.btn {
+  color: #0aa5e9 !important;
+  font-size: 12pt;
+  font-family: "Nunito", sans-serif !important;
+  font-weight: bold;
+  border: 2px solid #D2D4DA;
+  background-color: white;
+  box-shadow: 0 3px #D2D4DA;
 }
 
-.btn-outline-success {
-  --bs-btn-color: white;
-  --bs-btn-border-color: white;
-  --bs-btn-hover-bg: #0aa5e9;
-  --bs-btn-hover-border-color: #0aa5e9;
+.btn:hover {
+  background-color: #F3F4F8;
+  border: 2px solid #D2D4DA;
+}
+
+.btn:active {
+  background-color: #F3F4F8 !important;
+  border: 2px solid #D2D4DA !important;
+  box-shadow: 0 0px #D2D4DA;
+  transform: translateY(1px);
 }
 
 img[src="./images/bird.png"] {
@@ -138,7 +145,7 @@ a {
 #profile-photo {
   border-radius: 50%;
 }
-*
+
 .card-mb-3 {
   width: 90%;
   height: 100px;
@@ -177,12 +184,6 @@ a {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
   color: #808080;
-}
-
-.btn {
-  font-size: 15pt;
-  border: 2px solid #D2D4DA;
-  color: #D2D4DA;
 }
 
 /* MODAL STYLES */
