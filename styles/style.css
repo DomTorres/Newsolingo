@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Sono:wght@200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
+/* FONT CONTROLS */
 .primary-font {
   font-family: "Nunito", sans-serif !important;
 }
@@ -17,8 +18,13 @@
   font-size: 15pt;
 }
 
-.nav-link,
-.navbar-brand {
+/* CONTAINER CONTROLS */
+.for-you-container, .saved-container {
+  margin-top: 2em;
+}
+
+/* NAVBAR CONTROLS */
+.nav-link, .navbar-brand, .dropdown-item {
   color: darkgray !important;
   /* font-family: "Poppins", sans-serif; */
   font-family: "Nunito";
@@ -30,6 +36,10 @@
 
 #navbarPlaceholder {
   border-bottom: #D2D4DA solid 1px !important;
+}
+
+.nav-link.active {
+  color: green !important;
 }
 
 #logo {
