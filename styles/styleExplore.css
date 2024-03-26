@@ -16,7 +16,7 @@ body {
 #container {
     display: grid;
     grid-template-rows: 30vh 40vh;
-    grid-template-areas: 
+    grid-template-areas:
         "map"
         "news";
 }
@@ -52,29 +52,64 @@ a {
     flex-direction: row;
     height: auto;
     margin: 0.5%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
     transition: 0.3s;
     padding: 5px;
     font-family: 'Nunito';
+    border-radius: 20px;
 }
 
 .card:hover {
-    box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.2);
+    background-color: #F3F4F8;
 }
 
 .card-img {
     display: none;
 }
 
+.card .headline {
+    font-size: 15pt;
+    font-family: "Nunito";
+    color: #404040;
+}
+
+.card .preview,
+.card .country {
+    font-size: 12pt;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    color: #808080;
+}
+
+
 #map {
     height: 100%;
+}
+
+.marker {
+    background-image: url('https://docs.mapbox.com/help/demos/custom-markers-gl-js/mapbox-icon.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
 }
 
 @media only screen and (min-width: 701px) and (max-width: 1280px) {
     .card-img {
         display: unset;
         padding: 2em 0.5em 0em 0.5em;
-        max-width: 40%;;    
+        max-width: 40%;
+        ;
     }
 
 }
@@ -87,7 +122,7 @@ a {
         grid-template-areas:
             "map news";
     }
-    
+
     main {
         grid-area: map;
         height: 100%;
@@ -111,6 +146,7 @@ a {
     .card-img {
         display: unset;
         padding: 2em 0.5em 0em 0.5em;
-        max-width: 40%;;    
+        max-width: 40%;
+        ;
     }
 }
