@@ -1,87 +1,121 @@
+
 :root {
-  --primary-color: #07afd9;
+  --primary-color: #07afd9; 
 }
 
+/* Apply 'box-sizing' to all elements */
 * {
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: sans-serif; /* Set default font */
 }
 
-.container-radio {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px; /*controls the Y position of the buttons*/
+/* Styles for the main title */
+.title h1 { 
+  font-size: 35px; 
+  margin: 5px auto; /* Margin to center horizontally */
+  text-align: center; /* Center text */
 }
 
-.radio-tile-group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.input-container {
-  position: relative;
-  height: 3rem; /*controls the height of the buttons*/
-  width: 15rem; /*controls the width of the buttons*/
-  margin: 0.5rem; /*controls the separation among the buttons*/
-}
-
-.input-container input {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  cursor: pointer;
-  z-index: 2;
-  opacity: 0;
-}
-
-.input-container .radio-tile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  border: 2px solid var(--primary-color);
+/* Styles for the select-genres */
+.select-genres {
+  display: block;
+  margin: 20px auto;
   border-radius: 15px;
-  transition: all 300ms ease;
+  padding: 3px;
+  width: 12rem;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  border: 2px solid var(--primary-color);
+  text-align: center;
 }
 
+/* Container for radio buttons */
+.container-radio {
+  display: flex; 
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin-top: 20px; /* Margin top to control the Y position of the buttons */
+}
+
+/* Group of radio buttons */
+.radio-tile-group {
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; /* Center horizontally */
+}
+
+/* Container input for each radio button */
+.input-container {
+  position: relative; 
+  height: 2rem; 
+  width: 12rem; 
+  margin: 0.5rem; /* Spacing between buttons */
+}
+
+/* Styles for input of each radio button */
+.input-container input {
+  position: absolute; 
+  height: 100%;
+  width: 100%; 
+  margin: 0; 
+  cursor: pointer; /* Change cursor on hover */
+  z-index: 2; /* Place above other elements */
+  opacity: 0; /* Hide the actual input */
+}
+
+/* Styles for each radio button */
+.input-container .radio-tile {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  height: 100%; /* Full size */
+  border: 2px solid var(--primary-color); 
+  border-radius: 15px; 
+  transition: all 300ms ease; /* Smooth transition */
+}
+
+/* Styles for the label of radio button */
 .input-container label {
-  color: var(--primary-color);
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: var(--primary-color); 
+  font-size: 0.8rem; 
+  font-weight: 600; 
+  text-transform: uppercase; 
+  letter-spacing: 1px; /* Letter spacing */
+  font-size: 12px;
 }
 
+/* Styles when a radio button is checked */
 input:checked + .radio-tile {
-  background-color: var(--primary-color);
-  box-shadow: 0 0 12px var(--primary-color);
-  transform: scale(1.1);
+  background-color: var(--primary-color); 
+  box-shadow: 0 0 12px var(--primary-color); /* Add shadow */
+  transform: scale(1.1); 
 }
 
+/* Styles when hovering over a radio button */
 input:hover + .radio-tile {
-  box-shadow: 0 0 12px var(--primary-color);
+  box-shadow: 0 0 12px var(--primary-color); /* Add shadow on hover */
 }
 
+/* Styles for icon inside a checked radio button */
 input:checked + .radio-tile ion-icon,
 input:checked + .radio-tile label {
-  color: white;
+  color: white; /* Change color of icon and label to white */
+}
+.btn-save {
+  margin: 50px 618px; /* Se centra verticalmente y horizontalmente */
+  margin-right: 10px; /* Add space between buttons */
+  background: #0aa5e9;
+  color: #fff;
+  padding: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  outline-color: #0aa5e9;
+  height: 30px; /* Change input container height to 40 pixels */
+  width: 130px; /* Adjust the width of the button */
+  text-align: center; /* Center buttons */
+  font-size: 18px;
 }
 
-.checkbox-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-.checkbox-item {
-  display: flex;
-  align-items: center;
-}
 
-.checkbox-item input[type="checkbox"] {
-  margin-right: 5px; 
-}
