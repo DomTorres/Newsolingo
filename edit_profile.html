@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>My BCIT Project</title>
-    <meta name="comp1800 template" content="My 1800 App">
+    <meta name="comp1800 template" content="My 1800 App" />
 
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap Library CSS CDN go here -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
     <!-- Boostrap Library JS CDN  go here -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Other libraries go here -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,107 +28,124 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
+    />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <!-- Link to styles of your own -->
-    <link rel="stylesheet" href="/styles/edit_profile.css">
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/edit_profile.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <!------------------------------>
     <!-- Your HTML Layout go here -->
-    
-    
+
     <!------------------------------>
     <!-- Stuff for body goes here -->
 
     <!-- Navbar -->
     <nav id="navbarPlaceholder"></nav>
-      
-      
+
     <div class="text">
-      <h2>Edit Profile</h2>
+      <h2 class="primary-font">Edit Profile</h2>
     </div>
-    
-    <div class="img-container">
-      <img id="profile-pic" src="/images/avatar.png"/>
-      <label for="profile-load">Load Picture</label>
-      <input id="profile-load" type="file" accept="image/*"/>
-    </div>
-    
-    <form class="main-container">
-      <div class="name-form">
-        <label class="visually-hidden" for="autoSizingInput">Name</label>
-        <input type="text" class="form-control" id="autoSizingInput" placeholder="Name">
+
+    <fieldset class="mb-3" id="personalInfoFields" disabled>
+      <div class="img-container">
+        <img id="profile-pic" src="/images/avatar.png" />
+        <label for="profile-load">Load Picture</label>
+        <input id="profile-load" type="file" accept="image/*" />
       </div>
-    
-      <div class="user-form">
-        <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
-        <div class="input-group">
-          <div class="input-group-text">@</div>
-          <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
+
+      <form class="main-container">
+        <div class="name-form">
+          <label class="visually-hidden" for="nameImput">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nameImput"
+            placeholder="Name"
+          />
         </div>
-      </div>
-    
-      <select class="form-select" id="autoSizingSelect">
-        <option value="" disabled selected hidden>Choose a News Country</option>
-        <option value="au">Australia</option>
-          <option value="br">Brazil</option>
-          <option value="ca">Canada</option>
-          <option value="cn">China</option>
-          <option value="eg">Egypt</option>
-          <option value="fr">France</option>
-          <option value="de">Germany</option>
-          <option value="gr">Greece</option>
-          <option value="hk">Hong Kong</option>
-          <option value="in">India</option>
-          <option value="ie">Ireland</option>
-          <option value="il">Israel</option>
-          <option value="it">Italy</option>
-          <option value="jp">Japan</option>
-          <option value="nl">Netherlands</option>
-          <option value="no">Norway</option>
-          <option value="pk">Pakistan</option>
-          <option value="pe">Peru</option>
-          <option value="ph">Philippines</option>
-          <option value="pt">Portugal</option>
-          <option value="ro">Romania</option>
-          <option value="ru">Russian Federation</option>
-          <option value="sg">Singapore</option>
-          <option value="es">Spain</option>
-          <option value="se">Sweden</option>
-          <option value="ch">Switzerland</option>
-          <option value="tw">Taiwan</option>
-          <option value="ua">Ukraine</option>
-          <option value="gb">United Kingdom</option>
-          <option value="us">United States</option>
-      </select>
-    </form>
-    
+
+        <div class="user-form">
+          <label class="visually-hidden" for="username-imput">Username</label>
+          <div class="input-group">
+            <div class="input-group-text">@</div>
+            <input
+              type="text"
+              class="form-control"
+              id="username-imput"
+              placeholder="Username"
+            />
+          </div>
+        </div>
+
+        <select class="form-select" id="country-form">
+          <option value="" disabled selected hidden>
+            Choose a News Country
+          </option>
+          <option value="Australia">Australia</option>
+          <option value="Brazil">Brazil</option>
+          <option value="Canada">Canada</option>
+          <option value="China">China</option>
+          <option value="Egypt">Egypt</option>
+          <option value="France">France</option>
+          <option value="Germany">Germany</option>
+          <option value="Greece">Greece</option>
+          <option value="Hong Kong">Hong Kong</option>
+          <option value="India">India</option>
+          <option value="Ireland">Ireland</option>
+          <option value="Israel">Israel</option>
+          <option value="Italy">Italy</option>
+          <option value="Japan">Japan</option>
+          <option value="Netherlands">Netherlands</option>
+          <option value="Norway">Norway</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="Peru">Peru</option>
+          <option value="Philippines">Philippines</option>
+          <option value="Portugal">Portugal</option>
+          <option value="Romania">Romania</option>
+          <option value="Russian Federation">Russian Federation</option>
+          <option value="Singapore">Singapore</option>
+          <option value="Spain">Spain</option>
+          <option value="Sweden">Sweden</option>
+          <option value="Switzerland">Switzerland</option>
+          <option value="Taiwan">Taiwan</option>
+          <option value="Ukraine">Ukraine</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="United States">United States</option>
+        </select>
+      </form>
+    </fieldset>
+
     <div class="save-editBtn">
-      <button type="button" class="btn-edit" onclick="editUserInfo()">Edit</button>
-      <button type="button" class="btn-save" onclick="saveUserInfo()">Save</button>
+      <button type="button" class="btn-edit" onclick="editUserInfo()">
+        Edit
+      </button>
+      <button type="button" class="btn-save" onclick="saveUserInfo()">
+        Save
+      </button>
     </div>
-    
-    
 
-<nav id="footerPlaceholder"></nav>
+    <nav id="footerPlaceholder"></nav>
 
-    <script src="./scripts/authentication.js"></script>
+    <!--<script src="./scripts/authentication.js"></script>-->
     <script src="./scripts/firebaseAPI_BBY22.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/main.js"></script>
-    <script src="./scripts/script.js"></script>
     <script src="/scripts/edit_profile.js"></script>
-
-</body>
+    <!--<script src="./scripts/main.js"></script>-->
+    <!--<script src="./scripts/script.js"></script>-->
+  </body>
 </html>
-     

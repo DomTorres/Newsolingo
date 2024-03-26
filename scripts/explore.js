@@ -20,6 +20,12 @@ searchJS.onload = function () {
   searchBox.marker = true;
   searchBox.mapboxgl = mapboxgl;
   map.addControl(searchBox);
+
+  searchBox.addEventListener('retrieve', (event) => {
+    const featureCollection = event.detail;
+    console.log("Event: " + event);
+    console.log("Event detail: " + featureCollection);
+  })
 };
 
 const geojson = {

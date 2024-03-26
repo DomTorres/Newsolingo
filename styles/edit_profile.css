@@ -21,20 +21,21 @@
   
   label {
     display: block;
-    height: 30px; /* Change input container height to 40 pixels */
-    width: 110px;
+    height: 30px; /* Change input container */
+    width: 120px;
     background: #0aa5e9;
     color: #fff;
-    padding: 5px;
+    padding: 3px;
     margin: 10px auto;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 17px;
   }
   
   .main-container {
-    width: calc(50% - 20px);
-    padding: 20px; /* Add internal space to form container */
-    border-radius: 25px;
+    width: calc(30% - 20px); /* Reducir el ancho del contenedor principal */
+    padding: 10px; /* Reducir el espacio interno del contenedor */
+    border-radius: 20px; /* Ajustar el radio de borde */
     border: 1px solid #ccccccd1;
     background-color: #ffffff;
     font-size: 14px;
@@ -51,6 +52,7 @@
   .save-editBtn {
     text-align: center; /* Center buttons */
     margin-top: 1px; /* Add top space */
+    font-size: 18px;
   }
   
   /* Additional styles for buttons */
@@ -80,4 +82,20 @@
   #profile-load {
     display: none;
   }
+ /* Reduce the internal space within the name and username input fields */
+.name-form input[type="text"],
+.user-form input[type="text"] {
+  padding: 1px; /* Adjust padding as needed */
+  font-size: 18px;
+}
+
+/* Reduce the internal space within the select element */
+#autoSizingSelect {
+  padding: 3px; /* Adjust padding as needed */
   
+}
+
+/* Reduce the internal space within the select element */
+.form-select {
+  padding: 3px; /* Adjust padding as needed */
+}

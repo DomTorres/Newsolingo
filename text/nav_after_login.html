@@ -10,7 +10,7 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="main.html">For You</a>
+            <a id="for-you-nav-link" class="nav-link" aria-current="page" href="main.html">For You</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../explore.html">Explore</a>
@@ -44,4 +44,12 @@
           <span class="primary-font" id="streak-goes-here"></span>
         </div>
     </div>
+
+    <!-- <script>
+      $(".nav-link").on("click", function(){
+        $(".nav-link").find(".active").removeClass("active");
+        $(this).addClass("active");
+        alert("Hello!");
+      });
+    </script> -->
 </nav>

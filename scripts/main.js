@@ -1,3 +1,14 @@
+// $(document).ready(function () {
+//     alert("Hello!");
+//     $("#for-you-nav-link").addClass("active");
+// });
+
+// $(".nav-link").on("click", function(){
+//     $(".nav-link").find(".active").removeClass("active");
+//     $(this).addClass("active");
+//     alert("Hello!");
+//   });
+  
 // function getNameFromAuth() {
 //     firebase.auth().onAuthStateChanged(user => {
 //         // Check if a user is signed in:
@@ -219,3 +230,4 @@ displayCards();
 //         last_updated: firebase.firestore.Timestamp.fromDate(new Date("January 1, 2023"))
 //     });
 // }
+
