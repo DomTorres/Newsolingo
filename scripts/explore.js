@@ -57,7 +57,7 @@ const geojson = {
 };
 
 // add markers to map
-for (const feature of geojson.features) {
+/*for (const feature of geojson.features) {
   // create a HTML element for each feature
   const el = document.createElement('div');
   el.className = 'marker';
@@ -65,6 +65,7 @@ for (const feature of geojson.features) {
   // make a marker for each feature and add to the map
   new mapboxgl.Marker(el).setLngLat(feature.geometry.coordinates).addTo(map);
 }
+
 
 new mapboxgl.Marker(el)
   .setLngLat(feature.geometry.coordinates)
@@ -76,10 +77,91 @@ new mapboxgl.Marker(el)
   )
   .addTo(map);
 
-  map.on('click', 'places', (e) => {
+  map.on('click', 'marker', (e) => {
     const country_description = e.features[0].properties.description;
     console.log(country_description);
-  })
+  })*/
+  var country_description;
+  map.on('load', () => {
+    map.addSource('places', {
+        // This GeoJSON contains features that include an "icon"
+        // property. The value of the "icon" property corresponds
+        // to an image in the Mapbox Streets style's sprite.
+        'type': 'geojson',
+        'data': {
+            'type': 'FeatureCollection',
+            'features': [
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            'us',
+                        'icon': 'park'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [-98, 38.931567]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            'cn',
+                        'icon': 'park'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [-77.003168, 38.894651]
+                    }
+                },
+                
+            ]
+        }
+    });
+    // Add a layer showing the places.
+    map.addLayer({
+        'id': 'places',
+        'type': 'symbol',
+        'source': 'places',
+        'layout': {
+            'icon-image': ['get', 'icon'],
+            'icon-size': 1.5,
+            'icon-allow-overlap': true
+        }
+    });
+
+    // When a click event occurs on a feature in the places layer, open a popup at the
+    // location of the feature, with description HTML from its properties.
+    map.on('click', 'places', (e) => {
+        // Copy coordinates array.
+        country_description = e.features[0].properties.description;
+        console.log(country_description);
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+    });
+
+    // Change the cursor to a pointer when the mouse is over the places layer.
+    map.on('mouseenter', 'places', () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'places', () => {
+        map.getCanvas().style.cursor = '';
+    });
+});
+
   
 // Use API to query news, then add to database
 function fetchNewsFromAPI() {
@@ -94,11 +176,12 @@ function fetchNewsFromAPI() {
         var articlesPerDay = user.data().articlesPerDay_preference;
         var from = "2024-03-17T00:00:00Z";
 
-  var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${max}&from=${from}&apikey=${news_api_key}`;
+        var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${max}&from=${from}&apikey=${news_api_key}`;
 
   fetch(url)
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       var articles = data.articles;
       console.log(articles);
       console.log("length:" + articles.length);
@@ -109,7 +192,7 @@ function fetchNewsFromAPI() {
         // Write each article into database, with ID = title
         var title = articles[i].title;
 
-        db.collection("news").doc(title).set({
+        db.collection("world").doc(title).set({
           description: articles[i].description,
           content: articles[i].content,
           url: articles[i].url,
@@ -128,7 +211,7 @@ fetchNewsFromAPI();
 function displayCards() {
   let cardTemplate = document.getElementById("newsCardTemplate");
 
-  db.collection("news").get()
+  db.collection("world").get()
     .then(articles => {
       articles.forEach(article => {
         // Clone template card
