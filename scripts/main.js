@@ -67,15 +67,15 @@ function saveUserIDToLocalStorage() {
 }
 saveUserIDToLocalStorage();
 
+const userID = localStorage.getItem("userID");
+const userRef = db.collection("users").doc(userID);
+
 // Is it a new day?
 localStorage.setItem("fetchedNewsForToday", "false");
 
 // Use API to query news, then add to database
 function fetchNewsFromAPI() {
     console.log("Entered function fetchNewsFromAPI");
-
-    const userID = localStorage.getItem("userID");
-    const userRef = db.collection("users").doc(userID);
 
     userRef.get()
         .then(user => {
@@ -85,9 +85,9 @@ function fetchNewsFromAPI() {
         var articlesPerDay = user.data().articlesPerDay_preference;
         var from = "2024-03-17T00:00:00Z"; // This needs to be dynamically based based on the current date.
 
-        console.log("Country read from database: " + country);
-        console.log("Category read from database: " + category);
-        console.log("articlesPerDay read from database: " + articlesPerDay);
+        // console.log("Country read from database: " + country);
+        // console.log("Category read from database: " + category);
+        // console.log("articlesPerDay read from database: " + articlesPerDay);
 
         var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${articlesPerDay}&from=${from}&apikey=${news_api_key}`;
 
@@ -95,37 +95,29 @@ function fetchNewsFromAPI() {
             .then(response => response.json())
             .then(data => {
                 var articles = data.articles;
-                console.log(articles);
-                console.log("length:" + articles.length);
+                // console.log(articles);
+                // console.log("length:" + articles.length);
 
-                numberOfArticles = articles.length;
-
-                for(let i = 0; i < numberOfArticles; i++) {
+                for(let i = 0; i < articles.length; i++) {
                     // Write each article into database, with ID = title
                     var title = articles[i].title;
                     
-                    db.collection("news").doc(title).set({
-                        description: articles[i].description,
+                    db.collection("users").doc(userID).collection("for_you").add({
+                        title: articles[i].title,
+                        descrption: articles[i].description,
                         content: articles[i].content,
-                        url: articles[i].url,
+                        // url: articles[i].url,
                         image: articles[i].image,
                         publishedAt: articles[i].publishedAt,
-                        category: category,
-                        country: country
-                    });
-
-                    // Save the newsID in the user's for_you array
-                    userRef.update({
-                        for_you: firebase.firestore.FieldValue.arrayUnion(title)
+                        // sourceName: articles[i].source.name,
+                        // sourceURL: articles[i].source.url
                     });
                 }  
                 
-                displayCards();
-                console.log("Successfully loaded cards for today.");
-
-                userRef.update({
-                    date_last_loaded: String(new Date())
-                })
+                // displayCards();
+                // userRef.update({
+                //     date_last_loaded: String(new Date())
+                // })
             })
         })
 }
@@ -199,35 +191,4 @@ function displayCards() {
         })
 }
 displayCards();
-
-// function writeNews() {
-//     //define a variable for the collection you want to create in Firestore to populate data
-//     var newsRef = db.collection("news");
-
-//     newsRef.add({
-//         code: "NEWS01",
-//         name: "Test 1",
-//         country: "gb",
-//         level: "easy",
-// 		details: "A lovely place for lunch walk",
-//         readTime: 3,
-//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
-//     });
-//     newsRef.add({
-//         code: "NEWS02",
-//         name: "Test 2",
-//         country: "uk",
-//         details: "Placeholder for news article",
-//         readTime: 4,
-//         last_updated: firebase.firestore.Timestamp.fromDate(new Date("March 10, 2022"))
-//     });
-//     newsRef.add({
-//         code: "NEWS03",
-//         name: "Test 3",
-//         country: "canada",
-//         details:  "Amazing ski slope views",
-//         readTime: 5,
-//         last_updated: firebase.firestore.Timestamp.fromDate(new Date("January 1, 2023"))
-//     });
-// }
 

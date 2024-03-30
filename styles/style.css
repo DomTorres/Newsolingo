@@ -175,9 +175,16 @@ a {
   border-radius: 15px;
 }
 
+/* ARTICLE STYLES */
 .article_container {
-  width: 80%;
+  width: 75%;
   margin: auto;
+}
+
+.article_container img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
 }
 
 #title {
@@ -186,11 +193,7 @@ a {
   color: #404040;
 }
 
-#image {
-  border-radius: 20px;
-}
-
-#content {
+#content, .dummy-content {
   font-size: 15pt;
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
