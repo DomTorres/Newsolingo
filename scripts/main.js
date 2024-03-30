@@ -150,11 +150,6 @@ function loadNewsForToday() {
 }
 loadNewsForToday();
 
-// if (localStorage.getItem("fetchedNewsForToday") == "false") {
-//     console.log("ran function");
-//     fetchNewsFromAPI();
-// }
-
 // Display news from database
 function displayCards() {
     let cardTemplate = document.getElementById("newsCardTemplate");
@@ -173,37 +168,10 @@ function displayCards() {
                 newcard.querySelector('.country').innerHTML = article.data().country;
 
                 // Set card hyperlink
-                newcard.querySelector("a").href = "article.html?articleID=" + article.id;
+                newcard.querySelector("a").href = "article.html?id=" + article.id;
 
                 // Add card to DOM
                 document.getElementById("for-you-cards-go-here").appendChild(newcard);
             })
-
-            // var articlesToShow = user.data().for_you.count;
-            // console.log(count);
-
-
-            // for(let i = 0; i < articlesToShow; i++) {
-            //     let forYouNewsID = user.data().for_you[i];
-
-            //     userRef.collection("for_you").get()
-            //         .then(article => {
-            //             // Clone template card
-            //             let newcard = cardTemplate.content.cloneNode(true);
-
-            //             // Set card details
-            //             newcard.querySelector('.card-img').setAttribute("src", article.data().image);
-            //             newcard.querySelector('.headline').innerHTML = article.id;
-            //             newcard.querySelector('.preview').innerHTML = article.data().description;
-            //             // newcard.querySelector('.time-to-read').innerHTML = time_to_read + " minute read";
-            //             newcard.querySelector('.country').innerHTML = article.data().country;
-
-            //             // Set card hyperlink
-            //             newcard.querySelector("a").href = "article.html?articleID=" + article.id;
-
-            //             // Add card to DOM
-            //             document.getElementById("for-you-cards-go-here").appendChild(newcard);
-            //         })
-            // }
         })
 }

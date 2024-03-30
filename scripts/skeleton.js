@@ -84,11 +84,11 @@ var query = window.matchMedia("(max-width: 450px)");
 function myFunction(query) {
     if (query.matches) {
         // mobile view
-        alert("mobile view");
+        // alert("mobile view");
         loadMobileSkeleton();
     } else {
         // web view
-        alert("web view");
+        // alert("web view");
         loadWebSkeleton();
     }
   }

@@ -1,13 +1,15 @@
+const userID = localStorage.getItem("userID");
+const userRef = db.collection("users").doc(userID);
 var newsID;
 
 function loadArticle() {
     let params = new URL(window.location.href);
 
-    newsID = params.searchParams.get("articleID"); 
-    const docRef = db.collection("news").doc(newsID)
+    newsID = params.searchParams.get("id"); 
+    const docRef = userRef.collection("for_you").doc(newsID);
 
     docRef.get().then(article => {
-        var title = article.id;
+        var title = article.data().title;
         var image = article.data().image;
         var content = article.data().content;
 
@@ -19,8 +21,6 @@ function loadArticle() {
 loadArticle();
 
 document.querySelector("#done-reading").addEventListener("click", () => {
-    const userID = localStorage.getItem("userID");
-    const userRef = db.collection("users").doc(userID);
     const docRef = db.collection("news").doc(newsID)
 
     console.log("clicked!");
@@ -30,35 +30,27 @@ document.querySelector("#done-reading").addEventListener("click", () => {
 
     userRef.get()
         .then(user => {
-            // Read user's current points
+            // Read points, articles read today
             points = user.data().points;
-            console.log("Old points: " + points);
+            articles_read_today = user.data().articles_read_today;
 
-            // Add pointsForReading 
+            // Update points, articles read today
             points += pointsForReading;
+            articles_read_today++;
 
             // Write updated points
             userRef.update({
-                points: points
-            })
-            console.log("added points");
-
-            // Read user's current articles read today
-            articles_read_today = user.data().articles_read_today;
-            
-            // Add articles_read_today by 1
-            articles_read_today++;
-
-            // Write updated articles read today
-            userRef.update({
+                points: points,
                 articles_read_today: articles_read_today
             })
 
             // Delete article from "for you" array
-            console.log(newsID);
-            userRef.update({
-                for_you: firebase.firestore.FieldValue.arrayRemove(newsID)
-            })
+            userRef.collection("for_you").doc(newsID).delete().then(() => {
+                console.log("Article deleted.");
+            }).catch((error) => {
+                console.log("Error removing document, " + error);
+            });
+
         })
 
 });
