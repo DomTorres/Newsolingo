@@ -59,19 +59,22 @@
 // }
 // printDate();
 
+const userID = localStorage.getItem("userID");
+const userRef = db.collection("users").doc(userID);
+
+function doAll() {
+    saveUserIDToLocalStorage();
+    loadNewsForToday();
+    displayCards();
+}
+doAll();
+
 // Get logged in user's ID, save it to local storage for future purposes
 function saveUserIDToLocalStorage() {
     firebase.auth().onAuthStateChanged(user => {
         localStorage.setItem("userID", user.uid);
     })
 }
-saveUserIDToLocalStorage();
-
-const userID = localStorage.getItem("userID");
-const userRef = db.collection("users").doc(userID);
-
-// Is it a new day?
-localStorage.setItem("fetchedNewsForToday", "false");
 
 // Use API to query news, then add to database
 function fetchNewsFromAPI() {
@@ -104,28 +107,27 @@ function fetchNewsFromAPI() {
                     
                     db.collection("users").doc(userID).collection("for_you").add({
                         title: articles[i].title,
-                        descrption: articles[i].description,
+                        description: articles[i].description,
                         content: articles[i].content,
                         // url: articles[i].url,
                         image: articles[i].image,
                         publishedAt: articles[i].publishedAt,
                         // sourceName: articles[i].source.name,
                         // sourceURL: articles[i].source.url
+
+                        country: country,
+                        category: category
                     });
                 }  
                 
-                // displayCards();
-                // userRef.update({
-                //     date_last_loaded: String(new Date())
-                // })
+                userRef.update({
+                    date_last_loaded: String(new Date())
+                })
             })
         })
 }
 
 function loadNewsForToday() {
-    const userID = localStorage.getItem("userID");
-    const userRef = db.collection("users").doc(userID);
-
     userRef.get()
         .then(user => {
             console.log("Date read from database: " + user.data().date_last_loaded);
@@ -155,40 +157,53 @@ loadNewsForToday();
 
 // Display news from database
 function displayCards() {
-    console.log("Entered function displayCards");
-
-    const userID = localStorage.getItem("userID");
-    const userRef = db.collection("users").doc(userID);
-
     let cardTemplate = document.getElementById("newsCardTemplate");
 
-    userRef.get()
-        .then(user => {
-            var articlesToShow = user.data().for_you.length;
+    userRef.collection("for_you").get()
+        .then(query => {
+            query.forEach(article => {
+                // Clone template card
+                let newcard = cardTemplate.content.cloneNode(true);
 
-            for(let i = 0; i < articlesToShow; i++) {
-                let forYouNewsID = user.data().for_you[i];
+                // Set card details
+                newcard.querySelector('.card-img').setAttribute("src", article.data().image);
+                newcard.querySelector('.headline').innerHTML = article.data().title;
+                newcard.querySelector('.preview').innerHTML = article.data().description;
+                // newcard.querySelector('.time-to-read').innerHTML = time_to_read + " minute read";
+                newcard.querySelector('.country').innerHTML = article.data().country;
 
-                db.collection("news").doc(forYouNewsID).get()
-                    .then(article => {
-                        // Clone template card
-                        let newcard = cardTemplate.content.cloneNode(true);
+                // Set card hyperlink
+                newcard.querySelector("a").href = "article.html?articleID=" + article.id;
 
-                        // Set card details
-                        newcard.querySelector('.card-img').setAttribute("src", article.data().image);
-                        newcard.querySelector('.headline').innerHTML = article.id;
-                        newcard.querySelector('.preview').innerHTML = article.data().description;
-                        // newcard.querySelector('.time-to-read').innerHTML = time_to_read + " minute read";
-                        newcard.querySelector('.country').innerHTML = article.data().country;
+                // Add card to DOM
+                document.getElementById("for-you-cards-go-here").appendChild(newcard);
+            })
 
-                        // Set card hyperlink
-                        newcard.querySelector("a").href = "article.html?articleID=" + article.id;
+            // var articlesToShow = user.data().for_you.count;
+            // console.log(count);
 
-                        // Add card to DOM
-                        document.getElementById("for-you-cards-go-here").appendChild(newcard);
-                    })
-            }
+
+            // for(let i = 0; i < articlesToShow; i++) {
+            //     let forYouNewsID = user.data().for_you[i];
+
+            //     userRef.collection("for_you").get()
+            //         .then(article => {
+            //             // Clone template card
+            //             let newcard = cardTemplate.content.cloneNode(true);
+
+            //             // Set card details
+            //             newcard.querySelector('.card-img').setAttribute("src", article.data().image);
+            //             newcard.querySelector('.headline').innerHTML = article.id;
+            //             newcard.querySelector('.preview').innerHTML = article.data().description;
+            //             // newcard.querySelector('.time-to-read').innerHTML = time_to_read + " minute read";
+            //             newcard.querySelector('.country').innerHTML = article.data().country;
+
+            //             // Set card hyperlink
+            //             newcard.querySelector("a").href = "article.html?articleID=" + article.id;
+
+            //             // Add card to DOM
+            //             document.getElementById("for-you-cards-go-here").appendChild(newcard);
+            //         })
+            // }
         })
 }
-displayCards();
-
