@@ -137,18 +137,8 @@ new mapboxgl.Marker(el)
         // Copy coordinates array.
         country_description = e.features[0].properties.description;
         console.log(country_description);
-
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
+        fetchNewsFromAPI();
+        displayCards();
     });
 
     // Change the cursor to a pointer when the mouse is over the places layer.
@@ -176,7 +166,7 @@ function fetchNewsFromAPI() {
         var articlesPerDay = user.data().articlesPerDay_preference;
         var from = "2024-03-17T00:00:00Z";
 
-        var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${max}&from=${from}&apikey=${news_api_key}`;
+        var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${articlesPerDay}&from=${from}&apikey=${news_api_key}`;
 
   fetch(url)
     .then(response => response.json())
@@ -205,7 +195,6 @@ function fetchNewsFromAPI() {
     })
   })    
 }
-fetchNewsFromAPI();
 
 // Display news from database
 function displayCards() {
@@ -232,5 +221,4 @@ function displayCards() {
       })
     })
 }
-displayCards();
 
