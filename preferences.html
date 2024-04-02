@@ -61,11 +61,11 @@
     <nav id="navbarPlaceholder"></nav>
 
     <div class="title">
-      <h1>Set Preferences</h1>
+      <h1>Select your news preferences</h1>
     </div>
 
-    <select class="select-genres" id="news-genres">
-      <option value="" disabled selected hidden>Set News Genres</option>
+    <select class="select-genres" id="news-type">
+      <option value="" disabled selected hidden>News type</option>
       <option value="General">General</option>
       <option value="World">World</option>
       <option value="Nation">Nation</option>
@@ -77,7 +77,50 @@
       <option value="Health">Health</option>
     </select>
 
-    <!-- Radio buttons -->
+    <select class="select-genres" id="news-country">
+      <option value="" disabled selected hidden>News country</option>
+        <option value="Australia">Australia</option>
+        <option value="Brazil">Brazil</option>
+        <option value="Canada">Canada</option>
+        <option value="China">China</option>
+        <option value="Egypt">Egypt</option>
+        <option value="France">France</option>
+        <option value="Germany">Germany</option>
+        <option value="Greece">Greece</option>
+        <option value="Hong Kong">Hong Kong</option>
+        <option value="India">India</option>
+        <option value="Ireland">Ireland</option>
+        <option value="Israel">Israel</option>
+        <option value="Italy">Italy</option>
+        <option value="Japan">Japan</option>
+        <option value="Netherlands">Netherlands</option>
+        <option value="Norway">Norway</option>
+        <option value="Pakistan">Pakistan</option>
+        <option value="Peru">Peru</option>
+        <option value="Philippines">Philippines</option>
+        <option value="Portugal">Portugal</option>
+        <option value="Romania">Romania</option>
+        <option value="Russia">Russia </option>
+        <option value="Singapore">Singapore</option>
+        <option value="Spain">Spain</option>
+        <option value="Sweden">Sweden</option>
+        <option value="Switzerland">Switzerland</option>
+        <option value="Taiwan">Taiwan</option>
+        <option value="Ukraine">Ukraine</option>
+        <option value="United Kingdom">United Kingdom</option>
+        <option value="United States">United States</option>
+    </select>
+
+
+ <select class="select-genres" id="news-frequency">
+          <option value="" disabled selected hidden>News frequency</option>
+          <option value="Casual">Casual (3 articles/day)</option>
+          <option value="Regular">Regular (5 articles/day)</option>
+          <option value="Serious">Serious (10 articles/day)</option>
+        </select>
+
+
+    <!-- Radio buttons 
     <div class="container-radio" id="radios">
       <div class="radio-tile-group">
         <div class="input-container">
@@ -101,7 +144,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>--->
 
     <button type="button" class="btn-save" onclick="saveUser()">
       Save
@@ -123,11 +166,11 @@
 
   <script src="./scripts/firebaseAPI_BBY22.js"></script>
   <script src="./scripts/preferences.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="./scripts/skeleton.js"></script>
   <script src="./scripts/main.js"></script>
   <script src="./scripts/script.js"></script>
-
+  
   <!-- <img src="/images/46837_setting_icon.png" class="rounded" alt="..." height="200px" width="200px"> -->
 </body>
 

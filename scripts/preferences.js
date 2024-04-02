@@ -1,67 +1,31 @@
-//container
-const preference = {
-    newsType: "",
-    newsPerDay: ""
-};
-
-populateInfo() //Load information by user
-
-function saveUser() {
-    preference.newsType = document.getElementById("news-genres").value;
-    preference.newsPerDay = getValueRadioButton();
-    saveUserInfo()
-}
-
-function getValueRadioButton() {
-    let selectedValue = null
-    // Get the selected radio button
-    let selectedRadioButton = document.querySelector('input[name="radio"]:checked');
-
-    // Get the value of the selected radio button
-    selectedValue = selectedRadioButton.value;
-    return selectedValue
-}
-
-function saveUserInfo() {
-
-    firebase.auth().onAuthStateChanged(function (user) {
-        //Asynch call to save the form fields into Firestore.
-        db.collection("users").doc(user.uid).update({
-            preferenceBD: preference
-        })
-            .then(function () {
-                debugger
-                alert("saved");
-            })
-    })
-}
-
 function populateInfo() {
-    debugger
+    // Function to populate user information
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            debugger
-            // go and get the curret user info from firestore
+            // Get current user's information from Firestore
             currentUser = db.collection("users").doc(user.uid);
 
             currentUser.get()
                 .then(userDoc => {
-                    console.log("esto es un console log", userDoc.data())
-                    let newsType = userDoc.data().preferenceBD.newsType
-                    document.getElementById("news-genres").value = newsType
+                    let nType = userDoc.data().newsType;
+                    let nCountry = userDoc.data().newsCountry;
+                    let newsPerDay = userDoc.data().newsFrequency;
 
-                    let newsPerDay = userDoc.data().preferenceBD.newsPerDay
-                    const radio = document.querySelector(`input[name="radio"][value="${newsPerDay}"]`);
-                    debugger
-                    if (radio) {
-                        radio.checked = true;
+                    // Check if values are not null before assigning them to form fields
+                    if (nType != null) {
+                        document.getElementById("news-type").value = nType;
                     }
-
-                })
-
+                    if (nCountry != null) {
+                        document.getElementById("news-country").value = nCountry;
+                    }
+                    if (newsPerDay != null) {
+                        document.getElementById("news-frequency").value = newsPerDay;
+                    }
+                });
         } else {
-            console.log("no user is logged in")
+            console.log("No user is currently signed in");
         }
-    }
-    )
+    });
 }
+// Call the function to populate user information
+populateInfo();

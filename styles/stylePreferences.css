@@ -103,10 +103,10 @@ input:checked + .radio-tile label {
   color: white; /* Change color of icon and label to white */
 }
 .btn-save {
-  margin: 50px 618px; /* Se centra verticalmente y horizontalmente */
+ 
   margin-right: 10px; /* Add space between buttons */
   background: #0aa5e9;
-  color: #fff;
+  color: white;
   padding: 0;
   border-radius: 5px;
   cursor: pointer;
