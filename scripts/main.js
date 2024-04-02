@@ -120,9 +120,25 @@ function fetchNewsFromAPI() {
                     });
                 }  
                 
+                // if user didn't read yesterday's goal, set streak to zero
+                console.log("Goal: " + Number(user.data().articlesPerDay_preference));
+                console.log("Articles read yesterday: " + Number(user.data().articles_read_today));
+                console.log(Number(user.data().articlesPerDay_preference) != Number(user.data().articles_read_today));
+
+                if (Number(user.data().articlesPerDay_preference) != Number(user.data().articles_read_today)) {
+                    userRef.update({
+                        streak: 0
+                    })
+                }
+
+                // set articles read today to zero, set date last loaded to today
                 userRef.update({
-                    date_last_loaded: String(new Date())
+                    // date_last_loaded: String(new Date())) // ACTUAL CODE
+                    date_last_loaded: String(new Date("Mar 02, 2024")),
+                    articles_read_today: 0
                 })
+
+                displayCards();
             })
         })
 }
@@ -135,7 +151,8 @@ function loadNewsForToday() {
             var dateLastLoaded = new Date(user.data().date_last_loaded);
             console.log(dateLastLoaded);
 
-            var dateToday = new Date("March 22, 2024")
+            // var dateToday = new Date(); // ACTUAL CODE
+            var dateToday = new Date("Mar 03, 2024") // CODE FOR TESTING PURPOSES
             console.log("Date today: " + dateToday);
 
             console.log(dateLastLoaded.getDate() > dateToday.getDate());
@@ -148,7 +165,6 @@ function loadNewsForToday() {
         }) 
 
 }
-loadNewsForToday();
 
 // Display news from database
 function displayCards() {
@@ -175,3 +191,13 @@ function displayCards() {
             })
         })
 }
+
+userRef.onSnapshot(user => {
+    var articlesLeft = Number(user.data().articlesPerDay_preference) - Number(user.data().articles_read_today);
+
+    if (articlesLeft == 0) {
+        document.getElementById("articles-left-goes-here").innerHTML = "You've completed your daily goal! Come back tomorrow.";
+    } else {
+        document.getElementById("articles-left-goes-here").innerHTML = "Nice going! Read " + articlesLeft + " more articles to complete your daily goal.";
+    }
+});

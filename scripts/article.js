@@ -22,9 +22,6 @@ loadArticle();
 
 document.querySelector("#done-reading").addEventListener("click", () => {
     const docRef = db.collection("news").doc(newsID)
-
-    console.log("clicked!");
-    console.log(userID);
  
     const pointsForReading = 100;
 
@@ -32,16 +29,23 @@ document.querySelector("#done-reading").addEventListener("click", () => {
         .then(user => {
             // Read points, articles read today
             points = user.data().points;
+            streak = user.data().streak;
             articles_read_today = user.data().articles_read_today;
+            articlesPerDay_preference = user.data().articlesPerDay_preference;
 
             // Update points, articles read today
             points += pointsForReading;
             articles_read_today++;
+            if (articles_read_today == articlesPerDay_preference) {
+                streak++;
+            }
 
+            console.log(articles_read_today);
             // Write updated points
             userRef.update({
                 points: points,
-                articles_read_today: articles_read_today
+                articles_read_today: articles_read_today,
+                streak: streak
             })
 
             // Delete article from "for you" array
@@ -50,10 +54,8 @@ document.querySelector("#done-reading").addEventListener("click", () => {
             }).catch((error) => {
                 console.log("Error removing document, " + error);
             });
-
         })
-
-});
+})
 
 document.querySelector("#back-to-for-you-page").addEventListener("click", () => {
     window.location.replace("main.html");
@@ -70,4 +72,5 @@ document.querySelector("#save").addEventListener("click", () => {
         alert("saved!");
     })
 })
+
 
