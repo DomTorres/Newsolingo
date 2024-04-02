@@ -89,13 +89,18 @@
   font-size: 18px;
 }
 
-/* Reduce the internal space within the select element */
-#autoSizingSelect {
-  padding: 3px; /* Adjust padding as needed */
-  
+.name-form input[type="text"].form-control,
+.user-form input[type="text"].form-control {
+  height: 34px; /* Cambiar la altura según sea necesario */
 }
+
 
 /* Reduce the internal space within the select element */
 .form-select {
-  padding: 3px; /* Adjust padding as needed */
+padding: 3px; /* Adjust padding as needed */
+}
+
+.input-group-text {
+  font-size: 20px;
+  padding: 1px;
 }

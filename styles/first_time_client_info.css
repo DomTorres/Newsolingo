@@ -1,92 +1,72 @@
-.profile-photo {
-  width: 100%;
-  height: 100vh;
-  background: rgb(255, 255, 255);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.text h2 {
+  text-align: center; /* Center-align heading */
+  font-size: 25px;
 }
 
-.card-container {
-  width: 400px; /* Ancho de la tarjeta reducido */
-  height: 400px; /* Altura de la tarjeta reducida */
-  background: rgb(250, 251, 253);
-  padding: 40px; /* Espacio interno */
-  border-radius: 15px; /* Radio del borde */
-  text-align: center;
-  color: #333;
-  font-size: 14px;
-  margin-bottom: 114px;
+.img-container {
+  text-align: center; /* Center-align image and label */
 }
 
-.card-container h1 {
-  font-weight: 500;
-  color: #000000;
-  font-size: 17px;
-  margin-top: -30px;
-  
+#profile-pic {
+  width: 100px; /* Reduce image size */
+  height: 100px;
+  border-radius: 50%; /* Circular shape */
+  margin-bottom: 10px; /* Add space between image and button */
 }
 
-.card-container img {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  margin-top: 0;
-  margin-bottom: 0;
+#profile-load {
+  display: block; /* Ensure button appears on a new line */
+  margin: 0 auto; /* Center-align button */
 }
 
 label {
   display: block;
-  height: 30px; /* Cambiar la altura del contenedor de entrada a 40 píxeles */
-  width: 110px;
+  height: 30px; /* Change input container */
+  width: 120px;
   background: #0aa5e9;
   color: #fff;
-  padding: 5px;
+  padding: 3px;
   margin: 10px auto;
   border-radius: 5px;
   cursor: pointer;
-  
-  
+  font-size: 17px;
 }
 
-input[type="text"] {
-  height: 25px; /* Cambiar la altura del contenedor de entrada a 40 píxeles */
-  width: calc(106% - 20px); /* Adjust the width of the text input field */
-  padding: 8px; /* Internal padding */
-  margin-bottom: 10px; /* Bottom margin */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.input-group {
-  height: 10px; /* Cambiar la altura del contenedor de entrada a 40 píxeles */
-  width: calc(100% - 20px); /* Adjust the width of the input group */
-  margin-bottom: 10px; /* Bottom margin */
-}
-
-.form-select {/*choose a country*/
-  height: 35px; /* Cambiar la altura del contenedor de entrada a 40 píxeles */
-  width: calc(100% - 20px); /* Adjust the width of the dropdown menu */
-  padding: 0px; /* Internal padding */
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  background-color: #f8f9fa;
+.main-container {
+  width: calc(30% - 20px); /* Reducir el ancho del contenedor principal */
+  padding: 10px; /* Reducir el espacio interno del contenedor */
+  border-radius: 20px; /* Ajustar el radio de borde */
+  border: 1px solid #ccccccd1;
+  background-color: #ffffff;
   font-size: 14px;
-  
-  
+  margin: 15px auto;
 }
 
-.save-button {/*save button*/
-  display: block;
-  height: 25px; /* Cambiar la altura del contenedor de entrada a 40 píxeles */
-  width: 130px; /* Adjust the width of the button */
+/* Add space between form elements */
+.name-form,
+.user-form,
+.form-select {
+  margin-bottom: 5px;
+}
+
+.save-editBtn {
+  text-align: center; /* Center buttons */
+  margin-top: 1px; /* Add top space */
+  font-size: 18px;
+}
+
+/* Additional styles for buttons */
+.btn-edit,
+.btn-save {
+  margin-right: 10px; /* Add space between buttons */
   background: #0aa5e9;
   color: #fff;
-  padding: 2px;
-  margin: 10px auto; /* Center the button horizontally */
+  padding: 0;
   border-radius: 5px;
   cursor: pointer;
-  border: none;
+  outline-color: #0aa5e9;
+  height: 30px; /* Change input container height to 40 pixels */
+  width: 130px; /* Adjust the width of the button */
 }
 
 /* Show the "Load Picture" button */
@@ -101,4 +81,26 @@ label[for="profile-load"] {
 
 #profile-load {
   display: none;
+}
+/* Reduce the internal space within the name and username input fields */
+.name-form input[type="text"],
+.user-form input[type="text"] {
+padding: 1px; /* Adjust padding as needed */
+font-size: 18px;
+}
+
+.name-form input[type="text"].form-control,
+.user-form input[type="text"].form-control {
+  height: 34px; /* Cambiar la altura según sea necesario */
+}
+
+
+/* Reduce the internal space within the select element */
+.form-select {
+padding: 3px; /* Adjust padding as needed */
+}
+
+.input-group-text {
+  font-size: 20px;
+  padding: 1px;
 }
