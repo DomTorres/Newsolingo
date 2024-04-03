@@ -1,3 +1,4 @@
+
 const ACCESS_TOKEN = 'pk.eyJ1IjoiaXRzbWVqb2hub2giLCJhIjoiY2x0Z2F1MWpzMHprdTJsc2RpaTJ6b3l3dSJ9.5Ny3ulHEbHGmH7TecVua5w';
 
 mapboxgl.accessToken = ACCESS_TOKEN;
@@ -8,12 +9,14 @@ const map = new mapboxgl.Map({
   zoom: 3
 });
 
-const countryCode = ['US', 'CA', 'AU', 'BR', 'CN', 'FR', 'EG', 'DE', 'GR', 'HK', 'IN', 'IE', 'IL', 'IT', 'JP', 'NL', 'NO', 'PK', 'PE', 'ph', 'pt', 'ro', 'ru', 'sg', 'es', 'se', 'ch', 'tw', 'ua', 'gb'];
+//const countryCode = ['US', 'CA', 'AU', 'BR', 'CN', 'FR', 'EG', 'DE', 'GR', 'HK', 'IN', 'IE', 'IL', 'IT', 'JP', 'NL', 'NO', 'PK', 'PE', 'ph', 'pt', 'ro', 'ru', 'sg', 'es', 'se', 'ch', 'tw', 'ua', 'gb'];
 
+onLoadDisplayCards();
 rollRandom();
 console.log(selected);
 
 var country_description;
+var countryCode = ['US', 'CA', 'AU', 'BR', 'CN', 'FR'];
 
 map.on('load', () => {
   /*
@@ -272,20 +275,23 @@ map.on('load', () => {
   });
 });
 
-
+//document.addEventListener("DOMContentLoaded", fetchNews);
 
 // Use API to query news, then add to database
-function fetchNewsFromAPI(i) {
+function fetchNewsFromAPI() {
   const userID = localStorage.getItem("userID");
   const userRef = db.collection("users").doc(userID);
-
-  userRef.get()
+  
+    userRef.get()
     .then(user => {
+      //for (let i = 0; i < 2; i++) {
       var country = country_description;
+      console.log(country);
       var category = user.data().category_preference;
       var articlesPerDay = user.data().articlesPerDay_preference;
       var from = "2024-03-17T00:00:00Z";
-      var news_api_key = 'ee6cc9b236a42b299ddb195f1bbe79d7';
+      //var news_api_key = 'ee6cc9b236a42b299ddb195f1bbe79d7';
+      var news_api_key = '097a6904a71fe009b51586c3913edabd';
 
       var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${articlesPerDay}&from=${from}&apikey=${news_api_key}`;
 
@@ -314,13 +320,13 @@ function fetchNewsFromAPI(i) {
             })
           }
         })
+     //}
     })
 }
 
 function fetchNews() {
-  for (let i = 0; i < 6; i++) {
-    fetchNewsFromAPI(i);
-    console.log(i);
+  for (let i = 0; i < 3; i++) {
+    fetchNewsFromAPI();
   }
 }
 
@@ -374,6 +380,35 @@ function displayCards() {
       })
     })
 }
+
+function onLoadDisplayCards() {
+  let cardTemplate = document.getElementById("newsCardTemplate");
+
+  db.collection("world").get()
+    .then(articles => {
+      articles.forEach(article => {
+
+        if (article.data().country.includes('ca')) {
+          // Clone template card
+          let newcard = cardTemplate.content.cloneNode(true);
+
+          // Set card details
+          newcard.querySelector('.card-img').setAttribute("src", article.data().image);
+          newcard.querySelector('.headline').innerHTML = article.id;
+          newcard.querySelector('.preview').innerHTML = article.data().description;
+          // newcard.querySelector('.time-to-read').innerHTML = time_to_read + " minute read";
+          newcard.querySelector('.country').innerHTML = article.data().country;
+
+          // Set card hyperlink
+          newcard.querySelector("a").href = "article.html?articleID=" + article.id;
+
+          // Add card to DOM
+          document.getElementById("explore-cards-go-here").appendChild(newcard);
+        }
+
+      })
+    })
+} 
 
 var rand = 0;
 var selected;

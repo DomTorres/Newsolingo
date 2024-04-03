@@ -49,9 +49,12 @@ function saveUserInfo() {
                             username: userName1,
                             userCountry: uCountry,
                             profilePic: url, // Save the URL into users collection
-                            newsType: nType,
-                            newsCountry: nCountry,
-                            newsFrequency: newsPerDay
+                            category_preference: nType,
+                            country_preference: nCountry,
+                            articlesPerDay_preference: newsPerDay,
+                            articles_read_today: 0,
+                            points: 0,
+                            streak: 0
 
                         })
                             .then(function () {
