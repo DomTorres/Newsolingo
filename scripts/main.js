@@ -76,10 +76,31 @@ function saveUserIDToLocalStorage() {
     })
 }
 
-// Use API to query news, then add to database
+/**
+ * This function is intended to run only ONCE per day, at the user's first load on that day. 
+ */
 function fetchNewsFromAPI() {
     console.log("Entered function fetchNewsFromAPI");
 
+    // delete existing articles in the "for you" collection first
+    // userRef.collection("for_you").get().then()
+
+    // if user didn't complete yesterday's goal, set streak to 0
+    userRef.get()
+        .then(user => {
+            if (Number(user.data().articlesPerDay_preference) != Number(user.data().articles_read_today)) {
+                userRef.update({
+                    streak: 0
+                })
+            }
+        })
+
+    // reset user's number of articles read today
+    userRef.update({
+        articles_read_today: 0
+    })
+
+    // fetch news from API
     userRef.get()
         .then(user => {
 
@@ -101,10 +122,9 @@ function fetchNewsFromAPI() {
                 // console.log(articles);
                 // console.log("length:" + articles.length);
 
-                for(let i = 0; i < articles.length; i++) {
-                    // Write each article into database, with ID = title
-                    var title = articles[i].title;
-                    
+                for(let i = 0; i < articles.length; i++) {                    
+
+                    // Write each article into the database
                     db.collection("users").doc(userID).collection("for_you").add({
                         title: articles[i].title,
                         description: articles[i].description,
@@ -119,23 +139,11 @@ function fetchNewsFromAPI() {
                         category: category
                     });
                 }  
-                
-                // if user didn't read yesterday's goal, set streak to zero
-                console.log("Goal: " + Number(user.data().articlesPerDay_preference));
-                console.log("Articles read yesterday: " + Number(user.data().articles_read_today));
-                console.log(Number(user.data().articlesPerDay_preference) != Number(user.data().articles_read_today));
 
-                if (Number(user.data().articlesPerDay_preference) != Number(user.data().articles_read_today)) {
-                    userRef.update({
-                        streak: 0
-                    })
-                }
-
-                // set articles read today to zero, set date last loaded to today
+                // Set date last loaded to today
                 userRef.update({
                     // date_last_loaded: String(new Date())) // ACTUAL CODE
-                    date_last_loaded: String(new Date("Mar 02, 2024")),
-                    articles_read_today: 0
+                    date_last_loaded: String(new Date("Mar 03, 2024")), // CODE FOR TESTING PURPOSES
                 })
 
                 displayCards();
@@ -152,7 +160,7 @@ function loadNewsForToday() {
             console.log(dateLastLoaded);
 
             // var dateToday = new Date(); // ACTUAL CODE
-            var dateToday = new Date("Mar 03, 2024") // CODE FOR TESTING PURPOSES
+            var dateToday = new Date("Mar 04, 2024") // CODE FOR TESTING PURPOSES
             console.log("Date today: " + dateToday);
 
             console.log(dateLastLoaded.getDate() > dateToday.getDate());
