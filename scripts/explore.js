@@ -9,149 +9,17 @@ const map = new mapboxgl.Map({
   zoom: 3
 });
 
-//const countryCode = ['US', 'CA', 'AU', 'BR', 'CN', 'FR', 'EG', 'DE', 'GR', 'HK', 'IN', 'IE', 'IL', 'IT', 'JP', 'NL', 'NO', 'PK', 'PE', 'ph', 'pt', 'ro', 'ru', 'sg', 'es', 'se', 'ch', 'tw', 'ua', 'gb'];
-
-onLoadDisplayCards();
-rollRandom();
-console.log(selected);
-
 var country_description;
 var countryCode = ['US', 'CA', 'AU', 'BR', 'CN', 'FR'];
 
-map.on('load', () => {
-  /*
-  for (let i = 0; i < 3; i++) {
-    switch (selected.pop) {
-      case 0:
-        map.addSource('places', {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [
-              {
-                'type': 'Feature',
-                'properties': {
-                  'description':
-                    'us',
-                  'icon': 'globe',
-                },
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [-98, 38.931567]
-                }
-              }
-            ]
-          }
-        })
-      case 1:
-        map.addSource('places', {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [
-              {
-                'type': 'Feature',
-                'properties': {
-                  'description':
-                    'cn',
-                  'icon': 'globe',
-                },
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [104.2, 35.9]
-                }
-              }
-            ]
-          }
-        })
-      case 2:
-        map.addSource('places', {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [
-              {
-                'type': 'Feature',
-                'properties': {
-                  'description':
-                    'ca',
-                  'icon': 'globe',
-                },
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [-106.35, 56.13]
-                }
-              }
-            ]
-          }
-        })
-      case 3:
-        map.addSource('places', {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [
-              {
-                'type': 'Feature',
-                'properties': {
-                  'description':
-                    'au',
-                  'icon': 'globe',
-                },
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [133.78, -25.3]
-                }
-              }
-            ]
-          }
-        })
-      case 4:
-        map.addSource('places', {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [
-              {
-                'type': 'Feature',
-                'properties': {
-                  'description':
-                    'br',
-                  'icon': 'globe',
-                },
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [-51.9, -14.24]
-                }
-              }
-            ]
-          }
-        })
-      case 5:
-        map.addSource('places', {
-          'type': 'geojson',
-          'data': {
-            'type': 'FeatureCollection',
-            'features': [
-              {
-                'type': 'Feature',
-                'properties': {
-                  'description':
-                    'fr',
-                  'icon': 'globe',
-                },
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [2.21, 46.23]
-                }
-              }
-            ]
-          }
-        })
-    }
-  }*/
+// loadNewsForToday function when page is loaded
+document.addEventListener("DOMContentLoaded", loadNewsForToday());
 
-  
+// Timer for onLoadDisplayCard function to have adequate time to fetch from API
+setTimeout(onLoadDisplayCards, 1000);
+
+map.on('load', () => {
+
   map.addSource('places', {
     // This GeoJSON contains features that include an "icon"
     // property. The value of the "icon" property corresponds
@@ -176,36 +44,12 @@ map.on('load', () => {
           'type': 'Feature',
           'properties': {
             'description':
-              'cn',
-            'icon': 'globe',
-          },
-          'geometry': {
-            'type': 'Point',
-            'coordinates': [104.2, 35.9]
-          }
-        },
-        {
-          'type': 'Feature',
-          'properties': {
-            'description':
               'ca',
             'icon': 'globe',
           },
           'geometry': {
             'type': 'Point',
             'coordinates': [-106.35, 56.13]
-          }
-        },
-        {
-          'type': 'Feature',
-          'properties': {
-            'description':
-              'au',
-            'icon': 'globe',
-          },
-          'geometry': {
-            'type': 'Point',
-            'coordinates': [133.78, -25.3]
           }
         },
         {
@@ -254,7 +98,7 @@ map.on('load', () => {
     // Copy coordinates array.
     country_description = e.features[0].properties.description;
     console.log(country_description);
-    fetchNewsFromAPI();
+    //loadNewsForToday();
     const elem = document.getElementById("explore-cards-go-here");
     console.log(elem.childNodes.length);
     if (elem.childNodes.length > 0) {
@@ -275,23 +119,21 @@ map.on('load', () => {
   });
 });
 
-//document.addEventListener("DOMContentLoaded", fetchNews);
-
 // Use API to query news, then add to database
-function fetchNewsFromAPI() {
+function fetchNewsFromAPI(c) {
   const userID = localStorage.getItem("userID");
   const userRef = db.collection("users").doc(userID);
-  
-    userRef.get()
+
+  userRef.get()
     .then(user => {
       //for (let i = 0; i < 2; i++) {
-      var country = country_description;
+      var country = c;
       console.log(country);
       var category = user.data().category_preference;
       var articlesPerDay = user.data().articlesPerDay_preference;
       var from = "2024-03-17T00:00:00Z";
-      //var news_api_key = 'ee6cc9b236a42b299ddb195f1bbe79d7';
-      var news_api_key = '097a6904a71fe009b51586c3913edabd';
+      var news_api_key = 'ee6cc9b236a42b299ddb195f1bbe79d7';
+      //var news_api_key = '097a6904a71fe009b51586c3913edabd';
 
       var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${articlesPerDay}&from=${from}&apikey=${news_api_key}`;
 
@@ -319,15 +161,14 @@ function fetchNewsFromAPI() {
               country: country
             })
           }
+          userRef.update({
+            // date_last_loaded: String(new Date())) // ACTUAL CODE
+            date_last_loaded: String(new Date("March 22, 2024")),
+          })
         })
-     //}
-    })
-}
 
-function fetchNews() {
-  for (let i = 0; i < 3; i++) {
-    fetchNewsFromAPI();
-  }
+      //}
+    })
 }
 
 function loadNewsForToday() {
@@ -338,13 +179,15 @@ function loadNewsForToday() {
       var dateLastLoaded = new Date(user.data().date_last_loaded);
       console.log(dateLastLoaded);
 
-      var dateToday = new Date("March 22, 2024")
+      var dateToday = new Date();
       console.log("Date today: " + dateToday);
 
-      console.log(dateLastLoaded.getDate() > dateToday.getDate());
       if (dateToday > dateLastLoaded) {
         console.log("We need to fetch news for today.");
-        fetchNewsFromAPI();
+        fetchNewsFromAPI('us');
+        setTimeout(fetchNewsFromAPI('ca'), 1500);
+        setTimeout(fetchNewsFromAPI('br'), 1500);
+        setTimeout(fetchNewsFromAPI('fr'), 2000);
       } else {
         console.log("Today's cards are already fetched.");
       }
@@ -381,6 +224,7 @@ function displayCards() {
     })
 }
 
+// Displays news from Canada when page loads
 function onLoadDisplayCards() {
   let cardTemplate = document.getElementById("newsCardTemplate");
 
@@ -408,16 +252,5 @@ function onLoadDisplayCards() {
 
       })
     })
-} 
-
-var rand = 0;
-var selected;
-function rollRandom() {
-  n = 3;
-  array = [0, 1, 2, 3, 4, 5];
-  var shuffled = array.sort(function () { return 0.5 - Math.random() });
-  selected = shuffled.slice(0, n);
-  console.log(selected);
-
 }
 
