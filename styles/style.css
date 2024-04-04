@@ -56,6 +56,16 @@
   vertical-align: middle;
 }
 
+/* PROGRESS BAR STYLING */
+#daily-progress {
+  margin-top: 1em;
+}
+
+#daily-progress-goes-here {
+  text-align: center;
+  font-size: 20pt;
+}
+
 /* BUTTON STYLING */
 .btn {
   color: #0aa5e9 !important;
