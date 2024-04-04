@@ -114,9 +114,9 @@
 
  <select class="select-genres" id="news-frequency">
           <option value="" disabled selected hidden>News frequency</option>
-          <option value="Casual">Casual (3 articles/day)</option>
-          <option value="Regular">Regular (5 articles/day)</option>
-          <option value="Serious">Serious (10 articles/day)</option>
+          <option value="3">Casual (3 articles/day)</option>
+          <option value="5">Regular (5 articles/day)</option>
+          <option value="10">Serious (10 articles/day)</option>
         </select>
 
 
@@ -146,9 +146,17 @@
       </div>
     </div>--->
 
-    <button type="button" class="btn-save" onclick="saveUser()">
+    <button type="button" class="btn-save" onclick="saveUserInfo()">
       Save
     </button>
+    <script>
+      // Tu código JavaScript aquí
+      function saveUserInfo() {
+          firebase.auth().onAuthStateChanged(function (user) {
+              // Código de la función saveUserInfo() aquí
+          });
+      }
+  </script>
 
   </body>
 
@@ -168,8 +176,8 @@
   <script src="./scripts/preferences.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="./scripts/skeleton.js"></script>
-  <script src="./scripts/main.js"></script>
-  <script src="./scripts/script.js"></script>
+  <!--<script src="./scripts/main.js"></script>-->
+  <!--<script src="./scripts/script.js"></script>-->
   
   <!-- <img src="/images/46837_setting_icon.png" class="rounded" alt="..." height="200px" width="200px"> -->
 </body>
