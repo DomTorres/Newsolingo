@@ -8,6 +8,7 @@ function chooseFileListener() {
     //attach listener to input file
     //when this file changes, do something
     fileInput.addEventListener('change', function (e) {
+        console.log("hello");
         debugger
         //the change event returns a file "e.target.files[0]"
         ImageFile = e.target.files[0];
@@ -44,6 +45,10 @@ function saveUserInfo() {
                         nCountry = document.getElementById("news-country").value;
                         newsPerDay = document.getElementById("news-frequency").value;
                         //Asynch call to save the form fields into Firestore.
+
+                        yesterday = new Date();
+                        yesterday.setDate(yesterday.getDate() - 1);
+
                         db.collection("users").doc(user.uid).update({
                             name: uName,
                             username: userName1,
@@ -52,6 +57,7 @@ function saveUserInfo() {
                             category_preference: nType,
                             country_preference: nCountry,
                             articlesPerDay_preference: newsPerDay,
+                            date_last_loaded: String(yesterday),
                             articles_read_today: 0,
                             points: 0,
                             streak: 0
