@@ -48,7 +48,7 @@ function saveUserInfo() {
                         db.collection("users").doc(user.uid).update({
                             name: uName,
                             username: userName1,
-                            Country: uCountry,
+                            userCountry: uCountry,
                             profilePic: url // Save the URL into users collection
                         })
                             .then(function () {
