@@ -8,8 +8,8 @@ function loadSkeleton() {
             $('#navbarPlaceholder').load('./text/nav_after_login.html');
             console.log("Logged-in navbar loaded.");
 
-            $('#footerPlaceholder').load('./text/footer.html');
-            console.log("Logged-in footer loaded.");
+            // $('#footerPlaceholder').load('./text/footer.html');
+            // console.log("Logged-in footer loaded.");
         } else {
             // No user is signed in.
             console.log("Not logged in.");
@@ -17,8 +17,8 @@ function loadSkeleton() {
             $('#navbarPlaceholder').load('./text/nav_before_login.html');
             console.log("Logged-out navbar loaded.");
 
-            $('#footerPlaceholder').load('./text/footer.html');
-            console.log("Logged-out footer loaded.");
+            // $('#footerPlaceholder').load('./text/footer.html');
+            // console.log("Logged-out footer loaded.");
         }
     });
 }
@@ -47,8 +47,8 @@ function loadWebSkeleton() {
             $('#navbarPlaceholder').load('./text/nav_after_login.html');
             console.log("Logged-in navbar loaded.");
 
-            $('#footerPlaceholder').load('./text/footer.html');
-            console.log("Logged-in footer loaded.");
+            // $('#footerPlaceholder').load('./text/footer.html');
+            // console.log("Logged-in footer loaded.");
         } else {
             // No user is signed in.
             console.log("Not logged in.");
@@ -56,8 +56,8 @@ function loadWebSkeleton() {
             $('#navbarPlaceholder').load('./text/nav_before_login.html');
             console.log("Logged-out navbar loaded.");
 
-            $('#footerPlaceholder').load('./text/footer.html');
-            console.log("Logged-out footer loaded.");
+            // $('#footerPlaceholder').load('./text/footer.html');
+            // console.log("Logged-out footer loaded.");
         }
     });
 }

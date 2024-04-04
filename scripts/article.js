@@ -35,7 +35,9 @@ document.querySelector("#done-reading").addEventListener("click", () => {
 
             // Update points, articles read today
             points += pointsForReading;
+            console.log(articles_read_today);
             articles_read_today++;
+            console.log(articles_read_today);
             if (articles_read_today == articlesPerDay_preference) {
                 streak++;
             }

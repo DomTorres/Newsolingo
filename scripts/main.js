@@ -8,32 +8,112 @@
 //     $(this).addClass("active");
 //     alert("Hello!");
 //   });
-  
-// function getNameFromAuth() {
-//     firebase.auth().onAuthStateChanged(user => {
-//         // Check if a user is signed in:
-//         if (user) {
-//             // Do something for the currently logged-in user here: 
-//             console.log(user.uid); //print the uid in the browser console
-//             console.log(user.displayName);  //print the user name in the browser console
-//             userName = user.displayName;
 
-//             //method #1:  insert with JS
-//             document.getElementById("name-goes-here").innerText = userName;    
+/**
+ * TO DO:
+ * 
+ * Delete all articles if it's a new day.
+ * Use the date today to query from API.
+ * Initialize date to date - 1.
+ * Fix progress statuses.
+ */
 
-//             //method #2:  insert using jquery
-//             //$("#name-goes-here").text(userName); //using jquery
+// Constants (we do not need to retrieve this after EVERY page load, just once per day.)
+var userID;
+var userRef;
 
-//             //method #3:  insert using querySelector
-//             //document.querySelector("#name-goes-here").innerText = userName
+// var articlesPerDay_preference = localStorage.getItem("articlesPerDay_preference");
+// var category_preference = localStorage.getItem("category_preference");
+// var country_preference = localStorage.getItem("country_preference");
 
-//         } else {
-//             // No user is signed in.
-//             console.log ("No user is logged in");
-//         }
-//     });
+var articlesPerDay_preference;
+var category_preference;
+var country_preference;
+
+// Driver function
+// function doAll() {
+//     isNewDay();
 // }
-// getNameFromAuth(); //run the function
+// doAll();
+
+// Get logged in user's ID, save it to local storage for future purposes.
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        console.log("Logged in");
+
+        userID = user.uid;
+        console.log(userID);
+
+        userRef = db.collection("users").doc(userID);
+        console.log(userRef);
+
+        // localStorage.setItem("userID", user.uid);
+        console.log("Saved auto userID to local storage.");
+
+        // call function isNewDay
+        isNewDay();
+
+        // call function loadDailyProgress
+        loadDailyProgress();
+
+    } else {
+        console.log("No user is signed in.");
+    }
+})
+
+// Determine if today is a new day.
+function isNewDay() {
+    console.log("Entered function isNewDay.");
+
+    userRef.get()
+        .then(user => {
+            console.log("Date read from database: " + user.data().date_last_loaded);
+
+            var dateLastLoaded = new Date(user.data().date_last_loaded);
+            console.log("Date last loaded: " + dateLastLoaded);
+
+            var dateToday = new Date(); // ACTUAL CODE
+            // var dateToday = new Date("Mar 04, 2024") // CODE FOR TESTING PURPOSES
+            console.log("Date today: " + dateToday);
+
+            console.log("Is today AFTER the day last loaded? " + (dateToday.getDate() > dateLastLoaded.getDate()));
+            if (dateToday.getDate() > dateLastLoaded.getDate()) {
+                console.log("It is a new day, we need to fetch data.");
+
+                saveUserDataToLocalStorage().then(() => {
+                    fetchNewsFromAPI();
+                });
+            } else {
+                console.log("It is not a new day, we do not need to fetch data.");
+                
+                displayCards();
+            }
+        }) 
+}
+
+// Get user's preference, save it to local storage for future purposes.
+async function saveUserDataToLocalStorage() {
+    console.log("Entered function saveUserDataToLocalStorage.");
+
+    userRef.get().then((user) => {
+        if (user.exists) {
+            articlesPerDay_preference = user.data().articlesPerDay_preference;
+            // localStorage.setItem("articlesPerDay_preference", articlesPerDay_preference);
+            console.log("Saved articlesPerDay_preference: " + articlesPerDay_preference);
+
+            category_preference = user.data().category_preference;
+            // localStorage.setItem("category_preference", category_preference);
+            console.log("Saved category_preference: " + category_preference);
+
+            country_preference = user.data().country_preference;
+            // localStorage.setItem("country_preference", country_preference);
+            console.log("Saved country_preference: " + country_preference);
+
+        } else {
+            console.log("Error retrieving user data.");
+        }
+    });
+}
 
 // console.log(today);
 // todayString = String(today);
@@ -59,53 +139,48 @@
 // }
 // printDate();
 
-const userID = localStorage.getItem("userID");
-const userRef = db.collection("users").doc(userID);
-
-function doAll() {
-    saveUserIDToLocalStorage();
-    loadNewsForToday();
-    displayCards();
-}
-doAll();
-
-// Get logged in user's ID, save it to local storage for future purposes
-function saveUserIDToLocalStorage() {
-    firebase.auth().onAuthStateChanged(user => {
-        localStorage.setItem("userID", user.uid);
-    })
-}
-
-// Use API to query news, then add to database
-function fetchNewsFromAPI() {
+/**
+ * This function is intended to run only ONCE per day, at the user's first load on that day. 
+ */
+async function fetchNewsFromAPI() {
     console.log("Entered function fetchNewsFromAPI");
 
+    // delete existing articles in the "for you" collection first
+    // userRef.collection("for_you").get().then()
+
+    // if user didn't complete yesterday's goal, set streak to 0
     userRef.get()
         .then(user => {
+            if (Number(user.data().articlesPerDay_preference) != Number(user.data().articles_read_today)) {
+                userRef.update({
+                    streak: 0
+                })
+            }
+        })
 
-        var country = user.data().country_preference;
-        var category = user.data().category_preference;
-        var articlesPerDay = user.data().articlesPerDay_preference;
+    // reset user's number of articles read today
+    userRef.update({
+        articles_read_today: 0
+    })
+
+    // fetch news from API
+    userRef.get().then(user => {
         var from = "2024-03-17T00:00:00Z"; // This needs to be dynamically based based on the current date.
 
-        // console.log("Country read from database: " + country);
-        // console.log("Category read from database: " + category);
-        // console.log("articlesPerDay read from database: " + articlesPerDay);
-
-        var url = `https://gnews.io/api/v4/top-headlines?category=${category}&country=${country}&max=${articlesPerDay}&from=${from}&apikey=${news_api_key}`;
+        var url = `https://gnews.io/api/v4/top-headlines?category=${category_preference}&country=${country_preference}&max=${articlesPerDay_preference}&from=${from}&apikey=${news_api_key}`;
 
         fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                var articles = data.articles;
-                // console.log(articles);
-                // console.log("length:" + articles.length);
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (jsonResponse) {
+                console.log("Articles were successfully fetched.");
+                var articles = jsonResponse.articles;
 
-                for(let i = 0; i < articles.length; i++) {
-                    // Write each article into database, with ID = title
-                    var title = articles[i].title;
-                    
-                    db.collection("users").doc(userID).collection("for_you").add({
+                for(let i = 0; i < articles.length; i++) {                    
+
+                    // Write each article into the database
+                    userRef.collection("for_you").add({
                         title: articles[i].title,
                         description: articles[i].description,
                         content: articles[i].content,
@@ -115,59 +190,37 @@ function fetchNewsFromAPI() {
                         // sourceName: articles[i].source.name,
                         // sourceURL: articles[i].source.url
 
-                        country: country,
-                        category: category
+                        country: country_preference,
+                        category: category_preference
                     });
                 }  
-                
-                // if user didn't read yesterday's goal, set streak to zero
-                console.log("Goal: " + Number(user.data().articlesPerDay_preference));
-                console.log("Articles read yesterday: " + Number(user.data().articles_read_today));
-                console.log(Number(user.data().articlesPerDay_preference) != Number(user.data().articles_read_today));
 
-                if (Number(user.data().articlesPerDay_preference) != Number(user.data().articles_read_today)) {
-                    userRef.update({
-                        streak: 0
-                    })
-                }
+                console.log("Articles were successfully written into the database.");
 
-                // set articles read today to zero, set date last loaded to today
-                userRef.update({
-                    // date_last_loaded: String(new Date())) // ACTUAL CODE
-                    date_last_loaded: String(new Date("Mar 02, 2024")),
-                    articles_read_today: 0
-                })
+                // Set date last loaded to today
+                updateDateLastLoaded();
 
+                // Display cards
                 displayCards();
             })
         })
 }
 
-function loadNewsForToday() {
-    userRef.get()
-        .then(user => {
-            console.log("Date read from database: " + user.data().date_last_loaded);
+async function updateDateLastLoaded() {
+    console.log("Entered function updateDateLastLoaded");
 
-            var dateLastLoaded = new Date(user.data().date_last_loaded);
-            console.log(dateLastLoaded);
+    userRef.update({
+        date_last_loaded: String(new Date()) // ACTUAL CODE
+        // date_last_loaded: String(new Date("Mar 03, 2024")), // CODE FOR TESTING PURPOSES
+    });
 
-            // var dateToday = new Date(); // ACTUAL CODE
-            var dateToday = new Date("Mar 03, 2024") // CODE FOR TESTING PURPOSES
-            console.log("Date today: " + dateToday);
-
-            console.log(dateLastLoaded.getDate() > dateToday.getDate());
-            if (dateToday > dateLastLoaded) {
-                console.log("We need to fetch news for today.");
-                fetchNewsFromAPI();
-            } else {
-                console.log("Today's cards are already fetched.");
-            }
-        }) 
-
+    console.log("Succesfully updated date last loaded to today.")
 }
 
 // Display news from database
-function displayCards() {
+async function displayCards() {
+    console.log("Entered function displayCards.");
+
     let cardTemplate = document.getElementById("newsCardTemplate");
 
     userRef.collection("for_you").get()
@@ -192,12 +245,17 @@ function displayCards() {
         })
 }
 
-userRef.onSnapshot(user => {
-    var articlesLeft = Number(user.data().articlesPerDay_preference) - Number(user.data().articles_read_today);
-
-    if (articlesLeft == 0) {
-        document.getElementById("articles-left-goes-here").innerHTML = "You've completed your daily goal! Come back tomorrow.";
-    } else {
-        document.getElementById("articles-left-goes-here").innerHTML = "Nice going! Read " + articlesLeft + " more articles to complete your daily goal.";
-    }
-});
+function loadDailyProgress() {
+    userRef.onSnapshot(user => {
+        articles_read_today = Number(user.data().articles_read_today);
+        articlesPerDay_preference = Number(user.data().articlesPerDay_preference);
+        document.getElementById("daily-progress-goes-here").innerHTML = `Daily Progress: ${articles_read_today} / ${articlesPerDay_preference} articles read`;
+        var articlesLeft = Number(user.data().articlesPerDay_preference) - Number(user.data().articles_read_today);
+    
+        // if (articlesLeft == 0) {
+        //     document.getElementById("articles-left-goes-here").innerHTML = "You've completed your daily goal! Come back tomorrow.";
+        // } else {
+        //     document.getElementById("articles-left-goes-here").innerHTML = "Nice going! Read " + articlesLeft + " more articles to complete your daily goal.";
+        // }
+    });
+}
