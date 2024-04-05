@@ -81,35 +81,19 @@ a {
     color: #808080;
 }
 
-
+/* For Map */
 #map {
     height: 100%;
 }
 
-.marker {
-    background-image: url('https://docs.mapbox.com/help/demos/custom-markers-gl-js/mapbox-icon.png');
-    background-size: cover;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-}
 
-.mapboxgl-popup {
-    max-width: 200px;
-}
-
-.mapboxgl-popup-content {
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-}
 
 @media only screen and (min-width: 701px) and (max-width: 1280px) {
     .card-img {
         display: unset;
         padding: 2em 0.5em 0em 0.5em;
         max-width: 40%;
-        ;
+        float: left;
     }
 
 }
@@ -147,6 +131,6 @@ a {
         display: unset;
         padding: 2em 0.5em 0em 0.5em;
         max-width: 40%;
-        ;
+        float: left;
     }
 }
