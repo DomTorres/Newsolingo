@@ -27,16 +27,10 @@
     <!-- Mapbox API -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
     <script id="search-js" defer="" src="https://api.mapbox.com/search-js/v1.0.0-beta.18/web.js"></script>
-     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.js"></script>
-    <link
-      href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css"
-      rel="stylesheet"
-    />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet" />
 
 
     <!-- Link to styles of your own -->
@@ -62,10 +56,10 @@
 
     <nav id="footerPlaceholder"></nav>
 
-     <!-- Templates for general use, not displayed -->
-     <template id="newsCardTemplate">
-        <a href="">
-            <div id="card">
+    <!-- Templates for general use, not displayed -->
+    <template id="newsCardTemplate">
+        <div id="card">
+            <a href="">
                 <img src="#" class="card-img-top card-img" alt="article" />
                 <div class="card-body">
                     <h5 class="headline"></h5>
@@ -73,9 +67,10 @@
                     <hr>
                     <p class="time-to-read"></p>
                     <p class="country"></p>
-                </div> 
-            </div>   
-        </a>
+                </div>
+            </a>
+        </div>
+
     </template>
 
     <script src="./scripts/firebaseAPI_BBY22.js"></script>
@@ -87,7 +82,7 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0PbYa56k-61eukXNslb9c2TMunf41rRk&callback=initMap&libraries=marker&v=beta&solution_channel=GMP_CCS_infowindows_v2"
         defer></script>
-    
+
 </body>
 
 </html>
