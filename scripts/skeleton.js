@@ -62,10 +62,31 @@ function loadWebSkeleton() {
     });
 }
 
-function loadUserStats() {
-    const userID = localStorage.getItem("userID");
-    const userRef = db.collection("users").doc(userID);
+var userID;
+var userRef;
 
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        console.log("Logged in");
+
+        userID = user.uid;
+        console.log(userID);
+
+        userRef = db.collection("users").doc(userID);
+        console.log(userRef);
+
+        // localStorage.setItem("userID", user.uid);
+        console.log("Saved auto userID to local storage.");
+
+        // call function isNewDay
+        loadUserStats();
+
+    } else {
+        console.log("No user is signed in.");
+    }
+});
+
+function loadUserStats() {
     userRef.onSnapshot(user => {
         let points = user.data().points;
         document.querySelector("#points-go-here").innerHTML = points;
@@ -75,7 +96,6 @@ function loadUserStats() {
     })
 
 }
-loadUserStats()
 
 // Media Queries, support for mobile
 

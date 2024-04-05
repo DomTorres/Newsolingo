@@ -12,10 +12,10 @@
 /**
  * TO DO:
  * 
- * Delete all articles if it's a new day.
- * Use the date today to query from API.
- * Initialize date to date - 1.
- * Fix progress statuses.
+ * Delete all articles if it's a new day. 
+ * Use the date today to query from API.    
+ * Initialize date to date - 1.               DONE!
+ * Fix progress statuses.                     DONE!
  */
 
 // Constants (we do not need to retrieve this after EVERY page load, just once per day.)
@@ -59,7 +59,7 @@ firebase.auth().onAuthStateChanged(user => {
     } else {
         console.log("No user is signed in.");
     }
-})
+});
 
 // Determine if today is a new day.
 function isNewDay() {

@@ -1,6 +1,27 @@
-const userID = localStorage.getItem("userID");
-const userRef = db.collection("users").doc(userID);
+var userID;
+var userRef;
 var newsID;
+
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        console.log("Logged in");
+
+        userID = user.uid;
+        console.log(userID);
+
+        userRef = db.collection("users").doc(userID);
+        console.log(userRef);
+
+        // localStorage.setItem("userID", user.uid);
+        console.log("Saved auto userID to local storage.");
+
+        // call function isNewDay
+        loadArticle();
+
+    } else {
+        console.log("No user is signed in.");
+    }
+});
 
 function loadArticle() {
     let params = new URL(window.location.href);
@@ -18,7 +39,6 @@ function loadArticle() {
         document.querySelector("#content").innerHTML = content;
     })
 }
-loadArticle();
 
 document.querySelector("#done-reading").addEventListener("click", () => {
     const docRef = db.collection("news").doc(newsID)
@@ -29,9 +49,16 @@ document.querySelector("#done-reading").addEventListener("click", () => {
         .then(user => {
             // Read points, articles read today
             points = user.data().points;
+            console.log("Points read from database:" + points);
+
             streak = user.data().streak;
+            console.log("Streak read from database: " + streak);
+
             articles_read_today = user.data().articles_read_today;
+            console.log("Articles read today read from database: " + articles_read_today);
+
             articlesPerDay_preference = user.data().articlesPerDay_preference;
+            console.log("Articles per day preference read from database: " + articlesPerDay_preference);
 
             // Update points, articles read today
             points += pointsForReading;
@@ -51,13 +78,17 @@ document.querySelector("#done-reading").addEventListener("click", () => {
             })
 
             // Delete article from "for you" array
-            userRef.collection("for_you").doc(newsID).delete().then(() => {
-                console.log("Article deleted.");
-            }).catch((error) => {
-                console.log("Error removing document, " + error);
-            });
+            deleteArticleFromForYou();
         })
-})
+});
+
+function deleteArticleFromForYou() {
+    userRef.collection("for_you").doc(newsID).delete().then(() => {
+        console.log("Article deleted.");
+    }).catch((error) => {
+        console.log("Error removing document, " + error);
+    });
+}
 
 document.querySelector("#back-to-for-you-page").addEventListener("click", () => {
     window.location.replace("main.html");
