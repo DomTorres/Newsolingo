@@ -70,8 +70,16 @@ function saveUserInfo() {
                                 console.log('Saved user profile info');
                                 console.log("Save user preferences");
                                 document.getElementById('personalInfoFields').disabled = true;
-                                alert("Saved");
-                                window.location.assign("main.html");
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    title: "Your work has been saved",
+                                    showConfirmButton: false,
+                                    timer: 1200
+                                    
+                                
+                                  });
+                                 setTimeout( function() { window.location = "main.html" }, 1200 );
                             })
                     })
             })

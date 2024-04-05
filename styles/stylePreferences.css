@@ -103,19 +103,33 @@ input:checked + .radio-tile label {
   color: white; /* Change color of icon and label to white */
 }
 .btn-save {
- 
-  margin-right: 10px; /* Add space between buttons */
-  background: #0aa5e9;
-  color: white;
-  padding: 0;
-  border-radius: 5px;
-  cursor: pointer;
-  outline-color: #0aa5e9;
-  height: 30px; /* Change input container height to 40 pixels */
-  width: 130px; /* Adjust the width of the button */
-  text-align: center; /* Center buttons */
-  font-size: 18px;
+  color: #0aa5e9 !important;
+  font-size: 15pt;
+  font-family: "Nunito", sans-serif !important;
+  font-weight: bold;
+  border: 2px solid #D2D4DA;
+  background-color: white;
+  box-shadow: 0 3px #D2D4DA;
+  border-radius: 15px;
+  width: 130px;
+  padding: 3px;
+  display: block;
+  height: 35px; 
+  width: 140px;
+  margin: 10px auto;
+  font-size: 17px;
 }
 
 
+.btn-save:hover {
+  background-color: #F3F4F8;
+  border: 2px solid #D2D4DA;
+}
+
+.btn-save:active {
+  background-color: #F3F4F8 !important;
+  border: 2px solid #D2D4DA !important;
+  box-shadow: 0 0px #D2D4DA;
+  transform: translateY(1px);
+}
 

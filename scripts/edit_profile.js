@@ -52,7 +52,7 @@ function saveUserInfo() {
                             profilePic: url // Save the URL into users collection
                         })
                             .then(function () {
-                                debugger
+                                
                                 console.log(uName, userName1, uCountry)
                                 console.log('Added Profile Pic URL to Firestore.');
                                 console.log('Saved user profile info');
@@ -62,9 +62,11 @@ function saveUserInfo() {
                                     icon: "success",
                                     title: "Your work has been saved",
                                     showConfirmButton: false,
-                                    timer: 1000
+                                    timer: 1200
+                                    
                                 
                                   });
+                                 setTimeout( function() { window.location = "main.html" }, 1200 );  
                             })
                     })
             })
