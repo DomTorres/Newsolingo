@@ -167,7 +167,15 @@ async function fetchNewsFromAPI() {
     userRef.get().then(user => {
         var from = "2024-03-17T00:00:00Z"; // This needs to be dynamically based based on the current date.
 
-        var url = `https://gnews.io/api/v4/top-headlines?category=${category_preference}&country=${country_preference}&max=${articlesPerDay_preference}&from=${from}&apikey=${news_api_key}`;
+        today = new Date();
+        to = today.toISOString();
+        console.log(to);
+
+        today.setDate(today.getDate() - 1);
+        from = today.toISOString();
+        console.log(from);
+
+        var url = `https://gnews.io/api/v4/top-headlines?category=${category_preference}&country=${country_preference}&max=${articlesPerDay_preference}&from=${from}&to=${to}&apikey=${news_api_key}`;
 
         fetch(url)
             .then(function (response) {
