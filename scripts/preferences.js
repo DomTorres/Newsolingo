@@ -31,3 +31,41 @@ function saveUserInfo() {
         
     })
 }
+
+function populateInfo() {
+   
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            
+            // go and get the curret user info from firestore
+            currentUser = db.collection("users").doc(user.uid);
+
+            currentUser.get()
+                .then(userDoc => {
+                    let nType = userDoc.data().category_preference;
+                    let nCountry = userDoc.data().country_preference;
+                    let newsPerDay = userDoc.data().articlesPerDay_preference;
+                    
+
+                    if (nType != null) {
+                        document.getElementById("news-type").value = nType;
+                    }
+                    if (nCountry != null) {
+                        document.getElementById("news-country").value = nCountry;
+                    }
+                    if (newsPerDay != null) {
+                        console.log(newsPerDay)
+                        document.getElementById("news-frequency").value = newsPerDay;
+                    }
+                    
+                })
+
+            } else {
+            console.log("no user is logged in")
+        }
+    }
+
+    )
+
+}
+populateInfo();
