@@ -13,10 +13,10 @@ var country_description;
 var countryCode = ['US', 'CA', 'AU', 'BR', 'CN', 'FR'];
 
 // loadNewsForToday function when page is loaded
-document.addEventListener("DOMContentLoaded", loadNewsForToday());
+//document.addEventListener("DOMContentLoaded", loadNewsForToday());
 
 // Timer for onLoadDisplayCard function to have adequate time to fetch from API
-setTimeout(onLoadDisplayCards, 1000);
+//setTimeout(onLoadDisplayCards, 1000);
 
 map.on('load', () => {
 
@@ -119,19 +119,41 @@ map.on('load', () => {
   });
 });
 
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+      console.log("Logged in");
+
+      userID = user.uid;
+      console.log(userID);
+
+      userRef = db.collection("users").doc(userID);
+      console.log(userRef);
+
+      // localStorage.setItem("userID", user.uid);
+      console.log("Saved auto userID to local storage.");
+
+      // call function isNewDay
+      loadNewsForToday();
+
+      //
+      setTimeout(onLoadDisplayCards, 1000);
+
+  } else {
+      console.log("No user is signed in.");
+  }
+});
+
 // Use API to query news, then add to database
 function fetchNewsFromAPI(c) {
-  const userID = localStorage.getItem("userID");
-  const userRef = db.collection("users").doc(userID);
 
   userRef.get()
     .then(user => {
       //for (let i = 0; i < 2; i++) {
       var country = c;
       console.log(country);
-      var category = user.data().category_preference;
-      var articlesPerDay = user.data().articlesPerDay_preference;
-      var from = "2024-03-17T00:00:00Z";
+      var category = 'general';
+      var articlesPerDay = 3;
+      var from = new Date();
       var news_api_key = 'ee6cc9b236a42b299ddb195f1bbe79d7';
       //var news_api_key = '097a6904a71fe009b51586c3913edabd';
 
