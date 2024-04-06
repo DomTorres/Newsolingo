@@ -97,7 +97,7 @@ img[src="./images/bird.png"] {
 }
 
 #page-content {
-  position: botom;
+  position: bottom;
   height: 100px;
   bottom: 0;
   width: 100%;
@@ -116,13 +116,15 @@ img[src="./images/bird.png"] {
 
 /* CARD STYLING */
 #cardContainer,
-#cardContainer2 {
+#cardContainer2 
+{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 1%;
 }
+
 a {
   text-decoration: none;
 }

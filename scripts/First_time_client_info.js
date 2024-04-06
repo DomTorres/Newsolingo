@@ -70,18 +70,36 @@ function saveUserInfo() {
                                 console.log('Saved user profile info');
                                 console.log("Save user preferences");
                                 document.getElementById('personalInfoFields').disabled = true;
-                                Swal.fire({
-                                    position: "top-end",
-                                    icon: "success",
-                                    title: "Your work has been saved",
-                                    showConfirmButton: false,
-                                    timer: 1200
-                                    
-                                
-                                  });
-                                 setTimeout( function() { window.location = "main.html" }, 1200 );
+                                window.location.href = "main.html";
                             })
                     })
             })
     })
 }
+function populateInfo() {
+   
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            
+            // go and get the curret user info from firestore
+            currentUser = db.collection("users").doc(user.uid);
+  
+            currentUser.get()
+                .then(userDoc => {
+                    let user = userDoc.data().name;                   
+  
+                    if (user != null) {
+                        document.getElementById("nameImput").value = user;
+                    }
+                    
+                })
+  
+            } else {
+            console.log("no user is logged in")
+        }
+    }
+  
+    )
+  
+  }
+  populateInfo();
