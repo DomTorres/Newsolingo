@@ -57,16 +57,8 @@ function saveUserInfo() {
                                 console.log('Added Profile Pic URL to Firestore.');
                                 console.log('Saved user profile info');
                                 document.getElementById('personalInfoFields').disabled = true;
-                                Swal.fire({
-                                    position: "top-end",
-                                    icon: "success",
-                                    title: "Your work has been saved",
-                                    showConfirmButton: false,
-                                    timer: 1200
-                                    
-                                
-                                  });
-                                 setTimeout( function() { window.location = "main.html" }, 1200 );  
+                                window.location.href = "main.html";
+                                 
                             })
                     })
             })
@@ -75,37 +67,36 @@ function saveUserInfo() {
 
 
 function populateInfo() {
-   
+   debugger
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             
             // go and get the curret user info from firestore
             currentUser = db.collection("users").doc(user.uid);
-
+debugger
             currentUser.get()
                 .then(userDoc => {
                     let Name = userDoc.data().name;
                     let userName = userDoc.data().username;
                     let uCountry = userDoc.data().userCountry;
                     let picUrl = userDoc.data().profilePic;
+                    debugger
 
                     if (Name != null) {
                         document.getElementById("nameImput").value = Name;
-                    }
+                    }debugger
                     if (userName != null) {
                         document.getElementById("username-imput").value = userName;
-                    }
+                    }debugger
                     if (uCountry != null) {
                         console.log(uCountry)
                         document.getElementById("country-form").value = uCountry;
-                    }
+                    }debugger
                     if (picUrl != null) {
                         console.log(picUrl);
-                        // use this line if "mypicdiv" is a "div"
-                        //$("#mypicdiv").append("<img src='" + picUrl + "'>")
-                        $("#profile-pic").attr("src", picUrl); //asignas al elemento la foto de firebase
-                        ImageFile = picUrl;
-                    }
+                        document.getElementById("profile-pic").src = picUrl;
+                        debugger
+                    }  
                     else
                         console.log("picURL is null");
                 })
