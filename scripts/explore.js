@@ -205,6 +205,11 @@ function loadNewsForToday() {
       console.log("Date today: " + dateToday);
 
       if (dateToday > dateLastLoaded) {
+        deleteCollection();
+        db.collection(world).get().then(snap => {
+          size = snap.size // will return the collection size
+        });
+        console.log(size);
         console.log("We need to fetch news for today.");
         fetchNewsFromAPI('us');
         setTimeout(fetchNewsFromAPI('ca'), 1500);
@@ -273,6 +278,14 @@ function onLoadDisplayCards() {
         }
 
       })
+    })
+}
+
+function deleteCollection() {
+    firebase.firestore().collection(world).listDocuments().then(val => {
+        val.map((val) => {
+            val.delete()
+        })
     })
 }
 
