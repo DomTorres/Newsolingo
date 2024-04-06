@@ -13,7 +13,7 @@
  * TO DO:
  * 
  * Delete all articles if it's a new day. 
- * Use the date today to query from API.    
+ * Use the date today to query from API.      DONE!
  * Initialize date to date - 1.               DONE!
  * Fix progress statuses.                     DONE!
  */
@@ -259,11 +259,5 @@ function loadDailyProgress() {
         articlesPerDay_preference = Number(user.data().articlesPerDay_preference);
         document.getElementById("daily-progress-goes-here").innerHTML = `Daily Progress: ${articles_read_today} / ${articlesPerDay_preference} articles read`;
         var articlesLeft = Number(user.data().articlesPerDay_preference) - Number(user.data().articles_read_today);
-    
-        // if (articlesLeft == 0) {
-        //     document.getElementById("articles-left-goes-here").innerHTML = "You've completed your daily goal! Come back tomorrow.";
-        // } else {
-        //     document.getElementById("articles-left-goes-here").innerHTML = "Nice going! Read " + articlesLeft + " more articles to complete your daily goal.";
-        // }
     });
 }

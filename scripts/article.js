@@ -77,9 +77,24 @@ document.querySelector("#done-reading").addEventListener("click", () => {
                 streak: streak
             })
 
+            var articlesLeft = Number(articlesPerDay_preference) - Number(articles_read_today);
+            console.log("Articles left: " + articlesLeft);
+
+            if (articlesLeft == 0) {
+                document.getElementById("modal-progress-message").innerHTML = `You've completed your daily goal! Come back tomorrow.`;
+
+                let completedDailyGoalSound = new Audio("./../sounds/completeddailygoal.wav")
+                completedDailyGoalSound.play();
+            } else {
+                document.getElementById("modal-progress-message").innerHTML = `Nice going! Read ${articlesLeft} more articles to complete your daily goal.`;
+
+                let doneReadingSound = new Audio("./../sounds/donereading.wav");
+                doneReadingSound.play();
+            }
+
             // Delete article from "for you" array
-            deleteArticleFromForYou();
-        })
+            deleteArticleFromForYou();  
+        });
 });
 
 function deleteArticleFromForYou() {
