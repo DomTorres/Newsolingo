@@ -23,7 +23,7 @@
   margin-top: 2em;
 }
 
-/* NAVBAR CONTROLS */
+/* NAVBAR STYLES */
 .nav-link, .navbar-brand, .dropdown-item {
   color: darkgray !important;
   /* font-family: "Poppins", sans-serif; */
@@ -47,8 +47,17 @@
   font-weight: bold;
 }
 
-.navbar_points, .navbar_streak {
-  /* float: right; */
+.navbar_streak, .navbar_points {
+  margin: 10px;
+}
+
+.navbar_streak > .material-symbols-outlined, .navbar_points > .material-symbols-outlined {
+  margin-bottom: 4px;
+  margin-right: 3px;
+}
+
+.navbar_streak {
+  margin-right: 30px !important;
 }
 
 .material-symbols-outlined {
