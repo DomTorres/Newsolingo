@@ -90,7 +90,7 @@ document.querySelector("#done-reading").addEventListener("click", () => {
                 let completedDailyGoalSound = new Audio("./../sounds/completeddailygoal.wav")
                 completedDailyGoalSound.play();
             } else {
-                document.getElementById("modal-progress-message").innerHTML = `Nice going! Read ${articlesLeft} more articles to complete your daily goal.`;
+                document.getElementById("modal-progress-message").innerHTML = `Read ${articlesLeft} more articles to complete your daily goal.`;
 
                 let doneReadingSound = new Audio("./../sounds/donereading.wav");
                 doneReadingSound.play();

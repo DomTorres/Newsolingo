@@ -41,7 +41,6 @@ firebase.auth().onAuthStateChanged(user => {
     if (user) {
         console.log("Logged in");
         console.log(user.displayName);
-        console.log(user.firstName);
 
         userID = user.uid;
         console.log(userID);
@@ -261,5 +260,8 @@ function loadDailyProgress() {
         articlesPerDay_preference = Number(user.data().articlesPerDay_preference);
         document.getElementById("daily-progress-goes-here").innerHTML = `Daily Progress: ${articles_read_today} / ${articlesPerDay_preference} articles read`;
         var articlesLeft = Number(user.data().articlesPerDay_preference) - Number(user.data().articles_read_today);
+
+        let percentage_read = `${(articles_read_today / articlesPerDay_preference) * 100}%`;
+        document.getElementById("current-progress").style.width = percentage_read;
     });
 }

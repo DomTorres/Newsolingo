@@ -189,38 +189,25 @@ a {
 }
 
 /* PROGRESS BAR */
-.progress-bar-container {
-  position: relative;
-  max-width: 500px;
-  width: 100%;
-  background: gray;
-  margin: 0 15px;
-  padding: 10px 20px;
-  border-radius: 7px;
-}
-
-.container .skill-box{
-  width: 100%;
-  margin: 25px 0;
-}
-
-.skill-box .title{
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
+.skill-box {
+  margin-top: 15px;
 }
 
 .skill-box .skill-bar {
-  height: 8px;
+  height: 12px;
   width: 100%;
   border-radius: 6px;
   margin-top: 6px;
   background: rgba(0, 0, 0, 0.1);
 }
 
-.skill-bar .skill-per {
+#current-progress {
   position: relative;
+  display: block;
+  height: 100%;
+  width: 50%;
+  border-radius: 6px;
+  background: #0aa5e9;
 }
 
 /* ARTICLE STYLES */
