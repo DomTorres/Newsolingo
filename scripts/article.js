@@ -1,12 +1,14 @@
 var userID;
 var userRef;
 var newsID;
+var displayName;
 
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
         console.log("Logged in");
 
         userID = user.uid;
+        displayName = user.displayName;
         console.log(userID);
 
         userRef = db.collection("users").doc(userID);
@@ -79,6 +81,8 @@ document.querySelector("#done-reading").addEventListener("click", () => {
 
             var articlesLeft = Number(articlesPerDay_preference) - Number(articles_read_today);
             console.log("Articles left: " + articlesLeft);
+
+            document.getElementById("encouragement-message").innerHTML = `Great going, ${displayName}!`;
 
             if (articlesLeft == 0) {
                 document.getElementById("modal-progress-message").innerHTML = `You've completed your daily goal! Come back tomorrow.`;

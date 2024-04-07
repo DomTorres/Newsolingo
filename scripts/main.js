@@ -40,6 +40,8 @@ var country_preference;
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
         console.log("Logged in");
+        console.log(user.displayName);
+        console.log(user.firstName);
 
         userID = user.uid;
         console.log(userID);
