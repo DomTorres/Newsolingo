@@ -193,11 +193,11 @@ async function fetchNewsFromAPI() {
                         title: articles[i].title,
                         description: articles[i].description,
                         content: articles[i].content,
-                        // url: articles[i].url,
+                        url: articles[i].url,
                         image: articles[i].image,
                         publishedAt: articles[i].publishedAt,
-                        // sourceName: articles[i].source.name,
-                        // sourceURL: articles[i].source.url
+                        sourceName: articles[i].source.name,
+                        sourceURL: articles[i].source.url,
 
                         country: country_preference,
                         category: category_preference

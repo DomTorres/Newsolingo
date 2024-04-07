@@ -32,13 +32,20 @@ function loadArticle() {
     const docRef = userRef.collection("for_you").doc(newsID);
 
     docRef.get().then(article => {
-        var title = article.data().title;
-        var image = article.data().image;
-        var content = article.data().content;
+        let title = article.data().title;
+        let image = article.data().image;
+        let content = article.data().content;
+        let publishedAt = article.data().publishedAt;
+        let sourceName = article.data().sourceName;
+        let url = article.data().url;
 
         document.querySelector("#title").innerHTML = title;
+        document.querySelector("#publishedAt-goes-here").innerHTML = publishedAt;
+        document.querySelector("#sourceName-goes-here").innerHTML = sourceName;
         document.querySelector("#image").setAttribute("src", image);
         document.querySelector("#content").innerHTML = content;
+        document.querySelector("#url-goes-here").innerHTML = url;
+        document.querySelector("#url-goes-here").setAttribute("href", url);
     })
 }
 
