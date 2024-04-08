@@ -124,15 +124,36 @@ document.querySelector("#back-to-for-you-page").addEventListener("click", () => 
     window.location.replace("main.html");
 })
 
-document.querySelector("#save").addEventListener("click", () => {
-    const userID = localStorage.getItem("userID");
-    const userRef = db.collection("users").doc(userID);
+let titleCopy, categoryCopy, countryCopy, imageCopy, contentCopy, descriptionCopy, publishedAtCopy, sourceNameCopy, sourceURLCopy, urlCopy;
 
-    userRef.update({
-        saved: firebase.firestore.FieldValue.arrayUnion(newsID)
-    })
-    .then(() => {
-        alert("saved!");
+document.querySelector("#save").addEventListener("click", () => {
+    // retrieve document contents
+    userRef.collection("for_you").doc(newsID).get().then(article => {
+        titleCopy = article.data().title;
+        categoryCopy = article.data().category;
+        countryCopy = article.data().country;
+        imageCopy = article.data().image;
+        contentCopy = article.data().content;
+        descriptionCopy = article.data().description;
+        publishedAtCopy = article.data().publishedAt;
+        sourceNameCopy = article.data().sourceName;
+        sourceURLCopy = article.data().sourceURL;
+        urlCopy = article.data().url;
+    }).then(() => {
+        userRef.collection("saved").doc(newsID).set({
+            title: titleCopy,
+            category: categoryCopy,
+            country: countryCopy,
+            image: imageCopy,
+            content: contentCopy,
+            description: descriptionCopy,
+            publishedAt: publishedAtCopy,
+            sourceName: sourceNameCopy,
+            sourceURL: sourceURLCopy,
+            url: urlCopy
+        }).then(() => {
+            alert("saved!");
+        })
     })
 })
 
