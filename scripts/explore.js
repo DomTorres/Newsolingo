@@ -98,7 +98,6 @@ map.on('load', () => {
     // Copy coordinates array.
     country_description = e.features[0].properties.description;
     console.log(country_description);
-    //loadNewsForToday();
     const elem = document.getElementById("explore-cards-go-here");
     console.log(elem.childNodes.length);
     if (elem.childNodes.length > 0) {
@@ -121,25 +120,25 @@ map.on('load', () => {
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-      console.log("Logged in");
+    console.log("Logged in");
 
-      userID = user.uid;
-      console.log(userID);
+    userID = user.uid;
+    console.log(userID);
 
-      userRef = db.collection("users").doc(userID);
-      console.log(userRef);
+    userRef = db.collection("users").doc(userID);
+    console.log(userRef);
 
-      // localStorage.setItem("userID", user.uid);
-      console.log("Saved auto userID to local storage.");
+    // localStorage.setItem("userID", user.uid);
+    console.log("Saved auto userID to local storage.");
 
-      // call function isNewDay
-      loadNewsForToday();
+    // call function isNewDay
+    loadNewsForToday();
 
-      //
-      setTimeout(onLoadDisplayCards, 1000);
+    //
+    setTimeout(onLoadDisplayCards, 1000);
 
   } else {
-      console.log("No user is signed in.");
+    console.log("No user is signed in.");
   }
 });
 
@@ -174,13 +173,17 @@ function fetchNewsFromAPI(c) {
             var title = articles[i].title;
 
             db.collection("world").doc(title).set({
+              title: articles[i].title,
               description: articles[i].description,
               content: articles[i].content,
               url: articles[i].url,
               image: articles[i].image,
               publishedAt: articles[i].publishedAt,
-              category: category,
-              country: country
+              sourceName: articles[i].source.name,
+              sourceURL: articles[i].source.url,
+
+              country: c,
+              category: 'general'
             })
           }
           userRef.update({
@@ -205,11 +208,12 @@ function loadNewsForToday() {
       console.log("Date today: " + dateToday);
 
       if (dateToday > dateLastLoaded) {
-        deleteCollection();
+        /*
         db.collection(world).get().then(snap => {
           size = snap.size // will return the collection size
         });
         console.log(size);
+        */
         console.log("We need to fetch news for today.");
         fetchNewsFromAPI('us');
         setTimeout(fetchNewsFromAPI('ca'), 1500);
@@ -271,7 +275,7 @@ function onLoadDisplayCards() {
           newcard.querySelector('.country').innerHTML = article.data().country;
 
           // Set card hyperlink
-          newcard.querySelector("a").href = "article.html?articleID=" + article.id;
+          newcard.querySelector("a").href = "articleExplore.html?articleID=" + article.id;
 
           // Add card to DOM
           document.getElementById("explore-cards-go-here").appendChild(newcard);
@@ -281,11 +285,4 @@ function onLoadDisplayCards() {
     })
 }
 
-function deleteCollection() {
-    firebase.firestore().collection(world).listDocuments().then(val => {
-        val.map((val) => {
-            val.delete()
-        })
-    })
-}
 
