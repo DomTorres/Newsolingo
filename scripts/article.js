@@ -53,6 +53,7 @@ document.querySelector("#done-reading").addEventListener("click", () => {
     const docRef = db.collection("news").doc(newsID)
  
     const pointsForReading = 100;
+    const bonusPointsForReading = 50;
 
     userRef.get()
         .then(user => {
@@ -76,6 +77,7 @@ document.querySelector("#done-reading").addEventListener("click", () => {
             console.log(articles_read_today);
             if (articles_read_today == articlesPerDay_preference) {
                 streak++;
+                points += bonusPointsForReading;
             }
 
             console.log(articles_read_today);
@@ -89,14 +91,16 @@ document.querySelector("#done-reading").addEventListener("click", () => {
             var articlesLeft = Number(articlesPerDay_preference) - Number(articles_read_today);
             console.log("Articles left: " + articlesLeft);
 
-            document.getElementById("encouragement-message").innerHTML = `Great going, ${displayName}!`;
-
             if (articlesLeft == 0) {
-                document.getElementById("modal-progress-message").innerHTML = `You've completed your daily goal! Come back tomorrow.`;
+                document.getElementById("encouragement-message").innerHTML = `You've completed your daily goal! Come back tomorrow for fresh news.`;
+                document.getElementById("modal-streak-update").innerHTML = `<span class="material-symbols-outlined">local_fire_department</span> +1`;
+                document.getElementById("modal-points-update").innerHTML = `<span class='material-symbols-outlined'>kid_star</span> +${bonusPointsForReading}`;
 
                 let completedDailyGoalSound = new Audio("./../sounds/completeddailygoal.wav")
                 completedDailyGoalSound.play();
             } else {
+                document.getElementById("encouragement-message").innerHTML = `Great going, ${displayName}!`;
+                document.getElementById("modal-points-update").innerHTML = `<span class='material-symbols-outlined'>kid_star</span> +${pointsForReading}`;
                 document.getElementById("modal-progress-message").innerHTML = `Read ${articlesLeft} more articles to complete your daily goal.`;
 
                 let doneReadingSound = new Audio("./../sounds/donereading.wav");

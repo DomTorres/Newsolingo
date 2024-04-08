@@ -53,11 +53,11 @@
 
 .navbar_streak > .material-symbols-outlined, .navbar_points > .material-symbols-outlined {
   margin-bottom: 4px;
-  margin-right: 3px;
+  margin-right: 2px;
 }
 
 .navbar_streak {
-  margin-right: 30px !important;
+  margin-right: 9px !important;
 }
 
 .material-symbols-outlined {
@@ -278,6 +278,18 @@ a {
 
 .modal-footer {
   border-top: 0;
+}
+
+#modal-points-update, #modal-streak-update {
+  margin: auto;
+}
+
+#modal-points-update > span{
+  margin-bottom: 4px;
+}
+
+#modal-streak-update, #modal-points-update {
+  padding: 0;
 }
 
 @media only screen and (min-width: 701px) and (max-width: 1600px) {
