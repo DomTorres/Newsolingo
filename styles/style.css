@@ -75,6 +75,10 @@
   vertical-align: middle;
 }
 
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: #0aa5e9 !important;
+}
+
 /* PROGRESS BAR STYLING */
 #daily-progress {
   margin-top: 1em;
