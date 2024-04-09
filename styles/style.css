@@ -307,6 +307,12 @@ a {
   padding: 0;
 }
 
+/* IMAGE STYLES */
+#profile-pic {
+  height: 12em;
+  width: 12em;
+}
+
 @media only screen and (min-width: 701px) and (max-width: 1600px) {
   #cardContainer,
   #cardContainer2 {
