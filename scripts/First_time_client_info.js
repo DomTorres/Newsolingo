@@ -103,3 +103,5 @@ function populateInfo() {
   
   }
   populateInfo();
+
+  $('#navbarPlaceholder').load('./text/nav_before_login.html');
