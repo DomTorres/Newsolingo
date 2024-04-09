@@ -94,7 +94,7 @@ document.querySelector("#done-reading").addEventListener("click", () => {
             if (articlesLeft == 0) {
                 document.getElementById("encouragement-message").innerHTML = `You've completed your daily goal! Come back tomorrow for fresh news.`;
                 document.getElementById("modal-streak-update").innerHTML = `<span class="material-symbols-outlined">local_fire_department</span> +1`;
-                document.getElementById("modal-points-update").innerHTML = `<span class='material-symbols-outlined'>kid_star</span> +${bonusPointsForReading}`;
+                document.getElementById("modal-points-update").innerHTML = `<span class='material-symbols-outlined'>kid_star</span> +${pointsForReading + bonusPointsForReading}`;
 
                 let completedDailyGoalSound = new Audio("./../sounds/completeddailygoal.wav")
                 completedDailyGoalSound.play();
@@ -151,8 +151,6 @@ document.querySelector("#save").addEventListener("click", () => {
             sourceName: sourceNameCopy,
             sourceURL: sourceURLCopy,
             url: urlCopy
-        }).then(() => {
-            alert("saved!");
         })
     })
 })
