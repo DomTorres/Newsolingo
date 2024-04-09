@@ -245,7 +245,7 @@ function displayCards() {
           newcard.querySelector('.country').innerHTML = article.data().country;
 
           // Set card hyperlink
-          newcard.querySelector("a").href = "article.html?articleID=" + article.id;
+          newcard.querySelector("a").href = "articleExplore.html?articleID=" + article.id;
 
           // Add card to DOM
           document.getElementById("explore-cards-go-here").appendChild(newcard);

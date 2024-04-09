@@ -56,30 +56,17 @@ document.querySelector("#done-reading").addEventListener("click", () => {
 
     userRef.get()
         .then(user => {
-            // Read points, articles read today
+            // Read points
             points = user.data().points;
             console.log("Points read from database:" + points);
 
-            streak = user.data().streak;
-            console.log("Streak read from database: " + streak);
-
-            articles_read_today = user.data().articles_read_today;
-            console.log("Articles read today read from database: " + articles_read_today);
-
-            articlesPerDay_preference = user.data().articlesPerDay_preference;
-            console.log("Articles per day preference read from database: " + articlesPerDay_preference);
-
-            // Update points, articles read today
+            // Update points
             points += pointsForReading;
-            console.log(articles_read_today);
 
             // Write updated points
             userRef.update({
                 points: points,
             })
-
-            var articlesLeft = Number(articlesPerDay_preference) - Number(articles_read_today);
-            console.log("Articles left: " + articlesLeft);
 
             document.getElementById("encouragement-message").innerHTML = `Great going, ${displayName}!`;
             document.getElementById("modal-points-update").innerHTML = `<span class='material-symbols-outlined'>kid_star</span> +${pointsForReading}`;
@@ -87,18 +74,8 @@ document.querySelector("#done-reading").addEventListener("click", () => {
             let doneReadingSound = new Audio("./../sounds/donereading.wav");
             doneReadingSound.play();
 
-            // Delete article from "world" collection
-            // deleteArticleFromExplore();  
         });
 });
-
-function deleteArticleFromExplore() {
-    db.collection("world").doc(newsID).delete().then(() => {
-        console.log("Article deleted.");
-    }).catch((error) => {
-        console.log("Error removing document, " + error);
-    });
-}
 
 document.querySelector("#back-to-for-you-page").addEventListener("click", () => {
     window.location.replace("explore.html");
