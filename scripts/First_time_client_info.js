@@ -92,6 +92,7 @@ function populateInfo() {
                         document.getElementById("nameImput").value = user;
                     }
                     
+                    document.getElementById("welcome-message-goes-here").innerHTML = `Let's set up your profile, ${user}`;
                 })
   
             } else {

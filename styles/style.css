@@ -18,6 +18,16 @@
   font-size: 15pt;
 }
 
+.header {
+  text-align: center !important;
+  font-size: 20pt !important;
+  font-family: "Nunito", sans-serif !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
+}
+
 /* CONTAINER CONTROLS */
 .for-you-container, .saved-container {
   margin-top: 2em;

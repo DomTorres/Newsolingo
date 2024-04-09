@@ -258,7 +258,7 @@ function loadDailyProgress() {
     userRef.onSnapshot(user => {
         articles_read_today = Number(user.data().articles_read_today);
         articlesPerDay_preference = Number(user.data().articlesPerDay_preference);
-        document.getElementById("daily-progress-goes-here").innerHTML = `Daily Progress: ${articles_read_today} / ${articlesPerDay_preference} articles read`;
+        document.getElementById("daily-progress-goes-here").innerHTML = `Your daily progress: ${articles_read_today} / ${articlesPerDay_preference} articles read`;
         var articlesLeft = Number(user.data().articlesPerDay_preference) - Number(user.data().articles_read_today);
 
         let percentage_read = `${(articles_read_today / articlesPerDay_preference) * 100}%`;
