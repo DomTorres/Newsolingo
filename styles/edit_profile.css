@@ -39,6 +39,7 @@
   
   .main-container {
     width: calc(30% - 20px); /* Reducir el ancho del contenedor principal */
+    min-width: 350px;
     padding: 10px; /* Reducir el espacio interno del contenedor */
     border-radius: 20px; /* Ajustar el radio de borde */
     border: 1px solid #ccccccd1;
