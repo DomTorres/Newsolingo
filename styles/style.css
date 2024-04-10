@@ -99,6 +99,7 @@
   background-color: white;
   box-shadow: 0 3px #D2D4DA;
   border-radius: 15px;
+  margin: 0 0 1em 0;
 }
 
 .btn:hover {

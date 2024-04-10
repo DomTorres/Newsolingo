@@ -48,7 +48,7 @@
         <a href="" target="_blank" id="url-goes-here"></a>
 
         <div id="button-group">
-            <a id="save" class="btn btn-primary btn-lg px-4 gap-3">Save</a>
+            <a id="save" class="btn btn-primary btn-lg px-4 gap-3" data-bs-toggle="modal2" data-bs-target="#exampleModalCenter">Save</a>
             <a id="done-reading" class="btn btn-primary btn-lg px-4 gap-3" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Done Reading</a>
         </div>
     </div>
@@ -70,9 +70,19 @@
         </div>
     </div>
 
-    <br>
-    <br>
-
+    <div class="modal2 fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title primary-font" id="encouragement-message"></h5>
+            </div>
+            <div>Saved!</dive>
+            <div class="modal-footer">
+                <button type="button" id="back-to-for-you-page" class="btn btn-secondary" data-bs-dismiss="modal2">Confirm</button>
+            </div>
+        </div>
+        </div>
+    </div>
 
     <nav id="footerPlaceholder"></nav>
 
