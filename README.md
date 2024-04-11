@@ -27,7 +27,7 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 ## 4. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?
 Here are the steps for using application
-* Log in/Sign up
+* Log in/Sign up (https://newsolingo.web.app/)
 * Select preferences and input information
 * For You Page:
     * Select article to view (can save)
