@@ -1,42 +1,12 @@
-// $(document).ready(function () {
-//     alert("Hello!");
-//     $("#for-you-nav-link").addClass("active");
-// });
-
-// $(".nav-link").on("click", function(){
-//     $(".nav-link").find(".active").removeClass("active");
-//     $(this).addClass("active");
-//     alert("Hello!");
-//   });
-
-/**
- * TO DO:
- * 
- * Delete all articles if it's a new day. 
- * Use the date today to query from API.      DONE!
- * Initialize date to date - 1.               DONE!
- * Fix progress statuses.                     DONE!
- */
-
-// Constants (we do not need to retrieve this after EVERY page load, just once per day.)
+// User preferences constants 
 var userID;
 var userRef;
-
-// var articlesPerDay_preference = localStorage.getItem("articlesPerDay_preference");
-// var category_preference = localStorage.getItem("category_preference");
-// var country_preference = localStorage.getItem("country_preference");
 
 var articlesPerDay_preference;
 var category_preference;
 var country_preference;
 
-// Driver function
-// function doAll() {
-//     isNewDay();
-// }
-// doAll();
-
-// Get logged in user's ID, save it to local storage for future purposes.
+// Get logged in user's ID, save it to local storage for future purposes, triggers function calls
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
         console.log("Logged in");
@@ -116,38 +86,9 @@ async function saveUserDataToLocalStorage() {
     });
 }
 
-// console.log(today);
-// todayString = String(today);
-// console.log(todayString);
-
-// console.log(Date(todayString));
-
-
-// Get date function
-// function printDate() {
-//     const currentDate = new Date();
-//     console.log(currentDate);
-
-//     const currentDayOfMonth = currentDate.getDate();
-//     const currentMonth = currentDate.getMonth(); // Be careful! January is 0, not 1
-//     const currentYear = currentDate.getFullYear();
-    
-//     const dateString = currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear;
-//     console.log("The date is: " + dateString);
-
-//     // const timestamp = currentDate.getTime(); 
-//     // console.log("The timestramp is: " + timestamp);
-// }
-// printDate();
-
-/**
- * This function is intended to run only ONCE per day, at the user's first load on that day. 
- */
+// This function is intended to run only ONCE per day, at the user's first load on that day. 
 async function fetchNewsFromAPI() {
     console.log("Entered function fetchNewsFromAPI");
-
-    // delete existing articles in the "for you" collection first
-    // userRef.collection("for_you").get().then()
 
     // if user didn't complete yesterday's goal, set streak to 0
     userRef.get()
@@ -166,14 +107,12 @@ async function fetchNewsFromAPI() {
 
     // fetch news from API
     userRef.get().then(user => {
-        var from = "2024-03-17T00:00:00Z"; // This needs to be dynamically based based on the current date.
-
         today = new Date();
         to = today.toISOString();
         console.log(to);
 
         today.setDate(today.getDate() - 1);
-        from = today.toISOString();
+        var from = today.toISOString();
         console.log(from);
 
         var url = `https://gnews.io/api/v4/top-headlines?category=${category_preference}&country=${country_preference}&max=${articlesPerDay_preference}&from=${from}&to=${to}&apikey=${news_api_key}`;
@@ -215,12 +154,12 @@ async function fetchNewsFromAPI() {
         })
 }
 
+// updates date last loaded
 async function updateDateLastLoaded() {
     console.log("Entered function updateDateLastLoaded");
 
     userRef.update({
-        date_last_loaded: String(new Date()) // ACTUAL CODE
-        // date_last_loaded: String(new Date("Mar 03, 2024")), // CODE FOR TESTING PURPOSES
+        date_last_loaded: String(new Date()) 
     });
 
     console.log("Succesfully updated date last loaded to today.")
@@ -254,6 +193,7 @@ async function displayCards() {
         })
 }
 
+// loads progress bar and status
 function loadDailyProgress() {
     userRef.onSnapshot(user => {
         articles_read_today = Number(user.data().articles_read_today);
