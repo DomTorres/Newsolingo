@@ -26,10 +26,17 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 
 ## 4. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?
-Here are the steps ...
-* ...
-* ...
-* ...
+Here are the steps for using application
+* Log in/Sign up
+* Select preferences and input information
+* For You Page:
+    * Select article to view (can save)
+    * Once all articles have been read they will be done for the day
+* Explore Page:
+    * Select country marker to view articles from that country
+    * Select article to view
+* Saved Page:
+    * See saved articles and can be selected to read
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
