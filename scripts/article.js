@@ -1,8 +1,10 @@
+// news constatns
 var userID;
 var userRef;
 var newsID;
 var displayName;
 
+// triggers function calls
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
         console.log("Logged in");
@@ -25,6 +27,7 @@ firebase.auth().onAuthStateChanged(user => {
     }
 });
 
+// loads article
 function loadArticle() {
     let params = new URL(window.location.href);
 
@@ -49,6 +52,7 @@ function loadArticle() {
     })
 }
 
+// when done reading, updates user points and streak
 document.querySelector("#done-reading").addEventListener("click", () => {
     const docRef = db.collection("news").doc(newsID)
  
@@ -112,6 +116,7 @@ document.querySelector("#done-reading").addEventListener("click", () => {
         });
 });
 
+// delete article
 function deleteArticleFromForYou() {
     userRef.collection("for_you").doc(newsID).delete().then(() => {
         console.log("Article deleted.");
@@ -120,12 +125,15 @@ function deleteArticleFromForYou() {
     });
 }
 
+// back to for you
 document.querySelector("#back-to-for-you-page").addEventListener("click", () => {
     window.location.replace("main.html");
 })
 
+// variable copies, for copying into saved subcollection
 let titleCopy, categoryCopy, countryCopy, imageCopy, contentCopy, descriptionCopy, publishedAtCopy, sourceNameCopy, sourceURLCopy, urlCopy;
 
+// save article
 document.querySelector("#save").addEventListener("click", () => {
     // retrieve document contents
     userRef.collection("for_you").doc(newsID).get().then(article => {
