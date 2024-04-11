@@ -1,7 +1,7 @@
 var ImageFile;      //global variable to store the File Object reference
 
 function chooseFileListener() {
-    debugger
+    
     const fileInput = document.getElementById("profile-load");   // pointer #1
     const image = document.getElementById("profile-pic");   // pointer #2
 
@@ -9,7 +9,7 @@ function chooseFileListener() {
     //when this file changes, do something
     fileInput.addEventListener('change', function (e) {
         console.log("hello");
-        debugger
+        
         //the change event returns a file "e.target.files[0]"
         ImageFile = e.target.files[0];
         var blob = URL.createObjectURL(ImageFile);
@@ -31,7 +31,7 @@ function saveUserInfo() {
         storageRef.put(ImageFile)
             .then(function () {
                 console.log('Uploaded to Cloud Storage.');
-                debugger
+                
                 //Asynch call to get URL from Cloud
                 storageRef.getDownloadURL()
                     .then(function (url) { // Get "url" of the uploaded file

@@ -6,14 +6,14 @@
 /* Apply 'box-sizing' to all elements */
 * {
   box-sizing: border-box;
-  font-family: sans-serif; /* Set default font */
+  font-family: sans-serif; 
 }
 
 /* Styles for the main title */
 .title h1 { 
   font-size: 35px; 
-  margin: 5px auto; /* Margin to center horizontally */
-  text-align: center; /* Center text */
+  margin: 5px auto; 
+  text-align: center; 
 }
 
 /* Styles for the select-genres */
@@ -32,16 +32,16 @@
 /* Container for radio buttons */
 .container-radio {
   display: flex; 
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  margin-top: 20px; /* Margin top to control the Y position of the buttons */
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 20px; 
 }
 
 /* Group of radio buttons */
 .radio-tile-group {
   display: flex; 
   flex-wrap: wrap; 
-  justify-content: center; /* Center horizontally */
+  justify-content: center; 
 }
 
 /* Container input for each radio button */
@@ -49,21 +49,21 @@
   position: relative; 
   height: 2rem; 
   width: 12rem; 
-  margin: 0.5rem; /* Spacing between buttons */
+  margin: 0.5rem; 
 }
 
-/* Styles for input of each radio button */
+
 .input-container input {
   position: absolute; 
   height: 100%;
   width: 100%; 
   margin: 0; 
-  cursor: pointer; /* Change cursor on hover */
-  z-index: 2; /* Place above other elements */
-  opacity: 0; /* Hide the actual input */
+  cursor: pointer; 
+  z-index: 2; 
+  opacity: 0;
 }
 
-/* Styles for each radio button */
+
 .input-container .radio-tile {
   display: flex; 
   flex-direction: column; 
@@ -72,35 +72,35 @@
   height: 100%; /* Full size */
   border: 2px solid var(--primary-color); 
   border-radius: 15px; 
-  transition: all 300ms ease; /* Smooth transition */
+  transition: all 300ms ease; 
 }
 
-/* Styles for the label of radio button */
+
 .input-container label {
   color: var(--primary-color); 
   font-size: 0.8rem; 
   font-weight: 600; 
   text-transform: uppercase; 
-  letter-spacing: 1px; /* Letter spacing */
+  letter-spacing: 1px;
   font-size: 12px;
 }
 
-/* Styles when a radio button is checked */
+
 input:checked + .radio-tile {
   background-color: var(--primary-color); 
-  box-shadow: 0 0 12px var(--primary-color); /* Add shadow */
+  box-shadow: 0 0 12px var(--primary-color); 
   transform: scale(1.1); 
 }
 
-/* Styles when hovering over a radio button */
+
 input:hover + .radio-tile {
-  box-shadow: 0 0 12px var(--primary-color); /* Add shadow on hover */
+  box-shadow: 0 0 12px var(--primary-color); 
 }
 
-/* Styles for icon inside a checked radio button */
+
 input:checked + .radio-tile ion-icon,
 input:checked + .radio-tile label {
-  color: white; /* Change color of icon and label to white */
+  color: white;
 }
 .btn-save {
   color: #0aa5e9 !important;

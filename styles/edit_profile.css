@@ -4,19 +4,19 @@
   }
   
   .img-container {
-    text-align: center; /* Center-align image and label */
+    text-align: center;
   }
   
   #profile-pic {
-    width: 100px; /* Reduce image size */
+    width: 100px;
     height: 100px;
-    border-radius: 50%; /* Circular shape */
-    margin-bottom: 10px; /* Add space between image and button */
+    border-radius: 50%;
+    margin-bottom: 10px;
   }
   
   #profile-load {
-    display: block; /* Ensure button appears on a new line */
-    margin: 0 auto; /* Center-align button */
+    display: block;
+    margin: 0 auto;
   }
   
   label {
@@ -38,9 +38,9 @@
   }
   
   .main-container {
-    width: calc(30% - 20px); /* Reducir el ancho del contenedor principal */
-    padding: 10px; /* Reducir el espacio interno del contenedor */
-    border-radius: 20px; /* Ajustar el radio de borde */
+    width: calc(30% - 20px);
+    padding: 10px;
+    border-radius: 20px;
     border: 1px solid #ccccccd1;
     background-color: #ffffff;
     font-size: 14px;
@@ -55,8 +55,8 @@
   }
   
   .save-editBtn {
-    text-align: center; /* Center buttons */
-    margin-top: 1px; /* Add top space */
+    text-align: center; 
+    margin-top: 1px; 
     font-size: 18px;
   }
   
@@ -74,12 +74,12 @@
     width: 130px; 
   }*/
   
-  /* Show the "Load Picture" button */
+  
   input[type="file"] {
     display: block;
   }
   
-  /* Show the associated label */
+  
   label[for="profile-load"] {
     display: block;
   }
@@ -87,22 +87,22 @@
   #profile-load {
     display: none;
   }
- /* Reduce the internal space within the name and username input fields */
+ 
 .name-form input[type="text"],
 .user-form input[type="text"] {
-  padding: 1px; /* Adjust padding as needed */
+  padding: 1px; 
   font-size: 18px;
 }
 
 .name-form input[type="text"].form-control,
 .user-form input[type="text"].form-control {
-  height: 34px; /* Cambiar la altura según sea necesario */
+  height: 34px; 
 }
 
 
-/* Reduce the internal space within the select element */
+
 .form-select {
-padding: 3px; /* Adjust padding as needed */
+padding: 3px; 
 }
 
 .input-group-text {
