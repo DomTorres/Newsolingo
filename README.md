@@ -17,7 +17,7 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 * Bootstrap 5.0 (Frontend library)
 * Firebase 8.0 (BAAS - Backend as a Service)
 * GNews API (querying and fetching news) https://gnews.io/
-* Mapbox API
+* Mapbox API https://www.mapbox.com/
 * Onclick sound effects
     1. https://www.youtube.com/watch?v=wAxM_vvR2Jo&list=WL&index=8
     2. https://www.youtube.com/watch?v=Ehj0sY9Gc94
@@ -33,11 +33,16 @@ Here are the steps ...
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
-* Delete collection function hasn't been implemented. So, if a user didn't finish their articles from yesterday, those yesterday articles
+* Delete collection function for For You page hasn't been implemented. So, if a user didn't finish their articles from yesterday, those yesterday articles
 don't get deleted and still show up today.
+* Delete collection function for Explore page hasn't been implemented. It will add news to the collection everyday, but won't delete the news from the previous day
 * Reading an article on the saved page decrements articles read today. So, sometimes it can go negative (read -1 more articles..., 
 4/3 articles read today...).
 * No way to unsave news articles
+
+Limitations: 
+* The news API only allows us to grab articles from a list of countries.
+* The news API doesn't allow us to fetch news from the api multiple times in a short period of time. This limited the number of countries we could fetch news from for the explore page.
 
 ## 6. Features for Future
 What we'd like to build in the future:
@@ -49,6 +54,7 @@ an article is saved)
     2. pay for premium version of API
     3. explore other APIs, perhaps native APIs from news outlets
     4. implement a window view where the user can view the article from the main news source without leaving the app
+* Could add a random country function for the explore page and a functioning search bar for the map.
 
 ## 7. Contents of Folder
 Content of the project folder:
