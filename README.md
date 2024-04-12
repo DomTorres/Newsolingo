@@ -2,14 +2,13 @@
 Newsolingo
 
 ## 1. Project Description
-State your app in a nutshell, or one-sentence pitch. Give some elaboration on what the core features are.  
-This browser based web application to ....
+Our team BBY-22 developed a web application to help individuals keep up with global news by delivering it in a simple and accessible way and making news-reading effortless unlike other news sources.
 
 ## 2. Names of Contributors
 List team members and/or short bio's here... 
-* Oswaldo, Hi!
-* Hi my name is John! I am excited to finally get started on my first project of this program!
-* This is Dom! I'm excited to start this project and learn git!
+* Oswaldo Vega
+* John Oh
+* Dom Torres
 	
 ## 3. Technologies and Resources Used
 List technologies (with version numbers), API's, icons, fonts, images, media or data sources, and other resources that were used.
@@ -27,7 +26,8 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 ## 4. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?
 Here are the steps for using application
-* Log in/Sign up (https://newsolingo.web.app/)
+* Clone from Github for code or (https://newsolingo.web.app/)
+* Log in/Sign up
 * Select preferences and input information
 * For You Page:
     * Select article to view (can save)
@@ -68,19 +68,49 @@ Content of the project folder:
 
 ```
  Top level of project folder: 
-├── .gitignore               # Git ignore file
-├── index.html               # landing HTML file, this is what users see when you come to url
-└── README.md
+├── .gitignore                      # Git ignore file
+├── index.html                      # landing HTML file, this is what users see when 
+├── 404.html                        # 
+├── article_explore.html            # HTML for the article from explore.html
+├── article.html                    # HTML for the article from main.html
+├── edit_profile.html               # HTML to edit your profile
+├── explore.html                    # HTML to explore page
+├── first_time_client_info.html     # HTML for first time users
+├── login.html                      # HTML for login page
+├── main.html                       # HTML for landing page
+├── preferences.html                # HTML to edit preferences
+├── saved.html                      # HTML for saved page
+└── README.md                       
 
 It has the following subfolders and files:
-├── .git                     # Folder for git repo
-├── images                   # Folder for images
-    /blah.jpg                # Acknowledge source
-├── scripts                  # Folder for scripts
-    /blah.js                 # 
-├── styles                   # Folder for styles
-    /blah.css                # 
-
+├── .git                          # Folder for git repo
+├── images                        # Folder for images
+    /bird.png                       # Newsolingo logo
+├── scripts                       # Folder for scripts
+    /alert.js                       # JS file for Sweetalerts    
+    /article_explore.js             # Script for article from explore.html
+    /authentication.js              # Authenticates user using firebase
+    /edit_profile.js                # Script for edit_profile.html
+    /explore.js                     # Script for explore.html
+    /First_time_client_info.js      # Script for first_time_client_info.html
+    /main.js                        # Script for main.html
+    /preferences.js                 # Script for preferences.html
+    /saved.js                       # Script for saved.html
+    /script.js                      # Script for logging out
+    /skeleton.js                    # Loads the nav bar and footer
+├── sounds
+    /completeddailygoal.wav         # Sound file that plays when daily goal is hit
+    /donereading.wav                # Sound file that plays when done reading is clicked
+├── styles                        # Folder for styles
+    /edit_profile.css               # CSS for edit_profile.html
+    /first_time_client_info.css     # CSS for first_time_client_info.html
+    /style_explore.css              # CSS for explore.html
+    /style.css                      # General css for html
+    /stylePreferences.css           # CSS for preferences.html
+├── text
+    /footer.html                    # HTML for the footer
+    /nav_after_login.html           # HTML for the nav bar after logging in
+    /nav_before_login.html          # HTML for the nav bar before logging in
 
 
 ```
