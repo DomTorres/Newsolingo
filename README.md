@@ -25,6 +25,12 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 
 ## 4. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?
+<<<<<<< HEAD
+Here are the steps ...
+* Create a new account at https://newsolingo.web.app/ 
+* Set profile details (photo, username, country) and set news preferences (country, category, articles per day)
+* Recieve today's news, come back tomorrow for new news 
+=======
 Here are the steps for using application
 * Clone from Github for code or (https://newsolingo.web.app/)
 * Log in/Sign up
@@ -37,6 +43,7 @@ Here are the steps for using application
     * Select article to view
 * Saved Page:
     * See saved articles and can be selected to read
+>>>>>>> 8280e29242179167b75b265992dade3b6b18ed71
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
